@@ -5,12 +5,6 @@ lolcatt
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
-
-.. image:: https://img.shields.io/pypi/v/lolcatt.svg
-        :target: https://pypi.python.org/pypi/lolcatt
-        :alt: Package on PyPI
-
-
 .. image:: https://img.shields.io/badge/Documentation-Github-blue
    :target: https://LokiLuciferase.github.io/lolcatt/
    :alt: Documentation
@@ -29,11 +23,6 @@ A TUI wrapper around `catt`.
 
 * Free software: MIT license
 
-
-Features
---------
-
-* TODO
 
 Credits
 -------
