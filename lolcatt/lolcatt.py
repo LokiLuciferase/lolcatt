@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
+import subprocess
 from dataclasses import dataclass
 from typing import Tuple
 
 from catt.api import CattDevice
+from catt.cli import get_config_as_dict
 from textual import on
 from textual.app import App
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Button
 from textual.widgets import Label
-from textual.widgets import Placeholder
 from textual.widgets import ProgressBar
 from textual.widgets import Static
 
@@ -32,9 +33,11 @@ class LolCattControls(Static):
     def compose(self):
         with Container(id='controls'):
             with Container(id='playback_buttons'):
-                yield Button('RW', id='rewind')
                 yield Button('Play/Pause', id='play_pause')
                 yield Button('Stop', id='stop')
+
+            with Container(id='wind_buttons'):
+                yield Button('RW', id='rewind')
                 yield Button('FF', id='ffwd')
 
             with Container(id='volume_buttons'):
@@ -48,6 +51,7 @@ class LolCattControls(Static):
     @on(Button.Pressed, "#stop")
     def stop(self):
         self.catt.stop()
+        exit(0)
 
     @on(Button.Pressed, "#vol_down")
     def vol_down(self):
@@ -67,7 +71,6 @@ class LolCattControls(Static):
 
 
 class LolCattProgress(Static):
-
     current = reactive(0)
     duration = reactive(0)
     percent_complete = reactive(0)
@@ -80,6 +83,8 @@ class LolCattProgress(Static):
         return current, duration, percent_complete
 
     def _format_time(self, seconds: float) -> str:
+        if seconds is None:
+            return '--:--'
         minutes, seconds = divmod(seconds, 60)
         return f'{minutes:02.0f}:{seconds:02.0f}'
 
@@ -107,25 +112,45 @@ class LolCattProgress(Static):
         yield Container(self.pb, self.pblabel, id='progress')
 
 
+class LolCattTitle(Static):
+    def __init__(self, catt: CattDevice, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.catt = catt
+        self.label = Label(self.catt.controller.cast_info.get('title', 'No Title'), id='title')
+
+    def compose(self):
+        yield Container(self.label, id='title_container')
+
+    def on_mount(self):
+        self.set_interval(interval=2.0, callback=self.update_title)
+
+    def update_title(self):
+        self.label.update(self.catt.controller.cast_info.get('title', 'No Title'))
+
+
 class LolCatt(App):
     CSS_PATH = 'lolcatt.css'
 
     def __init__(
-        self, catt: CattDevice, controls_cfg: ControlsConfig = ControlsConfig(), *args, **kwargs
+        self, device_name: str, controls_cfg: ControlsConfig = ControlsConfig(), *args, **kwargs
     ):
         super().__init__(*args, **kwargs)
         self.controls_cfg = controls_cfg
-        self.catt = catt
+        self.catt_cfg = get_config_as_dict()
+        self._device_name = (
+            self.catt_cfg['aliases'].get(device_name, device_name)
+            if device_name is not None
+            else self.catt_cfg['options'].get('device')
+        )
+        self.catt = CattDevice(self._device_name)
 
     def compose(self):
         yield Container(
-            Placeholder(),
+            # LolCattTitle(catt=self.catt),
             LolCattProgress(catt=self.catt),
             LolCattControls(catt=self.catt, config=self.controls_cfg),
             id='app',
         )
 
-
-if __name__ == '__main__':
-    catt = CattDevice('Living Room TV')
-    LolCatt(catt=catt).run()
+    def cast(self, media: str):
+        subprocess.run(['catt', '-d', self.catt.name, 'cast', '-f', media])

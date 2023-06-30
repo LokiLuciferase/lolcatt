@@ -8,13 +8,6 @@ Button {
     background: $background;
 }
 
-Placeholder {
-    dock: top;
-    height: 80%;
-    width: 50%;
-    align: center top;
-}
-
 #volume_buttons {
     layout: horizontal;
     width: 100%;
@@ -25,6 +18,14 @@ Placeholder {
 }
 
 #playback_buttons {
+    layout: horizontal;
+    align: center bottom;
+    margin: 0;
+    padding: 0;
+    height: 3;
+}
+
+#wind_buttons {
     layout: horizontal;
     align: center bottom;
     margin: 0;
