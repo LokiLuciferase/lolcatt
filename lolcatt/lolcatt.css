@@ -1,0 +1,54 @@
+Screen {
+    overflow: auto;
+    align: center middle;
+}
+
+Button {
+    color: $primary-lighten-3;
+    background: $background;
+}
+
+Placeholder {
+    dock: top;
+    height: 80%;
+    width: 50%;
+    align: center top;
+}
+
+#volume_buttons {
+    layout: horizontal;
+    width: 100%;
+    align: center bottom;
+    margin: 0;
+    padding: 0;
+    height: 3;
+}
+
+#playback_buttons {
+    layout: horizontal;
+    align: center bottom;
+    margin: 0;
+    padding: 0;
+    height: 3;
+}
+
+#progress {
+    layout: vertical;
+    width: 100%;
+    margin: 1;
+    padding: 0;
+    height: 1;
+    align: center middle;
+}
+
+#progress_bar {
+    width: 100%;
+    height: 1;
+    margin: 0;
+    padding: 0;
+    align: center bottom;
+}
+
+#controls {
+    layout: vertical;
+}
