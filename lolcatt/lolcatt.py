@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
 from dataclasses import dataclass
+from typing import Callable
 from typing import Tuple
 
 from catt.api import CattDevice
@@ -24,11 +25,17 @@ class ControlsConfig:
 
 class LolCattControls(Static):
     def __init__(
-        self, catt: CattDevice, config: ControlsConfig = ControlsConfig(), *args, **kwargs
+        self,
+        exit_cb: Callable,
+        catt: CattDevice,
+        config: ControlsConfig = ControlsConfig(),
+        *args,
+        **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.catt = catt
         self.config = config
+        self.exit = exit_cb
 
     def compose(self):
         with Container(id='controls'):
@@ -51,7 +58,7 @@ class LolCattControls(Static):
     @on(Button.Pressed, "#stop")
     def stop(self):
         self.catt.stop()
-        exit(0)
+        self.exit()
 
     @on(Button.Pressed, "#vol_down")
     def vol_down(self):
@@ -148,7 +155,7 @@ class LolCatt(App):
         yield Container(
             # LolCattTitle(catt=self.catt),
             LolCattProgress(catt=self.catt),
-            LolCattControls(catt=self.catt, config=self.controls_cfg),
+            LolCattControls(exit_cb=self.exit, catt=self.catt, config=self.controls_cfg),
             id='app',
         )
 
