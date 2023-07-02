@@ -15,6 +15,7 @@ from textual.widgets import Button
 from textual.widgets import Label
 from textual.widgets import ProgressBar
 from textual.widgets import Static
+from textual.widgets import Input
 
 
 @dataclass
@@ -168,6 +169,25 @@ class LolCattTitle(Static):
         self.label.update(self.get_title())
 
 
+class LolCattUrlInput(Static):
+    def __init__(self, cast_cb: Callable, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.cast_cb = cast_cb
+        self.input = Input(id='url_input', placeholder='Enter URL to cast...')
+        self.input.cursor_blink = False
+
+    @on(Input.Submitted, "#url_input")
+    def cast_url(self):
+        if self.input.value == '':
+            return
+        if self.input.value:
+            self.cast_cb(self.input.value)
+            self.input.value = ''
+
+    def compose(self):
+        yield Container(self.input, id='url_input_container')
+
+
 class LolCatt(App):
     CSS_PATH = 'lolcatt.css'
 
@@ -187,6 +207,7 @@ class LolCatt(App):
             else self.catt_cfg['options'].get('device')
         )
         self.catt = CattDevice(self._device_name)
+        self._catt_call = None
 
     def compose(self):
         yield Container(
@@ -194,11 +215,14 @@ class LolCatt(App):
             LolCattTitle(catt=self.catt),
             LolCattProgress(catt=self.catt),
             LolCattControls(exit_cb=self.exit, catt=self.catt, config=self.controls_cfg),
+            LolCattUrlInput(cast_cb=self.cast),
             id='app',
         )
 
     def cast(self, media: str):
-        subprocess.Popen(
+        if self._catt_call is not None:
+            self._catt_call.kill()
+        self._catt_call = subprocess.Popen(
             ['catt', '-d', self.catt.name, 'cast', '-f', media],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
