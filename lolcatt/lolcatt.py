@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
 from dataclasses import dataclass
-from re import S
 from typing import Callable
 from typing import Tuple
 
@@ -24,6 +23,12 @@ class ControlsConfig:
     rewind_secs: int = 10
     vol_step: float = 0.1
     use_utf8: bool = True
+
+
+@dataclass
+class CastState:
+    cast_info: dict
+    info: dict
 
 
 class LolCattControls(Static):
@@ -54,12 +59,12 @@ class LolCattControls(Static):
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.catt = catt
-        self.config = config
-        self.exit = exit_cb
+        self._catt = catt
+        self._config = config
+        self._exit_func = exit_cb
 
     def _get_control_label(self, control: str) -> str:
-        if self.config.use_utf8:
+        if self._config.use_utf8:
             return self.CONTROLS[control]
         else:
             return self.CONTROLS_ASCII[control]
@@ -80,28 +85,28 @@ class LolCattControls(Static):
 
     @on(Button.Pressed, "#play_pause")
     def toggle_play_pause(self):
-        self.catt.controller.play_toggle()
+        self._catt.controller.play_toggle()
 
     @on(Button.Pressed, "#stop")
     def stop(self):
-        self.catt.stop()
-        self.exit()
+        self._catt.stop()
+        self._exit_func()
 
     @on(Button.Pressed, "#vol_down")
     def vol_down(self):
-        self.catt.volumedown(self.config.vol_step)
+        self._catt.volumedown(self._config.vol_step)
 
     @on(Button.Pressed, "#vol_up")
     def vol_up(self):
-        self.catt.volumeup(self.config.vol_step)
+        self._catt.volumeup(self._config.vol_step)
 
     @on(Button.Pressed, "#ffwd")
     def ffwd(self):
-        self.catt.ffwd(self.config.ffwd_secs)
+        self._catt.ffwd(self._config.ffwd_secs)
 
     @on(Button.Pressed, "#rewind")
     def rewind(self):
-        self.catt.rewind(self.config.rewind_secs)
+        self._catt.rewind(self._config.rewind_secs)
 
 
 class LolCattProgress(Static):
@@ -122,17 +127,17 @@ class LolCattProgress(Static):
         minutes, seconds = divmod(seconds, 60)
         return f'{minutes:02.0f}:{seconds:02.0f}'
 
-    def __init__(self, catt: CattDevice, *args, **kwargs):
+    def __init__(self, catt: CattDevice, refresh_interval: float = 2.0, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.catt = catt
+        self._catt = catt
         self.pb = ProgressBar(id='progress_bar', total=100, show_bar=True, show_eta=False)
         self.pblabel = Label('(00:00/00:00)', id='progress_label')
-        self.set_interval(interval=2.0, callback=self.update_progress)
+        self._refresh_interval = refresh_interval
 
     def update_progress(self) -> int:
-        self.catt.controller._update_status()
+        self._catt.controller._update_status()
         self.current, self.duration, self.percent_complete = self._extract_progress(
-            self.catt.controller.cast_info
+            self._catt.controller.cast_info
         )
         self.pb.update(progress=self.percent_complete)
         current_fmt = self._format_time(self.current)
@@ -141,86 +146,112 @@ class LolCattProgress(Static):
 
     def on_mount(self):
         self.update_progress()
+        self.set_interval(interval=self._refresh_interval, callback=self.update_progress)
 
     def compose(self):
         yield Container(self.pb, self.pblabel, id='progress')
 
 
-class LolCattTitle(Static):
+class LolCattDeviceInfo(Static):
     def __init__(self, catt: CattDevice, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.catt = catt
-        self.label = Label(self.get_title(), id='title')
+        self._catt = catt
+        self.label = Label(self._get_device_info(), id='device_info')
 
-    def get_title(self) -> str:
-        playing = self.catt.controller.cast_info.get('title')
+    def _get_device_info(self) -> str:
+        info = self._catt.controller.info
+        return f'{info.get("display_name")} ({info.get("manufacturer")} {info.get("model_name")})'
+
+    def _update_label(self):
+        self.label.update(self._get_device_info())
+
+    def compose(self):
+        yield Container(self.label, id='device')
+
+
+class LolCattPlaybackInfo(Static):
+    def __init__(self, catt: CattDevice, refresh_interval: float = 2.0, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._catt = catt
+        self._refresh_interval = refresh_interval
+        self.label = Label(self._get_playback_info(), id='title')
+
+    def _get_playback_info(self) -> str:
+        playing = self._catt.controller.cast_info.get('title')
         if playing:
             return f'Playing: "{playing}"'
         else:
-            display_name = self.catt.controller.info.get('display_name')
+            display_name = self._catt.controller.info.get('display_name')
             print(display_name)
             if display_name is not None and display_name != 'Backdrop':
                 return display_name
             else:
                 return f'Nothing is playing.'
 
+    def _update_label(self):
+        self.label.update(self._get_playback_info())
+
     def compose(self):
         yield Container(self.label, id='title_container')
 
     def on_mount(self):
-        self.set_interval(interval=2.0, callback=self.update_title)
-
-    def update_title(self):
-        self.label.update(self.get_title())
+        self.set_interval(interval=self._refresh_interval, callback=self._update_label)
 
 
 class LolCattUrlInput(Static):
     def __init__(self, cast_cb: Callable, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.cast_cb = cast_cb
-        self.input = Input(id='url_input', placeholder='Enter URL to cast...')
-        self.input.cursor_blink = False
+        self._cast_cb = cast_cb
+        self._input = Input(id='url_input', placeholder='Enter URL to cast...')
+        self._input.cursor_blink = False
 
     @on(Input.Submitted, "#url_input")
     def cast_url(self):
-        if self.input.value == '':
+        if self._input.value == '':
             return
-        if self.input.value:
-            self.cast_cb(self.input.value)
-            self.input.value = ''
+        if self._input.value:
+            self._cast_cb(self._input.value)
+            self._input.value = ''
 
     def compose(self):
-        yield Container(self.input, id='url_input_container')
+        yield Container(self._input, id='url_input_container')
 
 
 class LolCatt(App):
     CSS_PATH = 'lolcatt.css'
 
-    def __init__(self, device_name: str, controls_cfg: ControlsConfig = None, *args, **kwargs):
+    def __init__(
+        self, device_name: str = None, controls_cfg: ControlsConfig = None, *args, **kwargs
+    ):
         super().__init__(*args, **kwargs)
-        self.catt_cfg = get_config_as_dict()
-        self.controls_cfg = (
+        self._catt_cfg = get_config_as_dict()
+        self._controls_cfg = (
             controls_cfg
             if controls_cfg is not None
             else ControlsConfig(
-                use_utf8=self.catt_cfg['options'].get('lolcatt_use_utf8', 'false').lower() == 'true'
+                use_utf8=self._catt_cfg['options'].get('lolcatt_use_utf8', 'false').lower()
+                == 'true'
             )
         )
+        self._refresh_interval = 2.0
         self._device_name = (
-            self.catt_cfg['aliases'].get(device_name, device_name)
+            self._catt_cfg['aliases'].get(device_name, device_name)
             if device_name is not None
-            else self.catt_cfg['options'].get('device')
+            else self._catt_cfg['options'].get('device')
         )
-        self.catt = CattDevice(self._device_name)
+        self._catt = CattDevice(self._device_name)
         self._catt_call = None
+        self._components = [
+            Label(f'Connected to "{self._device_name}".', id='device_label'),
+            LolCattPlaybackInfo(catt=self._catt, refresh_interval=self._refresh_interval),
+            LolCattProgress(catt=self._catt, refresh_interval=self._refresh_interval),
+            LolCattControls(exit_cb=self.exit, catt=self._catt, config=self._controls_cfg),
+            LolCattUrlInput(cast_cb=self.cast),
+        ]
 
     def compose(self):
         yield Container(
-            Label(f'Connected to "{self._device_name}".', id='device_label'),
-            LolCattTitle(catt=self.catt),
-            LolCattProgress(catt=self.catt),
-            LolCattControls(exit_cb=self.exit, catt=self.catt, config=self.controls_cfg),
-            LolCattUrlInput(cast_cb=self.cast),
+            *self._components,
             id='app',
         )
 
@@ -228,11 +259,11 @@ class LolCatt(App):
         if self._catt_call is not None:
             self._catt_call.kill()
         self._catt_call = subprocess.Popen(
-            ['catt', '-d', self.catt.name, 'cast', '-f', media],
+            ['catt', '-d', self._catt.name, 'cast', '-f', media],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
 
 
 if __name__ == '__main__':
-    LolCatt('Kitchen speaker').run()
+    LolCatt().run()

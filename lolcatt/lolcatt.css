@@ -46,7 +46,8 @@ Button {
     /*background: red;*/
 }
 
-#device_label, LolCattTitle {
+#device_label,
+LolCattPlaybackInfo {
     height: 3;
     width: 100%;
     align: center middle;
@@ -57,7 +58,8 @@ Button {
     border: grey;
 }
 
-#url_input_container, LolCatUrlInput {
+#url_input_container,
+LolCatUrlInput {
     layout: horizontal;
     height: 5;
     width: 100%;
