@@ -6,6 +6,7 @@ from typing import Tuple
 
 from catt.api import CattDevice
 from catt.cli import get_config_as_dict
+from catt.error import CastError
 from textual import on
 from textual.app import App
 from textual.containers import Container
@@ -85,7 +86,10 @@ class LolCattControls(Static):
 
     @on(Button.Pressed, "#play_pause")
     def toggle_play_pause(self):
-        self._catt.controller.play_toggle()
+        try:
+            self._catt.controller.play_toggle()
+        except ValueError:
+            pass
 
     @on(Button.Pressed, "#stop")
     def stop(self):
@@ -102,11 +106,17 @@ class LolCattControls(Static):
 
     @on(Button.Pressed, "#ffwd")
     def ffwd(self):
-        self._catt.ffwd(self._config.ffwd_secs)
+        try:
+            self._catt.ffwd(self._config.ffwd_secs)
+        except CastError:
+            pass
 
     @on(Button.Pressed, "#rewind")
     def rewind(self):
-        self._catt.rewind(self._config.rewind_secs)
+        try:
+            self._catt.rewind(self._config.rewind_secs)
+        except CastError:
+            pass
 
 
 class LolCattProgress(Static):
