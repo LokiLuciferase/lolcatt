@@ -153,20 +153,29 @@ class LolCattProgress(Static):
 
 
 class LolCattDeviceInfo(Static):
-    def __init__(self, catt: CattDevice, *args, **kwargs):
+    def __init__(self, catt: CattDevice, refresh_interval: float = 2.0, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._catt = catt
-        self.label = Label(self._get_device_info(), id='device_info')
+        self._refresh_interval = refresh_interval
+        self.label = Label(self._get_device_info())
 
     def _get_device_info(self) -> str:
-        info = self._catt.controller.info
-        return f'{info.get("display_name")} ({info.get("manufacturer")} {info.get("model_name")})'
+        if hasattr(self._catt, 'name'):
+            info = self._catt.name
+            msg = f'Connected to: "{info}"'
+        else:
+            msg = 'Not connected to a device.'
+        return msg
 
     def _update_label(self):
         self.label.update(self._get_device_info())
 
+    def on_mount(self):
+        self._update_label()
+        self.set_interval(interval=self._refresh_interval, callback=self._update_label)
+
     def compose(self):
-        yield Container(self.label, id='device')
+        yield Container(self.label, id='device_info')
 
 
 class LolCattPlaybackInfo(Static):
@@ -182,9 +191,8 @@ class LolCattPlaybackInfo(Static):
             return f'Playing: "{playing}"'
         else:
             display_name = self._catt.controller.info.get('display_name')
-            print(display_name)
             if display_name is not None and display_name != 'Backdrop':
-                return display_name
+                return f'Displaying: "{display_name}"'
             else:
                 return f'Nothing is playing.'
 
@@ -192,7 +200,7 @@ class LolCattPlaybackInfo(Static):
         self.label.update(self._get_playback_info())
 
     def compose(self):
-        yield Container(self.label, id='title_container')
+        yield Container(self.label, id='playback_info')
 
     def on_mount(self):
         self.set_interval(interval=self._refresh_interval, callback=self._update_label)
@@ -242,7 +250,7 @@ class LolCatt(App):
         self._catt = CattDevice(self._device_name)
         self._catt_call = None
         self._components = [
-            Label(f'Connected to "{self._device_name}".', id='device_label'),
+            LolCattDeviceInfo(catt=self._catt, refresh_interval=self._refresh_interval),
             LolCattPlaybackInfo(catt=self._catt, refresh_interval=self._refresh_interval),
             LolCattProgress(catt=self._catt, refresh_interval=self._refresh_interval),
             LolCattControls(exit_cb=self.exit, catt=self._catt, config=self._controls_cfg),

@@ -46,8 +46,8 @@ Button {
     /*background: red;*/
 }
 
-#device_label,
-LolCattPlaybackInfo {
+#device_info,
+#playback_info {
     height: 3;
     width: 100%;
     align: center middle;
