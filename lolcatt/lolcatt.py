@@ -123,7 +123,14 @@ class LolCattTitle(Static):
     def __init__(self, catt: CattDevice, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.catt = catt
-        self.label = Label(self.catt.controller.cast_info.get('title', 'No Title'), id='title')
+        self.label = Label(self.get_title(), id='title')
+
+    def get_title(self) -> str:
+        playing = self.catt.controller.cast_info.get('title')
+        if playing:
+            return f'Playing: "{playing}"'
+        else:
+            return f'Nothing is playing.'
 
     def compose(self):
         yield Container(self.label, id='title_container')
@@ -132,7 +139,7 @@ class LolCattTitle(Static):
         self.set_interval(interval=2.0, callback=self.update_title)
 
     def update_title(self):
-        self.label.update(self.catt.controller.cast_info.get('title', 'No Title'))
+        self.label.update(self.get_title())
 
 
 class LolCatt(App):
@@ -153,11 +160,20 @@ class LolCatt(App):
 
     def compose(self):
         yield Container(
-            # LolCattTitle(catt=self.catt),
+            Label(f'Connected to "{self._device_name}".', id='device_label'),
+            LolCattTitle(catt=self.catt),
             LolCattProgress(catt=self.catt),
             LolCattControls(exit_cb=self.exit, catt=self.catt, config=self.controls_cfg),
             id='app',
         )
 
     def cast(self, media: str):
-        subprocess.run(['catt', '-d', self.catt.name, 'cast', '-f', media])
+        subprocess.Popen(
+            ['catt', '-d', self.catt.name, 'cast', '-f', media],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+
+
+if __name__ == '__main__':
+    LolCatt('Kitchen speaker').run()
