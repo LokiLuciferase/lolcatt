@@ -5,7 +5,7 @@ Screen {
 
 Button {
     color: white;
-    background: $background;
+    background: $background-lighten-2;
 }
 
 #volume_buttons,

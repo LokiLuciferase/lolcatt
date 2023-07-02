@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from re import S
 import subprocess
 from dataclasses import dataclass
 from typing import Callable
@@ -21,9 +22,28 @@ class ControlsConfig:
     ffwd_secs: int = 30
     rewind_secs: int = 10
     vol_step: float = 0.1
+    use_utf8: bool = True
 
 
 class LolCattControls(Static):
+    CONTROLS = {
+        'play_pause': '⏯',
+        'stop': '⏹',
+        'rewind': '⏪',
+        'ffwd': '⏩',
+        'vol_down': '',
+        'vol_up': '',
+    }
+
+    CONTROLS_ASCII = {
+        'play_pause': 'Play/Pause',
+        'stop': 'Stop',
+        'rewind': 'RW',
+        'ffwd': 'FW',
+        'vol_down': 'Vol-',
+        'vol_up': 'Vol+',
+    }
+
     def __init__(
         self,
         exit_cb: Callable,
@@ -37,19 +57,25 @@ class LolCattControls(Static):
         self.config = config
         self.exit = exit_cb
 
+    def _get_control_label(self, control: str) -> str:
+        if self.config.use_utf8:
+            return self.CONTROLS[control]
+        else:
+            return self.CONTROLS_ASCII[control]
+
     def compose(self):
         with Container(id='controls'):
             with Container(id='playback_buttons'):
-                yield Button('Play/Pause', id='play_pause')
-                yield Button('Stop', id='stop')
+                yield Button(self._get_control_label('play_pause'), id='play_pause')
+                yield Button(self._get_control_label('stop'), id='stop')
 
             with Container(id='wind_buttons'):
-                yield Button('RW', id='rewind')
-                yield Button('FF', id='ffwd')
+                yield Button(self._get_control_label('rewind'), id='rewind')
+                yield Button(self._get_control_label('ffwd'), id='ffwd')
 
             with Container(id='volume_buttons'):
-                yield Button('Vol-', id='vol_down')
-                yield Button('Vol+', id='vol_up')
+                yield Button(self._get_control_label('vol_down'), id='vol_down')
+                yield Button(self._get_control_label('vol_up'), id='vol_up')
 
     @on(Button.Pressed, "#play_pause")
     def toggle_play_pause(self):
@@ -145,12 +171,16 @@ class LolCattTitle(Static):
 class LolCatt(App):
     CSS_PATH = 'lolcatt.css'
 
-    def __init__(
-        self, device_name: str, controls_cfg: ControlsConfig = ControlsConfig(), *args, **kwargs
-    ):
+    def __init__(self, device_name: str, controls_cfg: ControlsConfig = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.controls_cfg = controls_cfg
         self.catt_cfg = get_config_as_dict()
+        self.controls_cfg = (
+            controls_cfg
+            if controls_cfg is not None
+            else ControlsConfig(
+                use_utf8=self.catt_cfg['options'].get('lolcatt_use_utf8', 'false').lower() == 'true'
+            )
+        )
         self._device_name = (
             self.catt_cfg['aliases'].get(device_name, device_name)
             if device_name is not None
