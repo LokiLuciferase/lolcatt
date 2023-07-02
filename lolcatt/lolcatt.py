@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-from re import S
 import subprocess
 from dataclasses import dataclass
+from re import S
 from typing import Callable
 from typing import Tuple
 
@@ -12,10 +12,10 @@ from textual.app import App
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Button
+from textual.widgets import Input
 from textual.widgets import Label
 from textual.widgets import ProgressBar
 from textual.widgets import Static
-from textual.widgets import Input
 
 
 @dataclass
@@ -157,7 +157,12 @@ class LolCattTitle(Static):
         if playing:
             return f'Playing: "{playing}"'
         else:
-            return f'Nothing is playing.'
+            display_name = self.catt.controller.info.get('display_name')
+            print(display_name)
+            if display_name is not None and display_name != 'Backdrop':
+                return display_name
+            else:
+                return f'Nothing is playing.'
 
     def compose(self):
         yield Container(self.label, id='title_container')
