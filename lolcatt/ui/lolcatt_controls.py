@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from catt.api import CattDevice
+from catt.cli import get_config_as_dict
 from catt.error import CastError
 from textual import on
 from textual.containers import Container
 from textual.widgets import Button
 from textual.widgets import Static
+
+from lolcatt.casting.caster import Caster
 
 
 @dataclass
@@ -14,7 +16,7 @@ class ControlsConfig:
     ffwd_secs: int = 30
     rewind_secs: int = 10
     vol_step: float = 0.1
-    use_utf8: bool = True
+    use_utf8: bool = False
 
 
 class LolCattControls(Static):
@@ -39,14 +41,16 @@ class LolCattControls(Static):
     def __init__(
         self,
         exit_cb: Callable,
-        catt: CattDevice,
-        config: ControlsConfig = ControlsConfig(),
+        caster: Caster,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self._catt = catt
-        self._config = config
+        self._caster = caster
+        self._config = ControlsConfig(
+            use_utf8=get_config_as_dict()['options'].get('lolcatt_use_utf8', 'false').lower()
+            == 'true'
+        )
         self._exit_func = exit_cb
 
     def _get_control_label(self, control: str) -> str:
@@ -72,33 +76,33 @@ class LolCattControls(Static):
     @on(Button.Pressed, "#play_pause")
     def toggle_play_pause(self):
         try:
-            self._catt.controller.play_toggle()
+            self._caster.get_device().controller.play_toggle()
         except ValueError:
             pass
 
     @on(Button.Pressed, "#stop")
     def stop(self):
-        self._catt.stop()
+        self._caster.get_device().stop()
         self._exit_func()
 
     @on(Button.Pressed, "#vol_down")
     def vol_down(self):
-        self._catt.volumedown(self._config.vol_step)
+        self._caster.get_device().volumedown(self._config.vol_step)
 
     @on(Button.Pressed, "#vol_up")
     def vol_up(self):
-        self._catt.volumeup(self._config.vol_step)
+        self._caster.get_device().volumeup(self._config.vol_step)
 
     @on(Button.Pressed, "#ffwd")
     def ffwd(self):
         try:
-            self._catt.ffwd(self._config.ffwd_secs)
+            self._caster.get_device().ffwd(self._config.ffwd_secs)
         except CastError:
             pass
 
     @on(Button.Pressed, "#rewind")
     def rewind(self):
         try:
-            self._catt.rewind(self._config.rewind_secs)
+            self._caster.get_device().rewind(self._config.rewind_secs)
         except CastError:
             pass

@@ -1,19 +1,20 @@
-from catt.api import CattDevice
 from textual.containers import Container
 from textual.widgets import Label
 from textual.widgets import Static
 
+from lolcatt.casting.caster import Caster
+
 
 class LolCattDeviceInfo(Static):
-    def __init__(self, catt: CattDevice, refresh_interval: float = 2.0, *args, **kwargs):
+    def __init__(self, caster: Caster, refresh_interval: float = 2.0, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._catt = catt
+        self._caster = caster
         self._refresh_interval = refresh_interval
         self.label = Label(self._get_device_info())
 
     def _get_device_info(self) -> str:
-        if hasattr(self._catt, 'name'):
-            info = self._catt.name
+        info = self._caster.get_device_name()
+        if info is not None:
             msg = f'Connected to: "{info}"'
         else:
             msg = 'Not connected to a device.'

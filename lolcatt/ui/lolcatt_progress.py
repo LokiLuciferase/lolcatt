@@ -1,11 +1,12 @@
 from typing import Tuple
 
-from catt.api import CattDevice
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Label
 from textual.widgets import ProgressBar
 from textual.widgets import Static
+
+from lolcatt.casting.caster import Caster
 
 
 class LolCattProgress(Static):
@@ -26,17 +27,17 @@ class LolCattProgress(Static):
         minutes, seconds = divmod(seconds, 60)
         return f'{minutes:02.0f}:{seconds:02.0f}'
 
-    def __init__(self, catt: CattDevice, refresh_interval: float = 2.0, *args, **kwargs):
+    def __init__(self, caster: Caster, refresh_interval: float = 2.0, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._catt = catt
+        self._caster = caster
+        self._refresh_interval = refresh_interval
         self.pb = ProgressBar(id='progress_bar', total=100, show_bar=True, show_eta=False)
         self.pblabel = Label('(00:00/00:00)', id='progress_label')
-        self._refresh_interval = refresh_interval
 
     def update_progress(self) -> int:
-        self._catt.controller._update_status()
+        self._caster.update_cast_status()
         self.current, self.duration, self.percent_complete = self._extract_progress(
-            self._catt.controller.cast_info
+            self._caster.get_cast_state().cast_info
         )
         self.pb.update(progress=self.percent_complete)
         current_fmt = self._format_time(self.current)
