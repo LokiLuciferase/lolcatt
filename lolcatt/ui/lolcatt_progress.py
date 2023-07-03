@@ -4,12 +4,11 @@ from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Label
 from textual.widgets import ProgressBar
-from textual.widgets import Static
 
-from lolcatt.casting.caster import Caster
+from lolcatt.ui.caster_static import CasterStatic
 
 
-class LolCattProgress(Static):
+class LolCattProgress(CasterStatic):
     current = reactive(0)
     duration = reactive(0)
     percent_complete = reactive(0)
@@ -27,15 +26,12 @@ class LolCattProgress(Static):
         minutes, seconds = divmod(seconds, 60)
         return f'{minutes:02.0f}:{seconds:02.0f}'
 
-    def __init__(self, caster: Caster, refresh_interval: float = 2.0, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._caster = caster
-        self._refresh_interval = refresh_interval
         self.pb = ProgressBar(id='progress_bar', total=100, show_bar=True, show_eta=False)
         self.pblabel = Label('(00:00/00:00)', id='progress_label')
 
     def update_progress(self) -> int:
-        self._caster.update_cast_status()
         self.current, self.duration, self.percent_complete = self._extract_progress(
             self._caster.get_cast_state().cast_info
         )
@@ -46,7 +42,9 @@ class LolCattProgress(Static):
 
     def on_mount(self):
         self.update_progress()
-        self.set_interval(interval=self._refresh_interval, callback=self.update_progress)
+        self.set_interval(
+            interval=self._caster.get_update_interval(), callback=self.update_progress
+        )
 
     def compose(self):
         yield Container(self.pb, self.pblabel, id='progress')

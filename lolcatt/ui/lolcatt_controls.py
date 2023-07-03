@@ -6,9 +6,8 @@ from catt.error import CastError
 from textual import on
 from textual.containers import Container
 from textual.widgets import Button
-from textual.widgets import Static
 
-from lolcatt.casting.caster import Caster
+from lolcatt.ui.caster_static import CasterStatic
 
 
 @dataclass
@@ -19,7 +18,7 @@ class ControlsConfig:
     use_utf8: bool = False
 
 
-class LolCattControls(Static):
+class LolCattControls(CasterStatic):
     CONTROLS = {
         'play_pause': '⏯',
         'stop': '⏹',
@@ -41,12 +40,10 @@ class LolCattControls(Static):
     def __init__(
         self,
         exit_cb: Callable,
-        caster: Caster,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self._caster = caster
         self._config = ControlsConfig(
             use_utf8=get_config_as_dict()['options'].get('lolcatt_use_utf8', 'false').lower()
             == 'true'

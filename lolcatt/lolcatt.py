@@ -10,16 +10,17 @@ from lolcatt.ui.lolcatt_url_input import LolCattUrlInput
 
 
 class LolCatt(App):
+    """The main application class for lolcatt."""
+
     CSS_PATH = 'ui/lolcatt.css'
 
     def __init__(self, device_name: str = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.caster = Caster(device_name)
-        self._refresh_interval = 1.0
         self._components = [
-            LolCattDeviceInfo(caster=self.caster, refresh_interval=self._refresh_interval),
-            LolCattPlaybackInfo(caster=self.caster, refresh_interval=self._refresh_interval),
-            LolCattProgress(caster=self.caster, refresh_interval=self._refresh_interval),
+            LolCattDeviceInfo(caster=self.caster),
+            LolCattPlaybackInfo(caster=self.caster),
+            LolCattProgress(caster=self.caster),
             LolCattControls(caster=self.caster, exit_cb=self.exit),
             LolCattUrlInput(caster=self.caster),
         ]

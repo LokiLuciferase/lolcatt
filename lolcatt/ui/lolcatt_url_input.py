@@ -1,15 +1,13 @@
 from textual import on
 from textual.containers import Container
 from textual.widgets import Input
-from textual.widgets import Static
 
-from lolcatt.casting.caster import Caster
+from lolcatt.ui.caster_static import CasterStatic
 
 
-class LolCattUrlInput(Static):
-    def __init__(self, caster: Caster, *args, **kwargs):
+class LolCattUrlInput(CasterStatic):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._caster = caster
         self._input = Input(id='url_input', placeholder='Enter URL to cast...')
         self._input.cursor_blink = False
 

@@ -1,15 +1,12 @@
 from textual.containers import Container
 from textual.widgets import Label
-from textual.widgets import Static
 
-from lolcatt.casting.caster import Caster
+from lolcatt.ui.caster_static import CasterStatic
 
 
-class LolCattPlaybackInfo(Static):
-    def __init__(self, caster: Caster, refresh_interval: float = 2.0, *args, **kwargs):
+class LolCattPlaybackInfo(CasterStatic):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._caster = caster
-        self._refresh_interval = refresh_interval
         self.label = Label(self._get_playback_info(), id='title')
 
     def _get_playback_info(self) -> str:
@@ -30,4 +27,4 @@ class LolCattPlaybackInfo(Static):
         yield Container(self.label, id='playback_info')
 
     def on_mount(self):
-        self.set_interval(interval=self._refresh_interval, callback=self._update_label)
+        self.set_interval(interval=self._caster.get_update_interval(), callback=self._update_label)
