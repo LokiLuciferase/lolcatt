@@ -3,7 +3,7 @@
 import lolcatt
 
 
-def test_content(response):
+def test_lolcat_start(response):
     """Sample pytest test function with the pytest fixture as an argument."""
     print(lolcatt.__version__)
     # from bs4 import BeautifulSoup

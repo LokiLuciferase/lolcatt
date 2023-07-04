@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import subprocess
+import sys
 import time
 from dataclasses import dataclass
 from typing import List
@@ -8,6 +9,7 @@ from typing import Optional
 from catt.api import CattDevice
 from catt.api import discover
 from catt.cli import get_config_as_dict
+from catt.error import CastError
 
 
 @dataclass
@@ -36,13 +38,30 @@ class Caster:
         self._catt_config = get_config_as_dict()
         if name_or_alias == 'default':
             self._device_name = self._catt_config['options'].get('device')
+            if self._device_name is None:
+                print(
+                    'No default device set. '
+                    'Scanning for all available devices and picking first...'
+                )
+                print(
+                    'To skip this in the future, either pass a device name '
+                    'or set a default device in the catt config file.'
+                )
+                possible_devices = self.get_available_devices()
+                if len(possible_devices) > 0:
+                    self._device_name = possible_devices[0].name
         elif name_or_alias is not None:
             self._device_name = self._catt_config['aliases'].get(name_or_alias, name_or_alias)
         else:
             self._device_name = None
 
         if self._device_name is not None:
-            self._device = CattDevice(self._device_name)
+            try:
+                self._device = CattDevice(self._device_name)
+            except CastError:
+                print(f'Selected device "{self._device_name}" was not found on this network.')
+                print('Scan for available devices using "lolcatt --scan".')
+                sys.exit(1)
 
         self._update_interval = update_interval
         self._state_last_updated = time.time()
@@ -123,7 +142,7 @@ class Caster:
         :return: A CastState object
         """
         if self._device is None:
-            raise ValueError('Can\'t get cast state: No device selected.')
+            return CastState({}, {}, False)
 
         if time.time() - self._state_last_updated > self._update_interval:
             self._device.controller._update_status()

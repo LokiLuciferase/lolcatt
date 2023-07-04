@@ -1,12 +1,11 @@
 from typing import Tuple
 
-from textual.events import Click
+from catt.error import CastError
 from textual.containers import Container
+from textual.events import Click
 from textual.reactive import reactive
 from textual.widgets import Label
 from textual.widgets import ProgressBar
-
-from catt.error import CastError
 
 from lolcatt.ui.caster_static import CasterStatic
 

@@ -1,13 +1,12 @@
 from textual.containers import Container
-from textual.widgets import Label
 from textual.reactive import reactive
+from textual.widgets import Label
 
 from lolcatt.ui.caster_static import CasterStatic
 from lolcatt.utils.utils import marquee
 
 
 class LolCattPlaybackInfo(CasterStatic):
-
     label_str = reactive('')
 
     def __init__(self, *args, **kwargs):

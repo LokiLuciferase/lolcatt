@@ -15,8 +15,8 @@ class LolCatt(App):
     CSS_PATH = 'ui/lolcatt.css'
 
     def __init__(self, device_name: str = None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self.caster = Caster(device_name)
+        super().__init__(*args, **kwargs)
         self._components = [
             LolCattDeviceInfo(caster=self.caster),
             LolCattPlaybackInfo(caster=self.caster),
