@@ -18,11 +18,11 @@ lolcatt
    :alt: Coverage Status
 
 
-A TUI wrapper around `catt`, enabling you to cast media to and control your Chromecast devices.
+A TUI wrapper around catt_, enabling you to cast media to and control your Chromecast devices.
 
-.. image:: https://raw.githubusercontent.com/LokiLuciferase/lolcatt/main/docs/source/_static/screenshot.png
-   :alt: Screenshot of lolcatt
-
+.. image:: https://raw.githubusercontent.com/LokiLuciferase/lolcatt/master/docs/_static/screenshot.png
+   :align: center
+   :alt:
 
 * Free software: MIT license
 
@@ -34,3 +34,4 @@ This package was created with Cookiecutter_ and the `LokiLuciferase/cookiecutter
 
 .. _Cookiecutter: https://github.com/LokiLuciferase/cookiecutter
 .. _`LokiLuciferase/cookiecutter-pypackage`: https://github.com/LokiLuciferase/cookiecutter-pypackage
+.. _catt: https://github.com/skorokithakis/catt
