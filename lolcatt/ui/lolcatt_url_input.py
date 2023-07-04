@@ -21,3 +21,6 @@ class LolCattUrlInput(CasterStatic):
 
     def compose(self):
         yield Container(self._input, id='url_input_container')
+
+    def on_mount(self):
+        self._input.focus()
