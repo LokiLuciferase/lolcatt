@@ -24,9 +24,9 @@ class LolCattPlaybackInfo(CasterStatic):
         elif display_name is not None and display_name != 'Backdrop':
             return f'Displaying: "{display_name}"'
         elif is_loading:
-            return f'Loading...'
+            return 'Loading...'
         else:
-            return f'Nothing is playing.'
+            return 'Nothing is playing.'
 
     def _update_label(self):
         self.label_str = self._get_playback_info() + ' '

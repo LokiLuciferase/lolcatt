@@ -11,4 +11,4 @@ sphinx-autodoc-typehints>=1.11.1
 twine>=1.14.0
 pre-commit>=3.0
 pre-commit-hooks==4.4.0
-typeguard>=2.10.0
+typeguard>=2.10.0,<3

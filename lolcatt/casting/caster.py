@@ -31,7 +31,7 @@ class Caster:
     CATT_ARGS = []
     CAST_ARGS = ['-f']
 
-    def __init__(self, name_or_alias: str = 'default', update_interval: float = 0.5):
+    def __init__(self, name_or_alias: Optional[str] = 'default', update_interval: float = 0.5):
         self._device = None
         self._available_devices = None
         self._catt_call = None
