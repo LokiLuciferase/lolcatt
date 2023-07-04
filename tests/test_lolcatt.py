@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 """Tests for `lolcatt` package."""
-import lolcatt
+from lolcatt.app import LolCatt
 
 
-def test_lolcat_start(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    print(lolcatt.__version__)
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+def test_lolcat_start():
+    """Simple smoke test for now."""
+    lolcatt = LolCatt(device_name=None)
+    lolcatt.run()
