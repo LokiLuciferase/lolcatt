@@ -6,6 +6,7 @@ Screen {
 Button {
     color: white;
     background: $background-lighten-2;
+    min-width: 14;
 }
 
 #volume_buttons,
@@ -27,12 +28,11 @@ Button {
     margin-right: 1;
     padding: 0;
     height: 4;
-    /*background: blue;*/
     border: grey;
 }
 
 #progress_label {
-    margin-left: 12;
+    margin-left: 10;
 }
 
 #controls {

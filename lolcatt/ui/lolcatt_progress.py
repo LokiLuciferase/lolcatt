@@ -28,7 +28,7 @@ class LolCattProgress(CasterStatic):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.pb = ProgressBar(id='progress_bar', total=100, show_bar=True, show_eta=False)
+        self.pb = ProgressBar(total=100, show_percentage=False, show_eta=False, id='progress_bar')
         self.pblabel = Label('(00:00/00:00)', id='progress_label')
 
     def update_progress(self) -> int:
