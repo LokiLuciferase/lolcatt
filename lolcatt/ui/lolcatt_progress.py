@@ -1,9 +1,12 @@
 from typing import Tuple
 
+from textual.events import Click
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Label
 from textual.widgets import ProgressBar
+
+from catt.error import CastError
 
 from lolcatt.ui.caster_static import CasterStatic
 
@@ -45,6 +48,19 @@ class LolCattProgress(CasterStatic):
         self.set_interval(
             interval=self._caster.get_update_interval(), callback=self.update_progress
         )
+
+    def on_click(self, event: Click):
+        min_x, max_x = (
+            self.pb.content_region.x,
+            self.pb.content_region.x + self.pb.content_region.width,
+        )
+        click_x = min(max(event.screen_x, min_x), max_x)
+        fraction = min(1, (click_x - min_x) / (max_x - min_x))
+        duration = self._caster.get_cast_state().cast_info.get('duration', 0.0)
+        try:
+            self._caster.get_device().seek(duration * fraction)
+        except CastError:
+            pass
 
     def compose(self):
         yield Container(self.pb, self.pblabel, id='progress')
