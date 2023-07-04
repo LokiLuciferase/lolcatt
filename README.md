@@ -5,20 +5,20 @@
 | Name                                  |    Stmts |     Miss |   Cover |   Missing |
 |-------------------------------------- | -------: | -------: | ------: | --------: |
 | lolcatt/\_\_init\_\_.py               |        3 |        0 |    100% |           |
-| lolcatt/app.py                        |       18 |        2 |     89% |    29, 36 |
+| lolcatt/app.py                        |       18 |        1 |     94% |        36 |
 | lolcatt/casting/\_\_init\_\_.py       |        0 |        0 |    100% |           |
-| lolcatt/casting/caster.py             |       80 |       41 |     49% |40-52, 54, 59-64, 78-96, 104-105, 114-119, 127, 135, 144-155, 166 |
+| lolcatt/casting/caster.py             |       80 |       40 |     50% |40-52, 54, 59-64, 78-96, 104-105, 114-119, 127, 135, 144-155 |
 | lolcatt/cli.py                        |       17 |       17 |      0% |      2-45 |
 | lolcatt/ui/\_\_init\_\_.py            |        0 |        0 |    100% |           |
 | lolcatt/ui/caster\_static.py          |        6 |        0 |    100% |           |
-| lolcatt/ui/lolcatt\_controls.py       |       72 |       30 |     58% |61, 66-77, 81-86, 90-93, 97, 101, 105-108, 112-115 |
-| lolcatt/ui/lolcatt\_device\_info.py   |       29 |       12 |     59% |18-23, 26-27, 30, 33, 36-37, 40 |
-| lolcatt/ui/lolcatt\_playback\_info.py |       33 |       16 |     52% |18-29, 32-33, 36, 39, 42, 45 |
-| lolcatt/ui/lolcatt\_progress.py       |       47 |       24 |     49% |20-23, 26-29, 37-43, 46-47, 52-62, 65 |
-| lolcatt/ui/lolcatt\_url\_input.py     |       20 |        7 |     65% |16-20, 23, 26 |
+| lolcatt/ui/lolcatt\_controls.py       |       72 |       29 |     60% |61, 66-77, 81-86, 90-93, 97, 101, 105-108, 112-114 |
+| lolcatt/ui/lolcatt\_device\_info.py   |       29 |       11 |     62% |18-23, 26-27, 30, 33, 36-37 |
+| lolcatt/ui/lolcatt\_playback\_info.py |       33 |       15 |     55% |18-29, 32-33, 36, 39, 42 |
+| lolcatt/ui/lolcatt\_progress.py       |       47 |       23 |     51% |20-23, 26-29, 37-43, 46-47, 52-62 |
+| lolcatt/ui/lolcatt\_url\_input.py     |       20 |        6 |     70% | 16-20, 23 |
 | lolcatt/utils/\_\_init\_\_.py         |        0 |        0 |    100% |           |
-| lolcatt/utils/utils.py                |       25 |       22 |     12% |14-19, 24-43 |
-|                             **TOTAL** |  **350** |  **171** | **51%** |           |
+| lolcatt/utils/utils.py                |       25 |       21 |     16% |14-18, 24-43 |
+|                             **TOTAL** |  **350** |  **163** | **53%** |           |
 
 
 ## Setup coverage badge
