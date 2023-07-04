@@ -30,3 +30,7 @@ class LolCatt(App):
             *self._components,
             id='app',
         )
+
+
+if __name__ == '__main__':
+    LolCatt('default').run()

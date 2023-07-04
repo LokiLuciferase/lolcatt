@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
 
-from lolcatt.lolcatt import LolCatt
+from lolcatt.app import LolCatt
 
 
 def main():

@@ -7,7 +7,7 @@ from lolcatt.ui.caster_static import CasterStatic
 class LolCattPlaybackInfo(CasterStatic):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.label = Label(self._get_playback_info(), id='title')
+        self.label = Label('', id='title')
 
     def _get_playback_info(self) -> str:
         playing = self._caster.get_cast_state().cast_info.get('title')
