@@ -4,6 +4,7 @@ from typing import Callable
 from catt.cli import get_config_as_dict
 from catt.error import CastError
 from textual import on
+from textual.app import DEFAULT_COLORS
 from textual.containers import Container
 from textual.widgets import Button
 
@@ -50,6 +51,11 @@ class LolCattControls(CasterStatic):
         )
         self._exit_func = exit_cb
 
+        self._pp_button_colors = [DEFAULT_COLORS['dark'].success, DEFAULT_COLORS['dark'].warning]
+        self._pp_button = Button(self._get_control_label('play_pause'), id='play_pause_button')
+        self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[0])
+        self._stop_button = Button(self._get_control_label('stop'), id='stop_button')
+
     def _get_control_label(self, control: str) -> str:
         if self._config.use_utf8:
             return self.CONTROLS[control]
@@ -59,45 +65,49 @@ class LolCattControls(CasterStatic):
     def compose(self):
         with Container(id='controls'):
             with Container(id='playback_buttons'):
-                yield Button(self._get_control_label('play_pause'), id='play_pause')
-                yield Button(self._get_control_label('stop'), id='stop')
+                yield self._pp_button
+                yield self._stop_button
 
             with Container(id='wind_buttons'):
-                yield Button(self._get_control_label('rewind'), id='rewind')
-                yield Button(self._get_control_label('ffwd'), id='ffwd')
+                yield Button(self._get_control_label('rewind'), id='rewind_button')
+                yield Button(self._get_control_label('ffwd'), id='ffwd_button')
 
             with Container(id='volume_buttons'):
-                yield Button(self._get_control_label('vol_down'), id='vol_down')
-                yield Button(self._get_control_label('vol_up'), id='vol_up')
+                yield Button(self._get_control_label('vol_down'), id='vol_down_button')
+                yield Button(self._get_control_label('vol_up'), id='vol_up_button')
 
-    @on(Button.Pressed, "#play_pause")
+    @on(Button.Pressed, "#play_pause_button")
     def toggle_play_pause(self):
         try:
             self._caster.get_device().controller.play_toggle()
+            self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[-1])
+            self._pp_button_colors.reverse()
         except ValueError:
             pass
 
-    @on(Button.Pressed, "#stop")
+    @on(Button.Pressed, "#stop_button")
     def stop(self):
-        self._caster.get_device().stop()
-        self._exit_func()
+        if self._caster.get_cast_state().cast_info.get('player_state') in ['PLAYING', 'PAUSED']:
+            self._caster.get_device().stop()
+        else:
+            self._exit_func()
 
-    @on(Button.Pressed, "#vol_down")
+    @on(Button.Pressed, "#vol_down_button")
     def vol_down(self):
         self._caster.get_device().volumedown(self._config.vol_step)
 
-    @on(Button.Pressed, "#vol_up")
+    @on(Button.Pressed, "#vol_up_button")
     def vol_up(self):
         self._caster.get_device().volumeup(self._config.vol_step)
 
-    @on(Button.Pressed, "#ffwd")
+    @on(Button.Pressed, "#ffwd_button")
     def ffwd(self):
         try:
             self._caster.get_device().ffwd(self._config.ffwd_secs)
         except CastError:
             pass
 
-    @on(Button.Pressed, "#rewind")
+    @on(Button.Pressed, "#rewind_button")
     def rewind(self):
         try:
             self._caster.get_device().rewind(self._config.rewind_secs)

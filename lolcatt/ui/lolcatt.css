@@ -6,8 +6,21 @@ Screen {
 Button {
     color: white;
     background: $background-lighten-2;
+    border-bottom: tall $accent;
     min-width: 14;
     margin-left: 1;
+}
+
+#play_pause_button {
+    border-bottom: tall $success;
+}
+
+#stop_button {
+    border-bottom: tall $error;
+}
+
+Bar > .bar--bar {
+    color: $accent;
 }
 
 #volume_buttons,

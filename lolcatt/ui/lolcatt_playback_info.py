@@ -17,14 +17,17 @@ class LolCattPlaybackInfo(CasterStatic):
 
     def _get_playback_info(self) -> str:
         playing = self._caster.get_cast_state().cast_info.get('title')
-        if playing:
+        display_name = self._caster.get_cast_state().info.get('display_name')
+        is_loading = self._caster.get_cast_state().is_loading
+
+        if playing is not None:
             return f'Playing: "{playing}"'
+        elif display_name is not None and display_name != 'Backdrop':
+            return f'Displaying: "{display_name}"'
+        elif is_loading:
+            return f'Loading...'
         else:
-            display_name = self._caster.get_cast_state().info.get('display_name')
-            if display_name is not None and display_name != 'Backdrop':
-                return f'Displaying: "{display_name}"'
-            else:
-                return f'Nothing is playing.'
+            return f'Nothing is playing.'
 
     def _update_label(self):
         self.label_str = self._get_playback_info() + ' '

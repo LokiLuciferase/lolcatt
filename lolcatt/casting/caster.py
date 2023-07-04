@@ -16,6 +16,7 @@ class CastState:
 
     cast_info: dict
     info: dict
+    is_loading: bool = False
 
 
 class Caster:
@@ -45,6 +46,9 @@ class Caster:
 
         self._update_interval = update_interval
         self._state_last_updated = time.time()
+        self._loading_started = None
+        self._is_loading_cast = False
+        self._loading_timeout = 8
 
     def cast(self, url_or_path: str):
         """
@@ -69,6 +73,8 @@ class Caster:
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
+        self._loading_started = time.time()
+        self._is_loading_cast = True
 
     def get_available_devices(self) -> List[str]:
         """
@@ -118,10 +124,18 @@ class Caster:
         """
         if self._device is None:
             raise ValueError('Can\'t get cast state: No device selected.')
+
         if time.time() - self._state_last_updated > self._update_interval:
             self._device.controller._update_status()
             self._state_last_updated = time.time()
-        return CastState(self._device.controller.cast_info, self._device.controller.info)
+
+        if self._is_loading_cast and time.time() - self._loading_started > self._loading_timeout:
+            self._loading_started = None
+            self._is_loading_cast = False
+
+        return CastState(
+            self._device.controller.cast_info, self._device.controller.info, self._is_loading_cast
+        )
 
     def get_update_interval(self) -> float:
         """

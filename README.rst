@@ -18,7 +18,10 @@ lolcatt
    :alt: Coverage Status
 
 
-A TUI wrapper around `catt`.
+A TUI wrapper around `catt`, enabling you to cast media to and control your Chromecast devices.
+
+.. image:: https://raw.githubusercontent.com/LokiLuciferase/lolcatt/main/docs/source/_static/screenshot.png
+   :alt: Screenshot of lolcatt
 
 
 * Free software: MIT license
