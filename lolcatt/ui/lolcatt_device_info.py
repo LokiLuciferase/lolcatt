@@ -1,12 +1,12 @@
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Label
+from textual.widgets import Static
 
-from lolcatt.ui.caster_static import CasterStatic
 from lolcatt.utils.utils import marquee
 
 
-class LolCattDeviceInfo(CasterStatic):
+class LolCattDeviceInfo(Static):
     label_str = reactive('')
 
     def __init__(self, *args, **kwargs):
@@ -15,7 +15,7 @@ class LolCattDeviceInfo(CasterStatic):
         self._marquee_gen = None
 
     def _get_device_info(self) -> str:
-        info = self._caster.get_device_name()
+        info = self.app.caster.get_device_name()
         if info is not None:
             msg = f'Connected to: "{info}"'
         else:
@@ -34,7 +34,9 @@ class LolCattDeviceInfo(CasterStatic):
 
     def on_mount(self):
         self._update_label()
-        self.set_interval(interval=self._caster.get_update_interval(), callback=self._update_label)
+        self.set_interval(
+            interval=self.app.caster.get_update_interval(), callback=self._update_label
+        )
 
     def compose(self):
         yield Container(self.label, id='device_info')

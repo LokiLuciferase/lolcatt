@@ -6,11 +6,10 @@ from textual.events import Click
 from textual.reactive import reactive
 from textual.widgets import Label
 from textual.widgets import ProgressBar
+from textual.widgets import Static
 
-from lolcatt.ui.caster_static import CasterStatic
 
-
-class LolCattProgress(CasterStatic):
+class LolCattProgress(Static):
     current = reactive(0)
     duration = reactive(0)
     percent_complete = reactive(0)
@@ -35,7 +34,7 @@ class LolCattProgress(CasterStatic):
 
     def update_progress(self) -> int:
         self.current, self.duration, self.percent_complete = self._extract_progress(
-            self._caster.get_cast_state().cast_info
+            self.app.caster.get_cast_state().cast_info
         )
         self.pb.update(progress=self.percent_complete)
         current_fmt = self._format_time(self.current)
@@ -45,7 +44,7 @@ class LolCattProgress(CasterStatic):
     def on_mount(self):
         self.update_progress()
         self.set_interval(
-            interval=self._caster.get_update_interval(), callback=self.update_progress
+            interval=self.app.caster.get_update_interval(), callback=self.update_progress
         )
 
     def on_click(self, event: Click):
@@ -55,9 +54,9 @@ class LolCattProgress(CasterStatic):
         )
         click_x = min(max(event.screen_x, min_x), max_x)
         fraction = min(1, (click_x - min_x) / (max_x - min_x))
-        duration = self._caster.get_cast_state().cast_info.get('duration', 0.0)
+        duration = self.app.caster.get_cast_state().cast_info.get('duration', 0.0)
         try:
-            self._caster.get_device().seek(duration * fraction)
+            self.app.caster.get_device().seek(duration * fraction)
         except CastError:
             pass
 

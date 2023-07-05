@@ -1,12 +1,12 @@
 from textual.containers import Container
 from textual.reactive import reactive
 from textual.widgets import Label
+from textual.widgets import Static
 
-from lolcatt.ui.caster_static import CasterStatic
 from lolcatt.utils.utils import marquee
 
 
-class LolCattPlaybackInfo(CasterStatic):
+class LolCattPlaybackInfo(Static):
     label_str = reactive('')
 
     def __init__(self, *args, **kwargs):
@@ -15,9 +15,9 @@ class LolCattPlaybackInfo(CasterStatic):
         self._marquee_gen = None
 
     def _get_playback_info(self) -> str:
-        playing = self._caster.get_cast_state().cast_info.get('title')
-        display_name = self._caster.get_cast_state().info.get('display_name')
-        is_loading = self._caster.get_cast_state().is_loading
+        playing = self.app.caster.get_cast_state().cast_info.get('title')
+        display_name = self.app.caster.get_cast_state().info.get('display_name')
+        is_loading = self.app.caster.get_cast_state().is_loading
 
         if playing is not None:
             return f'Playing: "{playing}"'
@@ -42,4 +42,6 @@ class LolCattPlaybackInfo(CasterStatic):
         yield Container(self.label, id='playback_info')
 
     def on_mount(self):
-        self.set_interval(interval=self._caster.get_update_interval(), callback=self._update_label)
+        self.set_interval(
+            interval=self.app.caster.get_update_interval(), callback=self._update_label
+        )
