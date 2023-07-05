@@ -60,6 +60,8 @@ dl-tc-test:
 	LONG_TESTS=true pytest --cov=$(PACKAGE_NAME) --typeguard-packages=$(PACKAGE_NAME) tests
 	coverage xml
 
+prepush: lint tc-test ## run tests and linting before pushing
+
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source $(PACKAGE_NAME) -m pytest
 	coverage report -m
@@ -82,6 +84,7 @@ docs: docs-build ## generate Sphinx HTML documentation, including API docs
 
 githash:  ## create git hash for current repo HEAD
 	[ ! -z "`git status`" ] && echo `git describe --match=DONOTMATCH --always --abbrev=40 --dirty` > $(PACKAGE_NAME)/.githash || echo 'Could not write githash.'
+
 docker-build: githash  ## build docker container
 	# Building image $(DOCKER_LOCAL_NAME):$(DOCKER_TAG)...
 	DOCKER_BUILDKIT=1 docker build -t $(DOCKER_LOCAL_NAME):$(DOCKER_TAG) --label githash=$$(cat $(PACKAGE_NAME)/.githash) .

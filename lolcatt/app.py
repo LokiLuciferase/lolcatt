@@ -1,5 +1,3 @@
-from typing import Callable
-
 from textual.app import App
 from textual.containers import Container
 from textual.screen import Screen
@@ -15,38 +13,14 @@ from lolcatt.ui.lolcatt_url_input import LolCattUrlInput
 class RemoteScreen(Screen):
     """A screen for the remote control UI."""
 
-    def __init__(self, caster: Caster, exit_cb: Callable, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.caster = caster
-        self.exit = exit_cb
-        self._components = [
+    def compose(self):
+        yield Container(
             LolCattDeviceInfo(),
             LolCattPlaybackInfo(),
             LolCattProgress(),
             LolCattControls(),
             LolCattUrlInput(),
-        ]
-
-    def compose(self):
-        yield Container(
-            *self._components,
             id='app',
-        )
-
-
-class QueueScreen(Screen):
-    """A screen for the queue UI."""
-
-    def __init__(self, caster: Caster, exit_cb: Callable, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.caster = caster
-        self.exit = exit_cb
-        self._components = []
-
-    def compose(self):
-        yield Container(
-            *self._components,
-            id='queue',
         )
 
 
@@ -60,8 +34,7 @@ class LolCatt(App):
         super().__init__(*args, **kwargs)
 
     def on_mount(self):
-        self.install_screen(RemoteScreen(caster=self.caster, exit_cb=self.exit), name='remote')
-        self.install_screen(QueueScreen(caster=self.caster, exit_cb=self.exit), name='queue')
+        self.install_screen(RemoteScreen(), name='remote')
         self.push_screen('remote')
 
 

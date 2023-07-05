@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import subprocess
-import sys
 import time
 from dataclasses import dataclass
 from typing import List
@@ -36,38 +35,12 @@ class Caster:
         self._available_devices = None
         self._catt_call = None
         self._catt_config = get_config_as_dict()
-        if name_or_alias == 'default':
-            self._device_name = self._catt_config['options'].get('device')
-            if self._device_name is None:
-                print(
-                    'No default device set. '
-                    'Scanning for all available devices and picking first...'
-                )
-                print(
-                    'To skip this in the future, either pass a device name '
-                    'or set a default device in the catt config file.'
-                )
-                possible_devices = self.get_available_devices()
-                if len(possible_devices) > 0:
-                    self._device_name = possible_devices[0].name
-        elif name_or_alias is not None:
-            self._device_name = self._catt_config['aliases'].get(name_or_alias, name_or_alias)
-        else:
-            self._device_name = None
-
-        if self._device_name is not None:
-            try:
-                self._device = CattDevice(self._device_name)
-            except CastError:
-                print(f'Selected device "{self._device_name}" was not found on this network.')
-                print('Scan for available devices using "lolcatt --scan".')
-                sys.exit(1)
-
+        self._loading_started = time.time()
+        self._is_loading_cast = True
+        self._loading_timeout = 8
         self._update_interval = update_interval
         self._state_last_updated = time.time()
-        self._loading_started = None
-        self._is_loading_cast = False
-        self._loading_timeout = 8
+        self.change_device(name_or_alias)
 
     def cast(self, url_or_path: str):
         """
@@ -104,19 +77,41 @@ class Caster:
         self._available_devices = discover()
         return self._available_devices
 
-    def change_device(self, name_or_alias: str):
+    def change_device(self, name_or_alias: str = None):
         """
         Changes the currently active device to the given name or alias. If the device is not
         available, a ValueError is raised.
 
         :param name_or_alias: The name or alias of the device to change to.
         """
-        self._device_name = self._catt_config['aliases'].get(name_or_alias, name_or_alias)
-        for device in self.get_available_devices():
-            if device.name == self._device_name:
-                self._device = device
-                return
-        raise ValueError('Can\'t change device: Device not found.')
+        if name_or_alias == 'default':
+            self._device_name = self._catt_config['options'].get('device')
+            if self._device_name is None:
+                print(
+                    'No default device set. '
+                    'Scanning for all available devices and picking first...'
+                )
+                print(
+                    'To skip this in the future, either pass a device name '
+                    'or set a default device in the catt config file.'
+                )
+                possible_devices = self.get_available_devices()
+                if len(possible_devices) > 0:
+                    self._device_name = possible_devices[0].name
+        elif name_or_alias is not None:
+            self._device_name = self._catt_config['aliases'].get(name_or_alias, name_or_alias)
+        else:
+            self._device_name = None
+
+        if self._device_name is not None:
+            try:
+                self._device = CattDevice(self._device_name)
+                self._loading_started = None
+                self._is_loading_cast = False
+            except CastError:
+                print(f'Selected device "{self._device_name}" was not found on this network.')
+                print('Scan for available devices using "lolcatt --scan".')
+                raise ValueError(f'No device with name or alias "{name_or_alias}" found.')
 
     def get_device(self) -> CattDevice:
         """
