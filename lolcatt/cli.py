@@ -37,7 +37,7 @@ def main(url_or_path, device, scan):
 
     lolcatt = LolCatt(device_name=device)
     if url_or_path is not None:
-        lolcatt.cast(url_or_path)
+        lolcatt.caster.cast(url_or_path)
     lolcatt.run()
 
 
