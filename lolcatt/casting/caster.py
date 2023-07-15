@@ -41,9 +41,9 @@ class Caster:
         autoplay: bool = True,
         config: Dict = None,
     ):
-        self._config = config
+        self._config = config if config is not None else {}
         self._yt_playlist_handler = YoutubePlaylistHandler(
-            cookies_file=self._config['options'].get('youtube_cookies_file')
+            cookies_file=self._config.get('options', {}).get('youtube_cookies_file')
         )
         self._device = None
         self._queue = []
