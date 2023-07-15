@@ -109,7 +109,7 @@ class LolCattControls(Static):
     def on_key(self, event: Key) -> None:
         if event.key == 'space':
             self.toggle_play_pause()
-        elif event.key == ('q', 'escape'):
+        elif event.key == ('q'):
             self.stop()
         elif event.key in ('h', 'left'):
             self.rewind()

@@ -31,10 +31,12 @@ class LolCatt(App):
 
     def __init__(self, device_name: str = None, *args, **kwargs):
         self.caster = Caster(device_name)
+        self.remote_screen = None
         super().__init__(*args, **kwargs)
 
     def on_mount(self):
-        self.install_screen(RemoteScreen(), name='remote')
+        self.remote_screen = RemoteScreen()
+        self.install_screen(self.remote_screen, name='remote')
         self.push_screen('remote')
 
 

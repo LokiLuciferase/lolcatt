@@ -1,5 +1,6 @@
 from textual import on
 from textual.containers import Container
+from textual.events import Key
 from textual.widgets import Input
 from textual.widgets import Static
 
@@ -20,6 +21,10 @@ class LolCattUrlInput(Static):
 
     def compose(self):
         yield Container(self._input, id='url_input_container')
+
+    def on_key(self, event: Key):
+        if event.key == 'escape':
+            self.app.remote_screen.focus_next()
 
     def on_mount(self):
         self._input.focus()
