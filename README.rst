@@ -18,13 +18,33 @@ lolcatt
    :alt: Coverage Status
 
 
-A TUI wrapper around catt_, enabling you to cast media to and control your Chromecast devices.
+A TUI wrapper around catt_, enabling you to cast to and control your chromecast devices.
+
 
 .. image:: https://raw.githubusercontent.com/LokiLuciferase/lolcatt/master/docs/_static/screenshot.png
    :align: center
    :alt:
 
-* Free software: MIT license
+Installation
+------------
+
+.. code-block:: bash
+
+    pip install lolcatt
+
+
+Quckstart
+----------
+
+To determine the names of local chromecast devices, run ``lolcatt --scan``.
+Afterwards, run ``lolcatt --device '<device name>'`` to start the UI targeting the specified device.
+A default device and device aliases can be set in the ``catt`` configuration file, see catt_'s documentation for more information.
+
+To cast, paste either a URL or a path to a local file into the input field and press enter.
+
+For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported for local files.
+
+Youtube playlists are supported, and each contained video will be played in sequence. By specifying a cookie file in the config file (per default under ``~/.config/lolcatt/config.toml``), you can also access private YouTube playlists such as "Watch Later" (https://www.youtube.com/playlist?list=WL).
 
 
 Credits
@@ -35,3 +55,5 @@ This package was created with Cookiecutter_ and the `LokiLuciferase/cookiecutter
 .. _Cookiecutter: https://github.com/LokiLuciferase/cookiecutter
 .. _`LokiLuciferase/cookiecutter-pypackage`: https://github.com/LokiLuciferase/cookiecutter-pypackage
 .. _catt: https://github.com/skorokithakis/catt
+.. _yt-dlp: https://github.com/yt-dlp/yt-dlp
+.. _here: https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md
