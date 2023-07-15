@@ -133,5 +133,13 @@ class LolCattControls(Static):
             self.rewind()
         elif event.key in ('l', 'right'):
             self.ffwd()
+        elif event.key in ('j', 'down'):
+            self.next()
+        elif event.key in ('k', 'up'):
+            self.prev()
+        elif event.key == 'plus':
+            self.vol_up()
+        elif event.key == 'minus':
+            self.vol_down()
         else:
             pass
