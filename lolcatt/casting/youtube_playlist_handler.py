@@ -2,7 +2,6 @@
 from pathlib import Path
 from typing import List
 
-from catt.cli import get_config_as_dict
 from yt_dlp import YoutubeDL
 
 
@@ -34,5 +33,8 @@ class YoutubePlaylistHandler:
         """
         Resolve a playlist into a list of video URLs.
         """
-        ids = self._get_ids_from_ytdl_json(self.ydl.extract_info(s, download=False))
-        return [f'https://www.youtube.com/watch?v={id_}' for id_ in ids]
+        try:
+            ids = self._get_ids_from_ytdl_json(self.ydl.extract_info(s, download=False))
+            return [f'https://www.youtube.com/watch?v={id_}' for id_ in ids]
+        except TypeError:
+            return []
