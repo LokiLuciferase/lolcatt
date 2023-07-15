@@ -7,8 +7,15 @@ Button {
     color: white;
     background: $background-lighten-2;
     border-bottom: tall $accent;
-    min-width: 14;
+    min-width: 15;
     margin-left: 1;
+}
+
+#prev_button,
+#rewind_button,
+#ffwd_button,
+#next_button {
+    min-width: 7;
 }
 
 #play_pause_button {
@@ -31,6 +38,7 @@ Bar > .bar--bar {
     align: center middle;
     height: 3;
     width: 32;
+    min-width: 14;
     margin-top: 1;
 }
 

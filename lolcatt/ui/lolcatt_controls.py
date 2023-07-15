@@ -22,8 +22,10 @@ class LolCattControls(Static):
     CONTROLS = {
         'play_pause': '⏯',
         'stop': '⏹',
+        'previous': '⏮',
         'rewind': '⏪',
         'ffwd': '⏩',
+        'next': '⏭',
         'vol_down': '',
         'vol_up': '',
     }
@@ -31,8 +33,10 @@ class LolCattControls(Static):
     CONTROLS_ASCII = {
         'play_pause': 'Play/Pause',
         'stop': 'Stop',
-        'rewind': 'RW',
-        'ffwd': 'FW',
+        'previous': '|<<',
+        'rewind': '<<',
+        'ffwd': '>>',
+        'next': '>>|',
         'vol_down': 'Vol-',
         'vol_up': 'Vol+',
     }
@@ -61,8 +65,10 @@ class LolCattControls(Static):
                 yield self._stop_button
 
             with Container(id='wind_buttons'):
+                yield Button(self._get_control_label('previous'), id='prev_button')
                 yield Button(self._get_control_label('rewind'), id='rewind_button')
                 yield Button(self._get_control_label('ffwd'), id='ffwd_button')
+                yield Button(self._get_control_label('next'), id='next_button')
 
             with Container(id='volume_buttons'):
                 yield Button(self._get_control_label('vol_down'), id='vol_down_button')
@@ -103,6 +109,20 @@ class LolCattControls(Static):
     def rewind(self):
         try:
             self.app.caster.get_device().rewind(self._config.rewind_secs)
+        except CastError:
+            pass
+
+    @on(Button.Pressed, '#next_button')
+    def next(self):
+        try:
+            self.app.caster.cast_next()
+        except CastError:
+            pass
+
+    @on(Button.Pressed, '#prev_button')
+    def prev(self):
+        try:
+            self.app.caster.cast_previous()
         except CastError:
             pass
 

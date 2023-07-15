@@ -16,7 +16,9 @@ class LolCattUrlInput(Static):
         if self._input.value == '':
             return
         if self._input.value:
-            self.app.caster.cast(self._input.value)
+            self.app.caster.enqueue(self._input.value, front=True)
+            print(self.app.caster._queue)
+            self.app.caster.cast_next()
             self._input.value = ''
 
     def compose(self):
