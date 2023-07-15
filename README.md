@@ -2,22 +2,23 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/LokiLuciferase/lolcatt/blob/python-coverage-comment-action-data/htmlcov/index.html)
 
-| Name                                  |    Stmts |     Miss |   Cover |   Missing |
-|-------------------------------------- | -------: | -------: | ------: | --------: |
-| lolcatt/\_\_init\_\_.py               |        3 |        0 |    100% |           |
-| lolcatt/app.py                        |       25 |        6 |     76% |17, 38-40, 44-45 |
-| lolcatt/casting/\_\_init\_\_.py       |        0 |        0 |    100% |           |
-| lolcatt/casting/caster.py             |       76 |       37 |     51% |51-69, 77-78, 88-100, 102, 107-114, 122, 130, 139-150, 161 |
-| lolcatt/cli.py                        |       17 |       17 |      0% |      2-45 |
-| lolcatt/ui/\_\_init\_\_.py            |        0 |        0 |    100% |           |
-| lolcatt/ui/lolcatt\_controls.py       |       81 |       47 |     42% |41-49, 52-55, 58-69, 73-78, 82-85, 89, 93, 97-100, 104-107, 110-119 |
-| lolcatt/ui/lolcatt\_device\_info.py   |       29 |       15 |     48% |13-15, 18-23, 26-27, 30, 33, 36-37, 42 |
-| lolcatt/ui/lolcatt\_playback\_info.py |       33 |       19 |     42% |13-15, 18-29, 32-33, 36, 39, 42, 45 |
-| lolcatt/ui/lolcatt\_progress.py       |       53 |       33 |     38% |19-22, 25-31, 34-37, 40-48, 51-52, 57-67, 70 |
-| lolcatt/ui/lolcatt\_url\_input.py     |       24 |       12 |     50% |10-12, 16-20, 23, 26-27, 30 |
-| lolcatt/utils/\_\_init\_\_.py         |        0 |        0 |    100% |           |
-| lolcatt/utils/utils.py                |       25 |       22 |     12% |14-19, 24-43 |
-|                             **TOTAL** |  **366** |  **208** | **43%** |           |
+| Name                                          |    Stmts |     Miss |   Cover |   Missing |
+|---------------------------------------------- | -------: | -------: | ------: | --------: |
+| lolcatt/\_\_init\_\_.py                       |        3 |        0 |    100% |           |
+| lolcatt/app.py                                |       27 |        4 |     85% |41-42, 47-48 |
+| lolcatt/casting/\_\_init\_\_.py               |        0 |        0 |    100% |           |
+| lolcatt/casting/caster.py                     |      139 |       80 |     42% |70-88, 94-104, 110-115, 121-127, 136-141, 147, 155, 163-164, 174-186, 188, 190, 195-202, 210, 218, 227, 230-231, 237-264, 273-277 |
+| lolcatt/casting/youtube\_playlist\_handler.py |       19 |        8 |     58% |11-13, 30, 36-39 |
+| lolcatt/cli.py                                |       27 |       27 |      0% |      2-64 |
+| lolcatt/ui/\_\_init\_\_.py                    |        0 |        0 |    100% |           |
+| lolcatt/ui/lolcatt\_controls.py               |       94 |       56 |     40% |44-51, 54-57, 60-73, 77-82, 86-89, 93, 97, 101-104, 108-111, 115-118, 122-125, 128-135 |
+| lolcatt/ui/lolcatt\_device\_info.py           |       29 |       14 |     52% |13-15, 18-23, 26-27, 30, 33, 36-37 |
+| lolcatt/ui/lolcatt\_playback\_info.py         |       33 |       18 |     45% |13-15, 18-29, 32-33, 36, 39, 42 |
+| lolcatt/ui/lolcatt\_progress.py               |       53 |       32 |     40% |19-22, 25-31, 34-37, 40-48, 51-52, 57-67 |
+| lolcatt/ui/lolcatt\_url\_input.py             |       26 |       13 |     50% |10-12, 16-22, 25, 28-29 |
+| lolcatt/utils/\_\_init\_\_.py                 |        0 |        0 |    100% |           |
+| lolcatt/utils/utils.py                        |       28 |       21 |     25% |16-20, 26-45 |
+|                                     **TOTAL** |  **478** |  **273** | **43%** |           |
 
 
 ## Setup coverage badge
