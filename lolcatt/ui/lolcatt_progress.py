@@ -33,7 +33,8 @@ class LolCattProgress(Static):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.pb = ProgressBar(total=100, show_percentage=False, show_eta=False, id='progress_bar')
-        self.pblabel = Label('(00:00/00:00)', id='progress_label')
+        self.pblabel = Label('', id='progress_label')
+        self._needed_width = 16  # FIXME: learn CSS
 
     def update_progress(self) -> int:
         self.current, self.duration, self.percent_complete = self._extract_progress(
@@ -42,7 +43,9 @@ class LolCattProgress(Static):
         self.pb.update(progress=self.percent_complete)
         current_fmt = self._format_time(self.current)
         duration_fmt = self._format_time(self.duration)
-        self.pblabel.update(f'({current_fmt}/{duration_fmt})')
+        upd_str = f'({current_fmt}/{duration_fmt})'
+        padding = ' ' * max(0, (self._needed_width - len(upd_str)))
+        self.pblabel.update(f'{padding}{upd_str}')
 
     def on_mount(self):
         self.update_progress()

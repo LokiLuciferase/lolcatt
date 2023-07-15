@@ -53,11 +53,11 @@ Bar > .bar--bar {
     padding: 0;
     height: 4;
     border: grey;
+    text-style: bold;
 }
 
 #progress_label {
-    margin-left: 10;
-    text-style: bold;
+    margin-left: 7;
 }
 
 #device_info,
