@@ -83,7 +83,7 @@ class LolCattControls(Static):
     @on(Button.Pressed, "#stop_button")
     def stop(self):
         if self.app.caster.get_cast_state().cast_info.get('player_state') in ['PLAYING', 'PAUSED']:
-            self.app.caster.get_device().stop()
+            self.app.caster.stop_cast()
         else:
             self.app.exit()
 

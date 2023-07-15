@@ -47,6 +47,7 @@ class Caster:
         )
         self._device = None
         self._queue = []
+        self._current_item = None
         self._played_queue = []
         self._available_devices = None
         self._catt_call = None
@@ -90,19 +91,40 @@ class Caster:
         """
         Casts the next item in the queue to the currently active device.
         """
+        if self._current_item is not None:
+            self._played_queue.append(self._current_item)
+            self._current_item = None
         if len(self._queue) > 0:
-            popped = self._queue.pop(0)
-            self._played_queue.append(popped)
-            self.cast(popped)
+            self._current_item = self._queue.pop(0)
+            self.cast(self._current_item)
+        else:
+            try:
+                self._device.stop()
+            except CastError:
+                pass
 
     def cast_previous(self):
         """
         Casts the previous item in the queue to the currently active device.
         """
+        if self._current_item is not None:
+            self._queue.insert(0, self._current_item)
+            self._current_item = None
         if len(self._played_queue) > 0:
-            self._played_queue.pop()
-            self._queue.insert(0, self._played_queue.pop())
-            self.cast_next()
+            self._current_item = self._played_queue.pop()
+            self.cast(self._current_item)
+
+    def stop_cast(self):
+        """
+        Stops the current cast.
+        """
+        if self._current_item is not None:
+            self._played_queue.append(self._current_item)
+            self._current_item = None
+        if self._catt_call is not None:
+            self._catt_call.kill()
+        if self._device is not None:
+            self._device.stop()
 
     def enqueue(self, url_or_path: str, front: bool = False):
         """
