@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
-import threading
 import time
 from dataclasses import dataclass
+from typing import Dict
 from typing import List
 from typing import Optional
 
@@ -39,8 +39,12 @@ class Caster:
         name_or_alias: Optional[str] = 'default',
         update_interval: float = 0.5,
         autoplay: bool = True,
+        config: Dict = None,
     ):
-        self._yt_playlist_handler = YoutubePlaylistHandler()
+        self._config = config
+        self._yt_playlist_handler = YoutubePlaylistHandler(
+            cookies_file=self._config['options'].get('youtube_cookies_file')
+        )
         self._device = None
         self._queue = []
         self._played_queue = []

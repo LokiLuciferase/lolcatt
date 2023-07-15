@@ -1,3 +1,5 @@
+from typing import Dict
+
 from textual.app import App
 from textual.containers import Container
 from textual.screen import Screen
@@ -29,8 +31,9 @@ class LolCatt(App):
 
     CSS_PATH = 'ui/lolcatt.css'
 
-    def __init__(self, device_name: str = None, *args, **kwargs):
-        self.caster = Caster(device_name)
+    def __init__(self, device_name: str = None, config: Dict = None, *args, **kwargs):
+        self.config = config
+        self.caster = Caster(device_name, config=config)
         self.remote_screen = None
         super().__init__(*args, **kwargs)
 

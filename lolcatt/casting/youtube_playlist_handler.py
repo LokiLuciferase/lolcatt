@@ -7,9 +7,7 @@ from yt_dlp import YoutubeDL
 
 
 class YoutubePlaylistHandler:
-    def __init__(self):
-        self._catt_config = get_config_as_dict()
-        cookies_file = self._catt_config['options'].get('youtube_cookies_file')
+    def __init__(self, cookies_file: str = None):
         if cookies_file is not None:
             cookies_file = Path(str(cookies_file)).expanduser().resolve()
             if not cookies_file.exists():

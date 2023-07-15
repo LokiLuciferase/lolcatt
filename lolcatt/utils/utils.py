@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from pathlib import Path
+
 from catt.api import discover
 
 
@@ -41,3 +43,11 @@ def scan():
     print('=' * (max_name_len + 19))
     for name, ip in deduped:
         print(f'{name}\t{ip}')
+
+
+def write_initial_config(p: Path):
+    p.write_text(
+        "[options]\n"
+        "use_utf8 = false  # Whether to use fancy icons\n"
+        "#youtube_cookies_file = \"~/.config/lolcatt/cookies.txt\"  # Path to a cookies.txt file for YouTube"
+    )

@@ -43,10 +43,7 @@ class LolCattControls(Static):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._config = ControlsConfig(
-            use_utf8=get_config_as_dict()['options'].get('lolcatt_use_utf8', 'false').lower()
-            == 'true'
-        )
+        self._config = ControlsConfig(use_utf8=self.app.config['options'].get('use_utf8', False))
         self._pp_button_colors = [DEFAULT_COLORS['dark'].success, DEFAULT_COLORS['dark'].warning]
         self._pp_button = Button(self._get_control_label('play_pause'), id='play_pause_button')
         self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[0])
