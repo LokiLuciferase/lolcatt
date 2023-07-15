@@ -5,6 +5,7 @@ from catt.error import CastError
 from textual import on
 from textual.app import DEFAULT_COLORS
 from textual.containers import Container
+from textual.events import Key
 from textual.widgets import Button
 from textual.widgets import Static
 
@@ -103,4 +104,16 @@ class LolCattControls(Static):
         try:
             self.app.caster.get_device().rewind(self._config.rewind_secs)
         except CastError:
+            pass
+
+    def on_key(self, event: Key) -> None:
+        if event.key == 'space':
+            self.toggle_play_pause()
+        elif event.key == ('q', 'escape'):
+            self.stop()
+        elif event.key in ('h', 'left'):
+            self.rewind()
+        elif event.key in ('l', 'right'):
+            self.ffwd()
+        else:
             pass
