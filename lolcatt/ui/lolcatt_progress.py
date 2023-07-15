@@ -25,6 +25,9 @@ class LolCattProgress(Static):
         if seconds is None:
             return '--:--'
         minutes, seconds = divmod(seconds, 60)
+        hours, minutes = divmod(minutes, 60)
+        if hours:
+            return f'{hours:02.0f}:{minutes:02.0f}:{seconds:02.0f}'
         return f'{minutes:02.0f}:{seconds:02.0f}'
 
     def __init__(self, *args, **kwargs):
