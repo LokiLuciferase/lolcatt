@@ -79,6 +79,11 @@ docs-build:
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 
+release: ## package and upload a release
+	python setup.py sdist bdist_wheel
+	twine check dist/*
+	twine upload dist/*
+
 docs: docs-build ## generate Sphinx HTML documentation, including API docs
 	${BROWSER} docs/_build/html/index.html
 
