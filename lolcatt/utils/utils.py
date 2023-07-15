@@ -48,6 +48,6 @@ def scan():
 def write_initial_config(p: Path):
     p.write_text(
         "[options]\n"
-        "use_utf8 = false  # Whether to use fancy icons\n"
+        "fancy_icons = true  # Whether to use fancy icons\n"
         "#youtube_cookies_file = \"~/.config/lolcatt/cookies.txt\"  # Path to a cookies.txt file for YouTube"
     )

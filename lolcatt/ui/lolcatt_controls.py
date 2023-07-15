@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
-from catt.cli import get_config_as_dict
 from catt.error import CastError
 from textual import on
 from textual.app import DEFAULT_COLORS
@@ -15,17 +14,17 @@ class ControlsConfig:
     ffwd_secs: int = 30
     rewind_secs: int = 10
     vol_step: float = 0.1
-    use_utf8: bool = False
+    fancy_icons: bool = False
 
 
 class LolCattControls(Static):
     CONTROLS = {
-        'play_pause': '⏯',
-        'stop': '⏹',
-        'previous': '⏮',
-        'rewind': '⏪',
-        'ffwd': '⏩',
-        'next': '⏭',
+        'play_pause': '',
+        'stop': '',
+        'previous': '',
+        'rewind': '',
+        'ffwd': '',
+        'next': '',
         'vol_down': '',
         'vol_up': '',
     }
@@ -33,24 +32,26 @@ class LolCattControls(Static):
     CONTROLS_ASCII = {
         'play_pause': 'Play/Pause',
         'stop': 'Stop',
-        'previous': '|<<',
+        'previous': '|<',
         'rewind': '<<',
         'ffwd': '>>',
-        'next': '>>|',
+        'next': '>|',
         'vol_down': 'Vol-',
         'vol_up': 'Vol+',
     }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._config = ControlsConfig(use_utf8=self.app.config['options'].get('use_utf8', False))
+        self._config = ControlsConfig(
+            fancy_icons=self.app.config['options'].get('fancy_icons', False)
+        )
         self._pp_button_colors = [DEFAULT_COLORS['dark'].success, DEFAULT_COLORS['dark'].warning]
         self._pp_button = Button(self._get_control_label('play_pause'), id='play_pause_button')
         self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[0])
         self._stop_button = Button(self._get_control_label('stop'), id='stop_button')
 
     def _get_control_label(self, control: str) -> str:
-        if self._config.use_utf8:
+        if self._config.fancy_icons:
             return self.CONTROLS[control]
         else:
             return self.CONTROLS_ASCII[control]

@@ -25,6 +25,13 @@ A TUI wrapper around catt_, enabling you to cast to and control your chromecast 
    :align: center
    :alt:
 
+
+Dependencies
+------------
+
+- A font containing FontAwesome icons. The freely available NerdFont_ collection is recommended.
+
+
 Installation
 ------------
 
@@ -40,11 +47,19 @@ To determine the names of local chromecast devices, run ``lolcatt --scan``.
 Afterwards, run ``lolcatt --device '<device name>'`` to start the UI targeting the specified device.
 A default device and device aliases can be set in the ``catt`` configuration file, see catt_'s documentation for more information.
 
-To cast, paste either a URL or a path to a local file into the input field and press enter.
+To cast, paste either a URL or a path to a local file into the input field and press enter. To seek, tap the progress bar.
 
-For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported for local files.
+For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported.
 
 Youtube playlists are supported, and each contained video will be played in sequence. By specifying a cookie file in the config file (per default under ``~/.config/lolcatt/config.toml``), you can also access private YouTube playlists such as "Watch Later" (https://www.youtube.com/playlist?list=WL).
+
+
+Troubleshooting
+---------------
+
+If button icons are not displayed correctly, ensure you are using a font containing FontAwesome icons. Alternatively, you can disable the use of fancy icons in the config file.
+
+If you encounter any other issues, please open an issue.
 
 
 Credits
@@ -57,3 +72,4 @@ This package was created with Cookiecutter_ and the `LokiLuciferase/cookiecutter
 .. _catt: https://github.com/skorokithakis/catt
 .. _yt-dlp: https://github.com/yt-dlp/yt-dlp
 .. _here: https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md
+.. _NerdFont: https://www.nerdfonts.com/
