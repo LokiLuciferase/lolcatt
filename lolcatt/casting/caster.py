@@ -234,15 +234,15 @@ class Caster:
         """
         Internal method that is called on every call to update the CastState.
         """
+        if self._device is None:
+            return
+
         if (
             self._autoplay
             and self._device.controller.info.get('idle_reason') == 'FINISHED'
             and len(self._queue) > 0
         ):
             self.cast_next()
-
-        if self._device is None:
-            return
 
         if time.time() - self._state_last_updated > self._update_interval:
             self._device.controller._update_status()

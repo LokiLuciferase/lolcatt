@@ -78,7 +78,7 @@ class LolCattControls(Static):
             self.app.caster.get_device().controller.play_toggle()
             self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[-1])
             self._pp_button_colors.reverse()
-        except ValueError:
+        except (ValueError, AttributeError):
             pass
 
     @on(Button.Pressed, "#stop_button")
@@ -90,38 +90,44 @@ class LolCattControls(Static):
 
     @on(Button.Pressed, "#vol_down_button")
     def vol_down(self):
-        self.app.caster.get_device().volumedown(self._config.vol_step)
+        try:
+            self.app.caster.get_device().volumedown(self._config.vol_step)
+        except (CastError, AttributeError):
+            pass
 
     @on(Button.Pressed, "#vol_up_button")
     def vol_up(self):
-        self.app.caster.get_device().volumeup(self._config.vol_step)
+        try:
+            self.app.caster.get_device().volumeup(self._config.vol_step)
+        except (CastError, AttributeError):
+            pass
 
     @on(Button.Pressed, "#ffwd_button")
     def ffwd(self):
         try:
             self.app.caster.get_device().ffwd(self._config.ffwd_secs)
-        except CastError:
+        except (CastError, AttributeError):
             pass
 
     @on(Button.Pressed, "#rewind_button")
     def rewind(self):
         try:
             self.app.caster.get_device().rewind(self._config.rewind_secs)
-        except CastError:
+        except (CastError, AttributeError):
             pass
 
     @on(Button.Pressed, '#next_button')
     def next(self):
         try:
             self.app.caster.cast_next()
-        except CastError:
+        except (CastError, AttributeError):
             pass
 
     @on(Button.Pressed, '#prev_button')
     def prev(self):
         try:
             self.app.caster.cast_previous()
-        except CastError:
+        except (CastError, AttributeError):
             pass
 
     def on_key(self, event: Key) -> None:

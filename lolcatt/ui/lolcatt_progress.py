@@ -63,7 +63,7 @@ class LolCattProgress(Static):
         duration = self.app.caster.get_cast_state().cast_info.get('duration', 0.0)
         try:
             self.app.caster.get_device().seek(duration * fraction)
-        except CastError:
+        except (CastError, AttributeError):
             pass
 
     def compose(self):
