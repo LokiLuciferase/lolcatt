@@ -28,8 +28,10 @@ A TUI wrapper around catt_, enabling you to cast to and control your chromecast 
 
 Dependencies
 ------------
-
-- A font containing FontAwesome icons. The freely available NerdFont_ collection is recommended.
+- Python 3.8+
+- catt_ (will be installed automatically)
+- yt-dlp_ (will be installed automatically)
+- Optional: A font containing FontAwesome icons to allow displaying of fancy icons on buttons. The freely available NerdFont_ collection is recommended. Fancy icons can be disabled and replaced by text (see below).
 
 
 Installation
@@ -43,21 +45,23 @@ Installation
 Quckstart
 ----------
 
-To determine the names of local chromecast devices, run ``lolcatt --scan``.
-Afterwards, run ``lolcatt --device '<device name>'`` to start the UI targeting the specified device.
-A default device and device aliases can be set in the ``catt`` configuration file, see catt_'s documentation for more information.
+At first we need to determine the name of the chromecast device we want to cast to. To do so, run ``lolcatt --scan``.
+To start the UI, run ``lolcatt -d '<device name or alias>'`` (or simply ``lolcatt`` if a default device is set).
+A default device and device aliases can be set in the ``catt`` configuration file (per default under ``~/.config/catt/config.cfg``), see catt_'s documentation for more information.
 
-To cast, paste either a URL or a path to a local file into the input field and press enter. To seek, tap the progress bar.
+To cast, paste either a URL or a path to a local file into the input field and press enter. To prepend a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To seek, tap the progress bar.
 
 For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported.
 
-Youtube playlists are supported, and each contained video will be played in sequence. By specifying a cookie file in the config file (per default under ``~/.config/lolcatt/config.toml``), you can also access private YouTube playlists such as "Watch Later" (https://www.youtube.com/playlist?list=WL).
+Youtube playlists are supported, and each contained video will be added to the playback queue. By specifying a cookie file in the config (per default under ``~/.config/lolcatt/config.toml``), you can also access private YouTube playlists such as "Watch Later" (https://www.youtube.com/playlist?list=WL), and ensure played YouTube videos are marked as watched.
 
 
 Troubleshooting
 ---------------
 
 If button icons are not displayed correctly, ensure you are using a font containing FontAwesome icons. Alternatively, you can disable the use of fancy icons in the config file.
+
+If casting does not work for no apparent reason, ensure you have the latest version of ``yt_dlp`` installed: ``pip install --upgrade yt-dlp``.
 
 If you encounter any other issues, please open an issue.
 
