@@ -23,6 +23,7 @@ class CastState:
     info: dict
     is_loading: bool = False
     media_loaded: bool = False
+    queue_len: int = 0
 
 
 class Caster:
@@ -295,5 +296,6 @@ class Caster:
                 self._device.controller.info,
                 is_loading=self._is_loading_cast,
                 media_loaded=self._media_loaded,
+                queue_len=len(self._queue),
             )
         return cs
