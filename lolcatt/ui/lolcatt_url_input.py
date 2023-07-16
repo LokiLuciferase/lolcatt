@@ -5,7 +5,6 @@ from textual import on
 from textual.binding import Binding
 from textual.binding import BindingType
 from textual.containers import Container
-from textual.events import Event
 from textual.events import Key
 from textual.widgets import Input
 from textual.widgets import Static
