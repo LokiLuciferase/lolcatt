@@ -4,6 +4,7 @@ from pathlib import Path
 import click
 import toml
 
+from lolcatt import __version__
 from lolcatt.app import LolCatt
 from lolcatt.utils.utils import scan as do_scan
 from lolcatt.utils.utils import write_initial_config
@@ -13,6 +14,7 @@ from lolcatt.utils.utils import write_initial_config
     'lolcatt',
     context_settings=dict(help_option_names=['-h', '--help']),
 )
+@click.version_option(__version__, '-v', '--version', prog_name='lolcatt')
 @click.argument(
     'url_or_path',
     nargs=1,
