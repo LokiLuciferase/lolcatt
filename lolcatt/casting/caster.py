@@ -2,6 +2,7 @@
 import subprocess
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Dict
 from typing import List
 from typing import Optional
@@ -61,6 +62,21 @@ class Caster:
         self._state_last_updated = time.time()
         self.change_device(name_or_alias)
 
+    def _build_cast_args(self) -> List[str]:
+        catt_cast_args = self.CAST_ARGS[:]
+
+        # if we have a cookies file for youtube, attempt to mark videos as watched
+        if self._config.get('options', {}).get('youtube_mark_watched', False):
+            cookies_file = self._config.get('options', {}).get('youtube_cookies_file')
+            if cookies_file is not None:
+                cookies_file = str(Path(cookies_file).expanduser().resolve())
+                catt_cast_args += [
+                    '--ytdl-option=mark_watched=true',
+                    f'--ytdl-option=cookiefile={cookies_file}',
+                ]
+
+        return catt_cast_args
+
     def cast(self, url_or_path: str):
         """
         Casts the given url or path to the currently active device.
@@ -77,7 +93,7 @@ class Caster:
             '-d',
             self._device_name,
             'cast',
-            *self.CAST_ARGS,
+            *self._build_cast_args(),
             url_or_path,
         ]
         self._catt_call = subprocess.Popen(

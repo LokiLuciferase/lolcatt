@@ -63,5 +63,6 @@ def write_initial_config(p: Path):
     p.write_text(
         "[options]\n"
         "fancy_icons = true  # Whether to use fancy icons\n"
-        "#youtube_cookies_file = \"~/.config/lolcatt/cookies.txt\"  # Path to a cookies.txt file for YouTube"
+        "#youtube_cookies_file = \"~/.config/lolcatt/cookies.txt\"  # Path to a cookies.txt file for YouTube\n"
+        "youtube_mark_watched = true # Whether to mark YouTube videos as watched (only if we have cookies)"
     )
