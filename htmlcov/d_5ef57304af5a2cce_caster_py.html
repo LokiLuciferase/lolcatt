@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for lolcatt/casting/caster.py: 42%</title>
+    <title>Coverage for lolcatt/casting/caster.py: 41%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="coverage_html.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>lolcatt/casting/caster.py</b>:
-            <span class="pc_cov">42%</span>
+            <span class="pc_cov">41%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -55,8 +55,8 @@
         </aside>
         <h2>
             <span class="text">149 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">62<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">87<span class="text"> missing</span></button>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">61<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">88<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
         <p class="text">
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="d_5ef57304af5a2cce_youtube_playlist_handler_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-07-17 23:16 +0000
+            created at 2023-07-18 00:03 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"/>
@@ -104,7 +104,7 @@
     <p class="run"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t">    <span class="nam">cast_info</span><span class="op">:</span> <span class="nam">dict</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t">    <span class="nam">info</span><span class="op">:</span> <span class="nam">dict</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t">    <span class="nam">is_loading</span><span class="op">:</span> <span class="nam">bool</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t">    <span class="nam">media_loaded</span><span class="op">:</span> <span class="nam">bool</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t">    <span class="nam">loading_failed</span><span class="op">:</span> <span class="nam">bool</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t">    <span class="nam">queue_len</span><span class="op">:</span> <span class="nam">int</span> <span class="op">=</span> <span class="num">0</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -138,7 +138,7 @@
     <p class="run"><span class="n"><a id="t56" href="#t56">56</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_catt_config</span> <span class="op">=</span> <span class="nam">get_config_as_dict</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t57" href="#t57">57</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_started</span> <span class="op">=</span> <span class="nam">time</span><span class="op">.</span><span class="nam">time</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loaded</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loading_failed</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_timeout</span> <span class="op">=</span> <span class="num">8</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_update_interval</span> <span class="op">=</span> <span class="nam">update_interval</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_autoplay</span> <span class="op">=</span> <span class="nam">autoplay</span>&nbsp;</span><span class="r"></span></p>
@@ -350,37 +350,36 @@
     <p class="mis show_mis"><span class="n"><a id="t268" href="#t268">268</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span> <span class="key">and</span> <span class="nam">time</span><span class="op">.</span><span class="nam">time</span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_started</span> <span class="op">></span> <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_timeout</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t269" href="#t269">269</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_started</span> <span class="op">=</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t270" href="#t270">270</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t271" href="#t271">271</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t272" href="#t272">272</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">cast_info</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">'player_state'</span><span class="op">)</span> <span class="key">in</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t273" href="#t273">273</a></span><span class="t">            <span class="str">'PLAYING'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t274" href="#t274">274</a></span><span class="t">            <span class="str">'BUFFERING'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t275" href="#t275">275</a></span><span class="t">            <span class="str">'PAUSED'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t276" href="#t276">276</a></span><span class="t">        <span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t277" href="#t277">277</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_started</span> <span class="op">=</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t278" href="#t278">278</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t279" href="#t279">279</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loaded</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t280" href="#t280">280</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t281" href="#t281">281</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loaded</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t282" href="#t282">282</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t283" href="#t283">283</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_cast_state</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span> <span class="op">-></span> <span class="nam">CastState</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t284" href="#t284">284</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t285" href="#t285">285</a></span><span class="t"><span class="str">        Returns a CastState object encapsulating the info dictionaries of the currently active</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t286" href="#t286">286</a></span><span class="t"><span class="str">        CattDevice.</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t287" href="#t287">287</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t288" href="#t288">288</a></span><span class="t"><span class="str">        :return: A CastState object</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t289" href="#t289">289</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t290" href="#t290">290</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_tick</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t291" href="#t291">291</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t292" href="#t292">292</a></span><span class="t">            <span class="nam">cs</span> <span class="op">=</span> <span class="nam">CastState</span><span class="op">(</span><span class="op">{</span><span class="op">}</span><span class="op">,</span> <span class="op">{</span><span class="op">}</span><span class="op">,</span> <span class="key">False</span><span class="op">,</span> <span class="key">False</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t293" href="#t293">293</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t294" href="#t294">294</a></span><span class="t">            <span class="nam">cs</span> <span class="op">=</span> <span class="nam">CastState</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t295" href="#t295">295</a></span><span class="t">                <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">cast_info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t296" href="#t296">296</a></span><span class="t">                <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t297" href="#t297">297</a></span><span class="t">                <span class="nam">is_loading</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t298" href="#t298">298</a></span><span class="t">                <span class="nam">media_loaded</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">_media_loaded</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t299" href="#t299">299</a></span><span class="t">                <span class="nam">queue_len</span><span class="op">=</span><span class="nam">len</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">_queue</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t300" href="#t300">300</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t301" href="#t301">301</a></span><span class="t">        <span class="key">return</span> <span class="nam">cs</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t271" href="#t271">271</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loading_failed</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t272" href="#t272">272</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t273" href="#t273">273</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">cast_info</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">'player_state'</span><span class="op">)</span> <span class="key">in</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t274" href="#t274">274</a></span><span class="t">            <span class="str">'PLAYING'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t275" href="#t275">275</a></span><span class="t">            <span class="str">'BUFFERING'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t276" href="#t276">276</a></span><span class="t">            <span class="str">'PAUSED'</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t277" href="#t277">277</a></span><span class="t">        <span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t278" href="#t278">278</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_loading_started</span> <span class="op">=</span> <span class="key">None</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t279" href="#t279">279</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t280" href="#t280">280</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t281" href="#t281">281</a></span><span class="t">    <span class="key">def</span> <span class="nam">get_cast_state</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span> <span class="op">-></span> <span class="nam">CastState</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t282" href="#t282">282</a></span><span class="t">        <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t283" href="#t283">283</a></span><span class="t"><span class="str">        Returns a CastState object encapsulating the info dictionaries of the currently active</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t284" href="#t284">284</a></span><span class="t"><span class="str">        CattDevice.</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t285" href="#t285">285</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t286" href="#t286">286</a></span><span class="t"><span class="str">        :return: A CastState object</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t287" href="#t287">287</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t288" href="#t288">288</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">_tick</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t289" href="#t289">289</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t290" href="#t290">290</a></span><span class="t">            <span class="nam">cs</span> <span class="op">=</span> <span class="nam">CastState</span><span class="op">(</span><span class="op">{</span><span class="op">}</span><span class="op">,</span> <span class="op">{</span><span class="op">}</span><span class="op">,</span> <span class="key">False</span><span class="op">,</span> <span class="key">False</span><span class="op">,</span> <span class="num">0</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t291" href="#t291">291</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t292" href="#t292">292</a></span><span class="t">            <span class="nam">cs</span> <span class="op">=</span> <span class="nam">CastState</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t293" href="#t293">293</a></span><span class="t">                <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">cast_info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t294" href="#t294">294</a></span><span class="t">                <span class="nam">self</span><span class="op">.</span><span class="nam">_device</span><span class="op">.</span><span class="nam">controller</span><span class="op">.</span><span class="nam">info</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t295" href="#t295">295</a></span><span class="t">                <span class="nam">is_loading</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">_is_loading_cast</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t296" href="#t296">296</a></span><span class="t">                <span class="nam">loading_failed</span><span class="op">=</span><span class="nam">self</span><span class="op">.</span><span class="nam">_media_loading_failed</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t297" href="#t297">297</a></span><span class="t">                <span class="nam">queue_len</span><span class="op">=</span><span class="nam">len</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">_queue</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t298" href="#t298">298</a></span><span class="t">            <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t299" href="#t299">299</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">_media_loading_failed</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t300" href="#t300">300</a></span><span class="t">        <span class="key">return</span> <span class="nam">cs</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -390,7 +389,7 @@
             <a id="nextFileLink" class="nav" href="d_5ef57304af5a2cce_youtube_playlist_handler_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-07-17 23:16 +0000
+            created at 2023-07-18 00:03 +0000
         </p>
     </div>
 </footer>
