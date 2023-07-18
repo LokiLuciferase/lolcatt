@@ -22,7 +22,7 @@ class CastState:
     cast_info: dict
     info: dict
     is_loading: bool = False
-    media_loaded: bool = False
+    loading_failed: bool = False
     queue_len: int = 0
 
 
@@ -56,7 +56,7 @@ class Caster:
         self._catt_config = get_config_as_dict()
         self._loading_started = time.time()
         self._is_loading_cast = True
-        self._media_loaded = False
+        self._media_loading_failed = False
         self._loading_timeout = 8
         self._update_interval = update_interval
         self._autoplay = autoplay
@@ -268,6 +268,7 @@ class Caster:
         if self._is_loading_cast and time.time() - self._loading_started > self._loading_timeout:
             self._loading_started = None
             self._is_loading_cast = False
+            self._media_loading_failed = True
 
         if self._device.controller.cast_info.get('player_state') in [
             'PLAYING',
@@ -276,9 +277,6 @@ class Caster:
         ]:
             self._loading_started = None
             self._is_loading_cast = False
-            self._media_loaded = True
-        else:
-            self._media_loaded = False
 
     def get_cast_state(self) -> CastState:
         """
@@ -289,13 +287,14 @@ class Caster:
         """
         self._tick()
         if self._device is None:
-            cs = CastState({}, {}, False, False)
+            cs = CastState({}, {}, False, False, 0)
         else:
             cs = CastState(
                 self._device.controller.cast_info,
                 self._device.controller.info,
                 is_loading=self._is_loading_cast,
-                media_loaded=self._media_loaded,
+                loading_failed=self._media_loading_failed,
                 queue_len=len(self._queue),
             )
+            self._media_loading_failed = False
         return cs

@@ -15,16 +15,19 @@ class LolCattPlaybackInfo(Static):
         self._marquee_gen = None
 
     def _get_playback_info(self) -> str:
-        playing = self.app.caster.get_cast_state().cast_info.get('title')
-        display_name = self.app.caster.get_cast_state().info.get('display_name')
-        is_loading = self.app.caster.get_cast_state().is_loading
+        state = self.app.caster.get_cast_state()
+        playing = state.cast_info.get('title')
+        display_name = state.info.get('display_name')
 
         if playing is not None:
             return f'Playing: "{playing}"'
         elif display_name is not None and display_name != 'Backdrop':
             return f'Displaying: "{display_name}"'
-        elif is_loading:
+        elif state.is_loading:
             return 'Loading...'
+        elif state.loading_failed:
+            self.app.notify('Loading failed.', severity='warning')
+            return 'Nothing is playing.'
         else:
             return 'Nothing is playing.'
 

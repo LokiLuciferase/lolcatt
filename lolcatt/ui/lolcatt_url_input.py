@@ -55,7 +55,7 @@ class LolCattUrlInput(Static):
             self.app.caster.enqueue(self._input.value, front=True)
             self._input.value = ''
             self.app.caster.cast_next()
-            self.notify('Playing...', severity='information', title='Info')
+            self.notify('Playing...', severity='information')
 
     @on(InputField.Enqueued, '#url_input')
     def enqueue_url(self):
@@ -64,7 +64,7 @@ class LolCattUrlInput(Static):
         if self._input.value:
             self.app.caster.enqueue(self._input.value, front=False)
             self._input.value = ''
-            self.notify('Enqueued.', severity='information', title='Info')
+            self.notify('Enqueued.', severity='information')
 
     def compose(self):
         yield Container(self._input, id='url_input_container')
