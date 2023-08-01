@@ -1,0 +1,14 @@
+# `dependabot.yml` file with updates
+# disabled for Docker and limited for npm
+
+version: 2
+updates:
+  # Configuration for pip
+  - package-ecosystem: "pip"
+    directory: "/requirements"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    ignore:
+      - dependency-name: "click"
+      - dependency-name: "textual"

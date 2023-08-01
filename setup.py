@@ -9,7 +9,7 @@ with open('README.rst') as readme_file:
 
 history = ''
 
-with open('requirements/prod.txt') as prod_req:
+with open('requirements/requirements.txt') as prod_req:
     requirements = [str(ir) for ir in parse_requirements(prod_req)]
 with open('requirements/test.txt') as test_req:
     test_requirements = [str(ir) for ir in parse_requirements(test_req)]
