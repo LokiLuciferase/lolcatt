@@ -27,6 +27,8 @@ class LolCattControls(Static):
         'next': '',
         'vol_down': '',
         'vol_up': '',
+        'repeat': '',
+        'shuffle': '',
     }
 
     CONTROLS_ASCII = {
@@ -38,6 +40,8 @@ class LolCattControls(Static):
         'next': '>|',
         'vol_down': 'Vol-',
         'vol_up': 'Vol+',
+        'repeat': 'Rep',
+        'shuffle': 'Shuf',
     }
 
     def __init__(self, *args, **kwargs):
@@ -48,7 +52,20 @@ class LolCattControls(Static):
         self._pp_button_colors = [DEFAULT_COLORS['dark'].success, DEFAULT_COLORS['dark'].warning]
         self._pp_button = Button(self._get_control_label('play_pause'), id='play_pause_button')
         self._pp_button.styles.border_bottom = ('tall', self._pp_button_colors[0])
+
         self._stop_button = Button(self._get_control_label('stop'), id='stop_button')
+
+        self._shuf_button_colors = [DEFAULT_COLORS['dark'].primary, DEFAULT_COLORS['dark'].success]
+        self._shuf_button = Button(self._get_control_label('shuffle'), id='shuffle_button')
+        self._shuf_button.styles.border_bottom = ('tall', self._shuf_button_colors[0])
+
+        self._rep_button_colors = [
+            DEFAULT_COLORS['dark'].secondary,
+            DEFAULT_COLORS['dark'].primary,
+            DEFAULT_COLORS['dark'].success,
+        ]
+        self._rep_button = Button(self._get_control_label('repeat'), id='repeat_button')
+        self._rep_button.styles.border_bottom = ('tall', self._rep_button_colors[0])
 
     def _get_control_label(self, control: str) -> str:
         if self._config.fancy_icons:
@@ -69,6 +86,8 @@ class LolCattControls(Static):
                 yield Button(self._get_control_label('next'), id='next_button')
 
             with Container(id='volume_buttons'):
+                yield self._shuf_button
+                yield self._rep_button
                 yield Button(self._get_control_label('vol_down'), id='vol_down_button')
                 yield Button(self._get_control_label('vol_up'), id='vol_up_button')
 
@@ -99,6 +118,25 @@ class LolCattControls(Static):
     def vol_up(self):
         try:
             self.app.caster.get_device().volumeup(self._config.vol_step)
+        except (CastError, AttributeError):
+            pass
+
+    @on(Button.Pressed, "#shuffle_button")
+    def shuffle(self):
+        try:
+            self.app.caster.set_shuffle(not self.app.caster.get_shuffle())
+        except (CastError, AttributeError):
+            pass
+
+    @on(Button.Pressed, "#repeat_button")
+    def repeat(self):
+        try:
+            if self.app.caster.get_repeat() == 'NO_REPEAT':
+                self.app.caster.set_repeat('REPEAT_ALL')
+            elif self.app.caster.get_repeat() == 'REPEAT_ALL':
+                self.app.caster.set_repeat('REPEAT_ONE')
+            else:
+                self.app.caster.set_repeat('NO_REPEAT')
         except (CastError, AttributeError):
             pass
 

@@ -14,7 +14,11 @@ Button {
 #prev_button,
 #rewind_button,
 #ffwd_button,
-#next_button {
+#next_button,
+#vol_down_button,
+#vol_up_button,
+#shuffle_button,
+#repeat_button {
     min-width: 7;
 }
 
@@ -31,9 +35,9 @@ Bar > .bar--bar {
     background: $background-lighten-3;
 }
 
-#volume_buttons,
 #playback_buttons,
-#wind_buttons {
+#wind_buttons,
+#volume_buttons {
     layout: horizontal;
     align: center middle;
     height: 3;

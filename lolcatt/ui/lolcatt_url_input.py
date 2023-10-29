@@ -44,7 +44,9 @@ class InputField(Input):
 class LolCattUrlInput(Static):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._input = InputField(id='url_input', placeholder='Enter URL or path to cast...')
+        self._input = InputField(
+            id='url_input', placeholder='Enter URL or path (Ctrl+s to queue)...'
+        )
         self._input.cursor_blink = False
 
     @on(InputField.Submitted, '#url_input')

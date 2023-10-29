@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+import random
 import subprocess
 import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict
 from typing import List
+from typing import NamedTuple
 from typing import Optional
 
 from catt.api import CattDevice
@@ -24,6 +26,16 @@ class CastState:
     is_loading: bool = False
     loading_failed: bool = False
     queue_len: int = 0
+
+
+REPEAT_STATES = NamedTuple(
+    'REPEAT_STATES',
+    [
+        ('NO_REPEAT', str),
+        ('REPEAT_ALL', str),
+        ('REPEAT_ONE', str),
+    ],
+)
 
 
 class Caster:
@@ -62,6 +74,9 @@ class Caster:
         self._autoplay = autoplay
         self._state_last_updated = time.time()
         self.change_device(name_or_alias)
+
+        self._do_shuffle = False
+        self._do_repeat = REPEAT_STATES.NO_REPEAT
 
     def _build_cast_args(self) -> List[str]:
         catt_cast_args = self.CAST_ARGS[:]
@@ -112,13 +127,24 @@ class Caster:
             self._played_queue.append(self._current_item)
             self._current_item = None
         if len(self._queue) > 0:
-            self._current_item = self._queue.pop(0)
+            if self._do_shuffle:
+                queue_idx = random.randint(0, len(self._queue) - 1)
+            else:
+                queue_idx = 0
+            self._current_item = self._queue.pop(queue_idx)
             self.cast(self._current_item)
         else:
-            try:
-                self._device.stop()
-            except CastError:
-                pass
+            if self._do_repeat == REPEAT_STATES.REPEAT_ALL:
+                self._queue = self._played_queue[:]
+                self._played_queue = []
+                self.cast_next()
+            elif self._do_repeat == REPEAT_STATES.REPEAT_ONE:
+                self.cast(self._current_item)
+            else:
+                try:
+                    self._device.stop()
+                except CastError:
+                    pass
 
     def cast_previous(self):
         """
@@ -298,3 +324,35 @@ class Caster:
             )
             self._media_loading_failed = False
         return cs
+
+    def set_shuffle(self, do_shuffle: bool):
+        """
+        Sets the shuffle state of the queue.
+
+        :param do_shuffle: If True, the queue is shuffled.
+        """
+        self._do_shuffle = do_shuffle
+
+    def get_shuffle(self) -> bool:
+        """
+        Returns the shuffle state of the queue.
+
+        :return: The shuffle state of the queue.
+        """
+        return self._do_shuffle
+
+    def set_repeat(self, repeat_state: REPEAT_STATES):
+        """
+        Sets the repeat state of the queue.
+
+        :param repeat_state: The repeat state to set.
+        """
+        self._do_repeat = repeat_state
+
+    def get_repeat(self) -> REPEAT_STATES:
+        """
+        Returns the repeat state of the queue.
+
+        :return: The repeat state of the queue.
+        """
+        return self._do_repeat
