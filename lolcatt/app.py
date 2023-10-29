@@ -1,4 +1,4 @@
-from typing import Dict
+from pathlib import Path
 
 from textual.app import App
 from textual.containers import Container
@@ -10,6 +10,7 @@ from lolcatt.ui.lolcatt_device_info import LolCattDeviceInfo
 from lolcatt.ui.lolcatt_playback_info import LolCattPlaybackInfo
 from lolcatt.ui.lolcatt_progress import LolCattProgress
 from lolcatt.ui.lolcatt_url_input import LolCattUrlInput
+from lolcatt.utils.utils import load_config
 
 
 class RemoteScreen(Screen):
@@ -31,9 +32,15 @@ class LolCatt(App):
 
     CSS_PATH = 'ui/lolcatt.css'
 
-    def __init__(self, device_name: str = None, config: Dict = None, *args, **kwargs):
-        self.config = config
-        self.caster = Caster(device_name, config=config)
+    def __init__(
+        self,
+        device_name: str = None,
+        config_path: Path = Path('~/.config/lolcatt/config.toml'),
+        *args,
+        **kwargs,
+    ):
+        self.config = load_config(config_path)
+        self.caster = Caster(device_name, config=self.config)
         self.remote_screen = None
         super().__init__(*args, **kwargs)
 

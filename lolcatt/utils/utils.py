@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 
+import toml
 from catt.api import discover
 from catt.cli import get_config_as_dict
 
@@ -66,3 +67,12 @@ def write_initial_config(p: Path):
         "#youtube_cookies_file = \"~/.config/lolcatt/cookies.txt\"  # Path to a cookies.txt file for YouTube\n"
         "youtube_mark_watched = true # Whether to mark YouTube videos as watched (only if we have cookies)"
     )
+
+
+def load_config(config_path: Path) -> dict:
+    config = Path(str(config_path)).expanduser()
+    if not config.exists():
+        config.parent.mkdir(parents=True, exist_ok=True)
+        write_initial_config(config)
+    config = toml.loads(config.read_text())
+    return config

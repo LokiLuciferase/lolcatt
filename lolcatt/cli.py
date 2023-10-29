@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-from pathlib import Path
-
 import click
-import toml
 
 from lolcatt import __version__
 from lolcatt.app import LolCatt
+from lolcatt.utils.utils import load_config
 from lolcatt.utils.utils import scan as do_scan
-from lolcatt.utils.utils import write_initial_config
 
 
 @click.command(
@@ -44,18 +41,11 @@ from lolcatt.utils.utils import write_initial_config
 )
 def main(url_or_path, device, scan, config):
     """Cast media from a local file or URL to a Chromecast device."""
-    config = Path(str(config)).expanduser()
-    if not config.exists():
-        config.parent.mkdir(parents=True, exist_ok=True)
-        write_initial_config(config)
-
-    config = toml.loads(config.read_text())
-
     if url_or_path is None and scan:
         do_scan()
         return
 
-    lolcatt = LolCatt(device_name=device, config=config)
+    lolcatt = LolCatt(device_name=device, config_path=config)
     if url_or_path is not None:
         lolcatt.caster.enqueue(url_or_path)
         lolcatt.caster.cast_next()

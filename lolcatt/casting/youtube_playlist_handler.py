@@ -16,7 +16,7 @@ class YoutubePlaylistHandler:
                 )
         self.ydl = YoutubeDL(
             {
-                'cookiefile': str(cookies_file),
+                'cookiefile': str(cookies_file) if cookies_file is not None else None,
                 'skip_download': True,
                 'quiet': True,
                 'ignoreerrors': True,
