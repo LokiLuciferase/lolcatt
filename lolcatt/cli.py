@@ -17,7 +17,7 @@ from lolcatt.utils.utils import write_initial_config
 @click.version_option(__version__, '-v', '--version', prog_name='lolcatt')
 @click.argument(
     'url_or_path',
-    nargs=1,
+    nargs=-1,
     default=None,
     required=False,
 )
@@ -57,7 +57,8 @@ def main(url_or_path, device, scan, config):
 
     lolcatt = LolCatt(device_name=device, config=config)
     if url_or_path is not None:
-        lolcatt.caster.enqueue(url_or_path)
+        for up in url_or_path:
+            lolcatt.caster.enqueue(up)
         lolcatt.caster.cast_next()
     lolcatt.run()
 
