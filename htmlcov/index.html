@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage report</title>
-    <link rel="icon" sizes="32x32" href="favicon_32.png">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <script type="text/javascript" src="coverage_html.js" defer></script>
+    <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
+    <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
+    <script src="coverage_html_cb_da166b87.js" defer></script>
 </head>
 <body class="indexfile">
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">40%</span>
+            <span class="pc_cov">44%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
             <label for="help_panel_state">
-                <img id="keyboard_icon" src="keybd_closed.png" alt="Show/hide keyboard shortcuts" />
+                <img id="keyboard_icon" src="keybd_closed_cb_ce680311.png" alt="Show/hide keyboard shortcuts">
             </label>
             <div id="help_panel">
                 <p class="legend">Shortcuts on this page</p>
                 <div class="keyhelp">
                     <p>
-                        <kbd>n</kbd>
+                        <kbd>f</kbd>
                         <kbd>s</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
@@ -41,11 +41,20 @@
             </div>
         </aside>
         <form id="filter_container">
-            <input id="filter" type="text" value="" placeholder="filter..." />
+            <input id="filter" type="text" value="" placeholder="filter...">
+            <div>
+                <input id="hide100" type="checkbox" >
+                <label for="hide100">hide covered</label>
+            </div>
         </form>
+        <h2>
+                <a class="button current">Files</a>
+                <a class="button" href="function_index.html">Functions</a>
+                <a class="button" href="class_index.html">Classes</a>
+        </h2>
         <p class="text">
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-08-01 17:13 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.5.1">coverage.py v7.5.1</a>,
+            created at 2024-05-05 20:43 +0000
         </p>
     </div>
 </header>
@@ -53,99 +62,99 @@
     <table class="index" data-sortable>
         <thead>
             <tr class="tablehead" title="Click to sort">
-                <th class="name left" aria-sort="none" data-shortcut="n">Module</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing</th>
-                <th aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded</th>
-                <th class="right" aria-sort="none" data-shortcut="c">coverage</th>
+                <th id="file" class="name left" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
+                <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
+                <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
+                <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="file">
-                <td class="name left"><a href="d_34ebeaa5f5fd262a___init___py.html">lolcatt/__init__.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_34ebeaa5f5fd262a___init___py.html">lolcatt/__init__.py</a></td>
                 <td>3</td>
                 <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="3 3">100%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_34ebeaa5f5fd262a_app_py.html">lolcatt/app.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_34ebeaa5f5fd262a_app_py.html">lolcatt/app.py</a></td>
                 <td>27</td>
-                <td>6</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="21 27">78%</td>
+                <td class="right" data-ratio="25 27">93%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_5ef57304af5a2cce_caster_py.html">lolcatt/casting/caster.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_5ef57304af5a2cce_caster_py.html">lolcatt/casting/caster.py</a></td>
                 <td>149</td>
-                <td>88</td>
+                <td>87</td>
                 <td>0</td>
-                <td class="right" data-ratio="61 149">41%</td>
+                <td class="right" data-ratio="62 149">42%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_5ef57304af5a2cce_youtube_playlist_handler_py.html">lolcatt/casting/youtube_playlist_handler.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_5ef57304af5a2cce_youtube_playlist_handler_py.html">lolcatt/casting/youtube_playlist_handler.py</a></td>
                 <td>19</td>
-                <td>9</td>
+                <td>8</td>
                 <td>0</td>
-                <td class="right" data-ratio="10 19">53%</td>
+                <td class="right" data-ratio="11 19">58%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_34ebeaa5f5fd262a_cli_py.html">lolcatt/cli.py</a></td>
-                <td>29</td>
-                <td>29</td>
+            <tr class="region">
+                <td class="name left"><a href="z_34ebeaa5f5fd262a_cli_py.html">lolcatt/cli.py</a></td>
+                <td>30</td>
+                <td>30</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 29">0%</td>
+                <td class="right" data-ratio="0 30">0%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160b9dc09749097_lolcatt_controls_py.html">lolcatt/ui/lolcatt_controls.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_a160b9dc09749097_lolcatt_controls_py.html">lolcatt/ui/lolcatt_controls.py</a></td>
                 <td>108</td>
-                <td>71</td>
+                <td>68</td>
                 <td>0</td>
-                <td class="right" data-ratio="37 108">34%</td>
+                <td class="right" data-ratio="40 108">37%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160b9dc09749097_lolcatt_device_info_py.html">lolcatt/ui/lolcatt_device_info.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_a160b9dc09749097_lolcatt_device_info_py.html">lolcatt/ui/lolcatt_device_info.py</a></td>
                 <td>29</td>
-                <td>15</td>
+                <td>11</td>
                 <td>0</td>
-                <td class="right" data-ratio="14 29">48%</td>
+                <td class="right" data-ratio="18 29">62%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160b9dc09749097_lolcatt_playback_info_py.html">lolcatt/ui/lolcatt_playback_info.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_a160b9dc09749097_lolcatt_playback_info_py.html">lolcatt/ui/lolcatt_playback_info.py</a></td>
                 <td>36</td>
-                <td>22</td>
+                <td>18</td>
                 <td>0</td>
-                <td class="right" data-ratio="14 36">39%</td>
+                <td class="right" data-ratio="18 36">50%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160b9dc09749097_lolcatt_progress_py.html">lolcatt/ui/lolcatt_progress.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_a160b9dc09749097_lolcatt_progress_py.html">lolcatt/ui/lolcatt_progress.py</a></td>
                 <td>64</td>
-                <td>39</td>
+                <td>34</td>
                 <td>0</td>
-                <td class="right" data-ratio="25 64">39%</td>
+                <td class="right" data-ratio="30 64">47%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_a160b9dc09749097_lolcatt_url_input_py.html">lolcatt/ui/lolcatt_url_input.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_a160b9dc09749097_lolcatt_url_input_py.html">lolcatt/ui/lolcatt_url_input.py</a></td>
                 <td>46</td>
-                <td>22</td>
+                <td>20</td>
                 <td>0</td>
-                <td class="right" data-ratio="24 46">52%</td>
+                <td class="right" data-ratio="26 46">57%</td>
             </tr>
-            <tr class="file">
-                <td class="name left"><a href="d_179760eaf142ccae_utils_py.html">lolcatt/utils/utils.py</a></td>
+            <tr class="region">
+                <td class="name left"><a href="z_179760eaf142ccae_utils_py.html">lolcatt/utils/utils.py</a></td>
                 <td>33</td>
-                <td>27</td>
+                <td>25</td>
                 <td>0</td>
-                <td class="right" data-ratio="6 33">18%</td>
+                <td class="right" data-ratio="8 33">24%</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="total">
                 <td class="name left">Total</td>
-                <td>543</td>
-                <td>328</td>
+                <td>544</td>
+                <td>303</td>
                 <td>0</td>
-                <td class="right" data-ratio="215 543">40%</td>
+                <td class="right" data-ratio="241 544">44%</td>
             </tr>
         </tfoot>
     </table>
@@ -157,16 +166,16 @@
 <footer>
     <div class="content">
         <p>
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.2.7">coverage.py v7.2.7</a>,
-            created at 2023-08-01 17:13 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.5.1">coverage.py v7.5.1</a>,
+            created at 2024-05-05 20:43 +0000
         </p>
     </div>
     <aside class="hidden">
-        <a id="prevFileLink" class="nav" href="d_179760eaf142ccae_utils_py.html"/>
-        <a id="nextFileLink" class="nav" href="d_34ebeaa5f5fd262a___init___py.html"/>
-        <button type="button" class="button_prev_file" data-shortcut="["/>
-        <button type="button" class="button_next_file" data-shortcut="]"/>
-        <button type="button" class="button_show_hide_help" data-shortcut="?"/>
+        <a id="prevFileLink" class="nav" href="z_179760eaf142ccae_utils_py.html"></a>
+        <a id="nextFileLink" class="nav" href="z_34ebeaa5f5fd262a___init___py.html"></a>
+        <button type="button" class="button_prev_file" data-shortcut="["></button>
+        <button type="button" class="button_next_file" data-shortcut="]"></button>
+        <button type="button" class="button_show_hide_help" data-shortcut="?"></button>
     </aside>
 </footer>
 </body>
