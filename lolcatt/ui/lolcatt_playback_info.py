@@ -1,6 +1,8 @@
 from textual.containers import Container
+from textual.events import Click
 from textual.reactive import reactive
 from textual.widgets import Label
+from textual.widgets import ListItem
 from textual.widgets import Static
 
 from lolcatt.utils.utils import marquee
@@ -48,3 +50,9 @@ class LolCattPlaybackInfo(Static):
         self.set_interval(
             interval=self.app.caster.get_update_interval(), callback=self._update_label
         )
+
+    def on_click(self, event: Click):
+        queue = self.app.caster.get_queue()
+        queuelist = [ListItem(Label(x)) for x in queue]
+        self.app.playlist_list = queuelist
+        self.app.push_screen('playlist')

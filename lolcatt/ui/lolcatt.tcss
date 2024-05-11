@@ -95,6 +95,30 @@ LolCatUrlInput {
     border: grey;
 }
 
+#playlist_box {
+    layout: vertical;
+    align: center middle;
+    dock: top;
+    max-height: 18;
+    max-width: 41;
+}
+
+#playlist_close_btn {
+    max-width: 5;
+    max-height: 3;
+}
+
+#playlist > ListItem {
+    padding-top: 1;
+    padding-bottom: 1;
+    padding-left: 2;
+    padding-right: 2;
+}
+
+#playlist_item_0 {
+    text-style: bold;
+}
+
 #app {
     layout: vertical;
     align: center middle;

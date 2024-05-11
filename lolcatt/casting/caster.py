@@ -131,6 +131,29 @@ class Caster:
             self._current_item = self._played_queue.pop()
             self.cast(self._current_item)
 
+    def cast_at_idx(self, idx: int):
+        """
+        Skips to the item at the given index in the queues.
+        """
+        if idx == 0:
+            return
+        if idx < 0:
+            prev_idx = len(self._played_queue) + idx
+            if prev_idx < 0:
+                return
+            self._queue.insert(0, self._current_item)
+            self._queue = self._played_queue[prev_idx + 1 :] + self._queue
+            self._played_queue = self._played_queue[: prev_idx + 1]
+            self._current_item = self._played_queue.pop(-1)
+        else:
+            if idx > len(self._queue):
+                return
+            self._played_queue.append(self._current_item)
+            self._played_queue += self._queue[: idx - 1]
+            self._current_item = self._queue.pop(idx - 1)
+            self._queue = self._queue[idx - 1 :]
+        self.cast(self._current_item)
+
     def stop_cast(self):
         """
         Stops the current cast.
@@ -170,6 +193,22 @@ class Caster:
         :return: The current queue.
         """
         return self._queue
+
+    def get_current_item(self) -> Optional[str]:
+        """
+        Returns the currently playing item.
+
+        :return: The currently playing item.
+        """
+        return self._current_item
+
+    def get_played_queue(self) -> List[str]:
+        """
+        Returns the played queue.
+
+        :return: The played queue.
+        """
+        return self._played_queue
 
     def get_available_devices(self) -> List[str]:
         """
