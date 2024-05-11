@@ -5,20 +5,21 @@
 | Name                                          |    Stmts |     Miss |   Cover |   Missing |
 |---------------------------------------------- | -------: | -------: | ------: | --------: |
 | lolcatt/\_\_init\_\_.py                       |        3 |        0 |    100% |           |
-| lolcatt/app.py                                |       27 |        2 |     93% |     47-48 |
+| lolcatt/app.py                                |       34 |        2 |     94% |     58-59 |
 | lolcatt/casting/\_\_init\_\_.py               |        0 |        0 |    100% |           |
-| lolcatt/casting/caster.py                     |      149 |       88 |     41% |67-79, 87-105, 111-121, 127-132, 138-144, 153-158, 164, 172, 180-181, 191-203, 205, 207, 212-219, 227, 235, 244, 247-248, 254-279, 288-300 |
-| lolcatt/casting/youtube\_playlist\_handler.py |       19 |        9 |     53% |11-13, 30, 36-40 |
+| lolcatt/casting/caster.py                     |      171 |      106 |     38% |67-79, 87-105, 111-121, 127-132, 138-155, 161-167, 176-181, 187, 195, 203, 211, 219-220, 230-242, 244, 246, 251-258, 266, 274, 283, 286-287, 293-318, 327-338 |
+| lolcatt/casting/youtube\_playlist\_handler.py |       19 |        8 |     58% |11-13, 30, 36-39 |
 | lolcatt/cli.py                                |       30 |       30 |      0% |      2-67 |
 | lolcatt/ui/\_\_init\_\_.py                    |        0 |        0 |    100% |           |
-| lolcatt/ui/lolcatt\_controls.py               |      108 |       69 |     36% |48-51, 54-57, 60-73, 77-82, 86-89, 93-96, 100-103, 107-110, 114-117, 121-124, 128-131, 134-151 |
-| lolcatt/ui/lolcatt\_device\_info.py           |       29 |       12 |     59% |18-23, 26-27, 30, 33, 36-37, 42 |
-| lolcatt/ui/lolcatt\_playback\_info.py         |       36 |       19 |     47% |18-32, 35-36, 39, 42, 45, 48 |
-| lolcatt/ui/lolcatt\_progress.py               |       64 |       35 |     45% |21-24, 28-34, 38-40, 49-58, 61-62, 67-77, 80 |
-| lolcatt/ui/lolcatt\_url\_input.py             |       46 |       22 |     52% |40-41, 46-48, 52-58, 62-67, 70, 73-74, 77 |
+| lolcatt/ui/lolcatt\_controls.py               |      108 |       68 |     37% |48-51, 54-57, 60-73, 77-82, 86-89, 93-96, 100-103, 107-110, 114-117, 121-124, 128-131, 134-149 |
+| lolcatt/ui/lolcatt\_device\_info.py           |       29 |       11 |     62% |18-23, 26-27, 30, 33, 36-37 |
+| lolcatt/ui/lolcatt\_playback\_info.py         |       43 |       22 |     49% |20-34, 37-38, 41, 44, 47, 50, 55-57 |
+| lolcatt/ui/lolcatt\_playlist.py               |       53 |       35 |     34% |18-27, 30, 33-58, 61 |
+| lolcatt/ui/lolcatt\_progress.py               |       64 |       34 |     47% |21-24, 28-34, 38-40, 49-58, 61-62, 67-77 |
+| lolcatt/ui/lolcatt\_url\_input.py             |       46 |       20 |     57% |40, 46-48, 52-58, 62-67, 70, 73-74 |
 | lolcatt/utils/\_\_init\_\_.py                 |        0 |        0 |    100% |           |
-| lolcatt/utils/utils.py                        |       33 |       27 |     18% |17-22, 27-59, 63 |
-|                                     **TOTAL** |  **544** |  **313** | **42%** |           |
+| lolcatt/utils/utils.py                        |       33 |       25 |     24% |17-21, 27-59 |
+|                                     **TOTAL** |  **633** |  **361** | **43%** |           |
 
 
 ## Setup coverage badge
