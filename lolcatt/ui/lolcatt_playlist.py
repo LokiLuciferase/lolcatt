@@ -35,9 +35,9 @@ class LolCattPlaylist(Static):
         next = self.app.caster.get_queue()
         if self._previous == previous and self._current == current and self._next == next:
             return
-        self._previous = previous
+        self._previous = previous[:]
         self._current = current
-        self._next = next
+        self._next = next[:]
         self._items = previous + [current] + next
         self.listview.clear()
         zero_item = None
