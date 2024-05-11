@@ -28,7 +28,7 @@ A TUI wrapper around catt_, enabling you to cast to and control your chromecast 
 
 Dependencies
 ------------
-- Python 3.8+
+- Python 3.10+ (older versions >= 3.6 might work, but are not tested)
 - catt_ (will be installed automatically)
 - yt-dlp_ (will be installed automatically)
 - Optional: A font containing FontAwesome icons to allow displaying of fancy icons on buttons. The freely available NerdFont_ collection is recommended. Fancy icons can be disabled and replaced by text (see below).
@@ -49,7 +49,7 @@ At first we need to determine the name of the chromecast device we want to cast 
 To start the UI, run ``lolcatt -d '<device name or alias>'`` (or simply ``lolcatt`` if a default device is set).
 A default device and device aliases can be set in the ``catt`` configuration file (per default under ``~/.config/catt/config.cfg``), see catt_'s documentation for more information.
 
-To cast, paste either a URL or a path to a local file into the input field and press enter. To add a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To seek, tap the progress bar.
+To cast, paste either a URL or a path to a local file into the input field and press enter. To add a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To view and navigate in the queue, tap the name of the currently playing item. To seek, tap the progress bar.
 
 For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported.
 
