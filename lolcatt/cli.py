@@ -51,12 +51,12 @@ def main(url_or_path, device, scan, config):
 
     config = toml.loads(config.read_text())
 
-    if url_or_path is None and scan:
+    if len(url_or_path) == 0 and scan:
         do_scan()
         return
 
     lolcatt = LolCatt(device_name=device, config=config)
-    if url_or_path is not None:
+    if len(url_or_path) > 0:
         for up in url_or_path:
             lolcatt.caster.enqueue(up)
         lolcatt.caster.cast_next()
