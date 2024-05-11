@@ -51,6 +51,7 @@ class Caster:
         self._queue = []
         self._current_item = None
         self._played_queue = []
+        self._well_known_devices = {}
         self._available_devices = None
         self._catt_call = None
         self._catt_config = get_config_as_dict()
@@ -61,6 +62,7 @@ class Caster:
         self._update_interval = update_interval
         self._autoplay = autoplay
         self._state_last_updated = time.time()
+        self._init_well_known_devices()
         self.change_device(name_or_alias)
 
     def _build_cast_args(self) -> List[str]:
@@ -77,6 +79,13 @@ class Caster:
                 ]
 
         return catt_cast_args
+
+    def _init_well_known_devices(self):
+        for _, device_name in self._catt_config['aliases'].items():
+            try:
+                self._well_known_devices[device_name] = CattDevice(device_name)
+            except Exception as e:
+                pass
 
     def cast(self, url_or_path: str):
         """
@@ -210,7 +219,15 @@ class Caster:
         """
         return self._played_queue
 
-    def get_available_devices(self) -> List[str]:
+    def get_well_known_devices(self) -> Dict[str, CattDevice]:
+        """
+        Returns well known devices which have aliases set.
+
+        :return: Well known devices.
+        """
+        return self._well_known_devices
+
+    def get_available_devices(self) -> List[CattDevice]:
         """
         Runs Chromecast discovery and returns a list of available CattDevices.
 
@@ -248,14 +265,23 @@ class Caster:
             self._device_name = None
 
         if self._device_name is not None:
+            if self._device_name in self._well_known_devices:
+                self._device = self._well_known_devices[self._device_name]
+                self._loading_started = None
+                self._is_loading_cast = False
+                return
             try:
+                if self._device is not None:
+                    self._device.stop()
+                    self._device.controller.kill()
+                    self._device = None
                 self._device = CattDevice(self._device_name)
                 self._loading_started = None
                 self._is_loading_cast = False
-            except CastError:
+            except CastError as e:
                 print(f'Selected device "{self._device_name}" was not found on this network.')
                 print('Scan for available devices using "lolcatt --scan".')
-                raise ValueError(f'No device with name or alias "{name_or_alias}" found.')
+                raise ValueError(f'No device with name or alias "{name_or_alias}" found: {e}')
 
     def get_device(self) -> CattDevice:
         """

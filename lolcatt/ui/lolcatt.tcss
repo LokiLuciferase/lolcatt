@@ -119,6 +119,30 @@ LolCatUrlInput {
     text-style: bold;
 }
 
+#devicelist_box {
+    layout: vertical;
+    align: center middle;
+    dock: top;
+    max-height: 18;
+    max-width: 41;
+}
+
+#devicelist_close_btn {
+    max-width: 5;
+    max-height: 3;
+}
+
+#devicelist > ListItem {
+    padding-top: 1;
+    padding-bottom: 1;
+    padding-left: 2;
+    padding-right: 2;
+}
+
+#active_device_listitem {
+    text-style: bold;
+}
+
 #app {
     layout: vertical;
     align: center middle;

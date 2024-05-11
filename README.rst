@@ -46,10 +46,10 @@ Quckstart
 ----------
 
 At first we need to determine the name of the chromecast device we want to cast to. To do so, run ``lolcatt --scan``.
+A default device and device aliases can be set in the ``catt`` configuration file ``~/.config/catt/config.cfg``. See catt_'s documentation for more information.
 To start the UI, run ``lolcatt -d '<device name or alias>'`` (or simply ``lolcatt`` if a default device is set).
-A default device and device aliases can be set in the ``catt`` configuration file (per default under ``~/.config/catt/config.cfg``), see catt_'s documentation for more information.
 
-To cast, paste either a URL or a path to a local file into the input field and press enter. To add a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To view and navigate in the queue, tap the name of the currently playing item. To seek, tap the progress bar.
+To cast, paste either a URL or a path to a local file into the input field and press enter. To add a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To view and navigate in the queue, tap the name of the currently playing item. To seek, tap the progress bar. To change chromecast device, tap the name of the currently active device (currently only devices with set aliases can be selected in this way).
 
 For URLs, all websites supported by yt-dlp_ (which handles media download under the hood) are supported. Find a list of supported websites here_. For local media, most common video and image formats are supported.
 
