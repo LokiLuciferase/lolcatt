@@ -10,13 +10,17 @@ from textual.widgets import Static
 
 class LolCattPlaybackListView(ListView):
     def on_list_view_selected(self, selected):
-        self.app.caster.cast_at_idx(selected.item.idx)
+        try:
+            self.app.caster.cast_at_idx(selected.item.idx)
+        except AttributeError:
+            pass
 
 
 class LolCattPlaylist(Static):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.listview = LolCattPlaybackListView(
+            ListItem(Label('Loading...')),
             id="playlist",
             initial_index=None,
         )

@@ -38,5 +38,8 @@ class LolCattDeviceInfo(Static):
             interval=self.app.caster.get_update_interval(), callback=self._update_label
         )
 
+    def on_click(self, event):
+        self.app.push_screen('device')
+
     def compose(self):
         yield Container(self.label, id='device_info')

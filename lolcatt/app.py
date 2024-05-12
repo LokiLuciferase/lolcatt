@@ -7,6 +7,7 @@ from textual.screen import Screen
 from lolcatt.casting.caster import Caster
 from lolcatt.ui.lolcatt_controls import LolCattControls
 from lolcatt.ui.lolcatt_device_info import LolCattDeviceInfo
+from lolcatt.ui.lolcatt_devicelist import LolCattDevicelist
 from lolcatt.ui.lolcatt_playback_info import LolCattPlaybackInfo
 from lolcatt.ui.lolcatt_playlist import LolCattPlaylist
 from lolcatt.ui.lolcatt_progress import LolCattProgress
@@ -34,6 +35,13 @@ class PlaylistScreen(Screen):
         yield LolCattPlaylist()
 
 
+class DeviceScreen(Screen):
+    """A screen for the device info UI."""
+
+    def compose(self):
+        yield LolCattDevicelist()
+
+
 class LolCatt(App):
     """The main application class for lolcatt."""
 
@@ -44,13 +52,16 @@ class LolCatt(App):
         self.caster = Caster(device_name, config=config)
         self.remote_screen = None
         self.playlist_screen = None
+        self.device_screen = None
         super().__init__(*args, **kwargs)
 
     def on_mount(self):
         self.remote_screen = RemoteScreen()
         self.playlist_screen = PlaylistScreen()
+        self.device_screen = DeviceScreen()
         self.install_screen(self.remote_screen, name='remote')
         self.install_screen(self.playlist_screen, name='playlist')
+        self.install_screen(self.device_screen, name='device')
         self.push_screen('remote')
 
 
