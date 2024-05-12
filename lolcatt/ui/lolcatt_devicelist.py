@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from catt.cli import get_config_as_dict
 from textual import on
-from textual import work
 from textual.containers import Vertical
 from textual.reactive import reactive
 from textual.widgets import Button
