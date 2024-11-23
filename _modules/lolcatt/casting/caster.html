@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lolcatt.casting.caster &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2e79380a" />
+    <script src="../../../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.casting.caster</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lolcatt.casting.caster</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">catt.api</span> <span class="kn">import</span> <span class="n">CattDevice</span>
+<span class="kn">from</span> <span class="nn">catt.api</span> <span class="kn">import</span> <span class="n">discover</span>
+<span class="kn">from</span> <span class="nn">catt.cli</span> <span class="kn">import</span> <span class="n">get_config_as_dict</span>
+<span class="kn">from</span> <span class="nn">catt.error</span> <span class="kn">import</span> <span class="n">CastError</span>
+
+<span class="kn">from</span> <span class="nn">.youtube_playlist_handler</span> <span class="kn">import</span> <span class="n">YoutubePlaylistHandler</span>
+
+
+<div class="viewcode-block" id="CastState">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.CastState">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">CastState</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dataclass for cast state, encapsulating info dictionaries of a catt controller.&quot;&quot;&quot;</span>
+
+    <span class="n">cast_info</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">info</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">is_loading</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">loading_failed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">queue_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+
+<div class="viewcode-block" id="Caster">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster">[docs]</a>
+<span class="k">class</span> <span class="nc">Caster</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class encapsulating the catt.api.CattDevice.</span>
+
+<span class="sd">    Provides a simple interface and enables exchange of the CattDevice on the fly.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">CATT_ARGS</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">CAST_ARGS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;--force-default&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_or_alias</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
+        <span class="n">update_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">autoplay</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">config</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_yt_playlist_handler</span> <span class="o">=</span> <span class="n">YoutubePlaylistHandler</span><span class="p">(</span>
+            <span class="n">cookies_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;options&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;youtube_cookies_file&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_well_known_devices</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_available_devices</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_catt_config</span> <span class="o">=</span> <span class="n">get_config_as_dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_media_loading_failed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loading_timeout</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_interval</span> <span class="o">=</span> <span class="n">update_interval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_autoplay</span> <span class="o">=</span> <span class="n">autoplay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state_last_updated</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_init_well_known_devices</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_device</span><span class="p">(</span><span class="n">name_or_alias</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_build_cast_args</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">catt_cast_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CAST_ARGS</span><span class="p">[:]</span>
+
+        <span class="c1"># if we have a cookies file for youtube, attempt to mark videos as watched</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;options&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;youtube_mark_watched&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">cookies_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;options&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;youtube_cookies_file&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cookies_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">cookies_file</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">cookies_file</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+                <span class="n">catt_cast_args</span> <span class="o">+=</span> <span class="p">[</span>
+                    <span class="s1">&#39;--ytdl-option=mark_watched=true&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;--ytdl-option=cookiefile=</span><span class="si">{</span><span class="n">cookies_file</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">catt_cast_args</span>
+
+    <span class="k">def</span> <span class="nf">_init_well_known_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">device_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catt_config</span><span class="p">[</span><span class="s1">&#39;aliases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_well_known_devices</span><span class="p">[</span><span class="n">device_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">CattDevice</span><span class="p">(</span><span class="n">device_name</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+<div class="viewcode-block" id="Caster.cast">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.cast">[docs]</a>
+    <span class="k">def</span> <span class="nf">cast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Casts the given url or path to the currently active device.</span>
+
+<span class="sd">        :param url_or_path: The url or path to cast.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Can</span><span class="se">\&#39;</span><span class="s1">t cast: No device selected.&#39;</span><span class="p">)</span>
+        <span class="n">full_catt_args</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;catt&#39;</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">CATT_ARGS</span><span class="p">,</span>
+            <span class="s1">&#39;-d&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span><span class="p">,</span>
+            <span class="s1">&#39;cast&#39;</span><span class="p">,</span>
+            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_build_cast_args</span><span class="p">(),</span>
+            <span class="n">url_or_path</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+            <span class="n">full_catt_args</span><span class="p">,</span>
+            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_is_loading</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Caster.cast_next">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_next">[docs]</a>
+    <span class="k">def</span> <span class="nf">cast_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Casts the next item in the queue to the currently active device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">CastError</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Caster.cast_previous">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_previous">[docs]</a>
+    <span class="k">def</span> <span class="nf">cast_previous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Casts the previous item in the queue to the currently active device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Caster.cast_at_idx">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_at_idx">[docs]</a>
+    <span class="k">def</span> <span class="nf">cast_at_idx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Skips to the item at the given index in the queues.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">prev_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="p">)</span> <span class="o">+</span> <span class="n">idx</span>
+            <span class="k">if</span> <span class="n">prev_idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="p">[</span><span class="n">prev_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="p">[:</span> <span class="n">prev_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">[:</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">[</span><span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Caster.stop_cast">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.stop_cast">[docs]</a>
+    <span class="k">def</span> <span class="nf">stop_cast</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stops the current cast.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_catt_call</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Caster.enqueue">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.enqueue">[docs]</a>
+    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url_or_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">front</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Enqueues the given url or path to the queue.</span>
+
+<span class="sd">        :param url_or_path: The url or path to enqueue.</span>
+<span class="sd">        :param front: If True, the url or path is added to the front of the queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;youtube&#39;</span> <span class="ow">in</span> <span class="n">url_or_path</span> <span class="ow">and</span> <span class="s1">&#39;playlist?&#39;</span> <span class="ow">in</span> <span class="n">url_or_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_is_loading</span><span class="p">()</span>
+            <span class="n">all_new_urls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yt_playlist_handler</span><span class="o">.</span><span class="n">resolve_playlist</span><span class="p">(</span><span class="n">url_or_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="n">all_new_urls</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="k">if</span> <span class="n">front</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">+</span> <span class="n">all_new_urls</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url_or_path</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">front</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">url_or_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Caster.clear_queue">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.clear_queue">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clears the queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_queue">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_queue">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the current queue.</span>
+
+<span class="sd">        :return: The current queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_queue</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_current_item">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_current_item">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_current_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the currently playing item.</span>
+
+<span class="sd">        :return: The currently playing item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_item</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_played_queue">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_played_queue">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_played_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the played queue.</span>
+
+<span class="sd">        :return: The played queue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_played_queue</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_well_known_devices">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_well_known_devices">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_well_known_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CattDevice</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns well known devices which have aliases set.</span>
+
+<span class="sd">        :return: Well known devices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_well_known_devices</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_available_devices">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_available_devices">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_available_devices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">CattDevice</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs Chromecast discovery and returns a list of available CattDevices.</span>
+
+<span class="sd">        :return: A list of available CattDevices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_available_devices</span> <span class="o">=</span> <span class="n">discover</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_available_devices</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_device_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_or_alias</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the device name for the given device name or alias.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name_or_alias</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+            <span class="n">device_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catt_config</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;device&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">device_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;No default device set. &#39;</span>
+                    <span class="s1">&#39;Scanning for all available devices and picking first...&#39;</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s1">&#39;To skip this in the future, either pass a device name &#39;</span>
+                    <span class="s1">&#39;or set a default device in the catt config file.&#39;</span>
+                <span class="p">)</span>
+                <span class="n">possible_devices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_available_devices</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_devices</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">device_name</span> <span class="o">=</span> <span class="n">possible_devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">elif</span> <span class="n">name_or_alias</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">:</span>
+            <span class="n">device_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">name_or_alias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">device_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_catt_config</span><span class="p">[</span><span class="s1">&#39;aliases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name_or_alias</span><span class="p">,</span> <span class="n">name_or_alias</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">device_name</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">device_name</span>
+
+<div class="viewcode-block" id="Caster.change_device">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.change_device">[docs]</a>
+    <span class="k">def</span> <span class="nf">change_device</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_or_alias</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the currently active device to the given name or alias. If the device is not</span>
+<span class="sd">        available, a ValueError is raised.</span>
+
+<span class="sd">        :param name_or_alias: The name or alias of the device to change to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_device_name</span><span class="p">(</span><span class="n">name_or_alias</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_well_known_devices</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_well_known_devices</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="n">CattDevice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">CastError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Selected device &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span><span class="si">}</span><span class="s1">&quot; was not found on this network.&#39;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scan for available devices using &quot;lolcatt --scan&quot;.&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No device with name or alias &quot;</span><span class="si">{</span><span class="n">name_or_alias</span><span class="si">}</span><span class="s1">&quot; found: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_device">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_device">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_device</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CattDevice</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the currently active CattDevice.</span>
+
+<span class="sd">        :return: The currently active CattDevice.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_device_name">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_device_name">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_device_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the name of the currently active CattDevice.</span>
+
+<span class="sd">        :return: The name of the currently active CattDevice.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device_name</span></div>
+
+
+<div class="viewcode-block" id="Caster.get_update_interval">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_update_interval">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_update_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the update interval of the CastState. Determines how often UI elements are need to</span>
+<span class="sd">        be updated.</span>
+
+<span class="sd">        :return: The update interval of the CastState.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_interval</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_trigger_is_loading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_tick</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal method that is called on every call to update the CastState.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_autoplay</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;idle_reason&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;FINISHED&#39;</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cast_next</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_last_updated</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_interval</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">_update_status</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_state_last_updated</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="ow">and</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loading_timeout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_media_loading_failed</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;player_state&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s1">&#39;PLAYING&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;BUFFERING&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;PAUSED&#39;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_loading_started</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Caster.get_cast_state">
+<a class="viewcode-back" href="../../../lolcatt.casting.html#lolcatt.casting.caster.Caster.get_cast_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_cast_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CastState</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a CastState object encapsulating the info dictionaries of the currently active</span>
+<span class="sd">        CattDevice.</span>
+
+<span class="sd">        :return: A CastState object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tick</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cs</span> <span class="o">=</span> <span class="n">CastState</span><span class="p">({},</span> <span class="p">{},</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cs</span> <span class="o">=</span> <span class="n">CastState</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">cast_info</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
+                <span class="n">is_loading</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_loading_cast</span><span class="p">,</span>
+                <span class="n">loading_failed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_media_loading_failed</span><span class="p">,</span>
+                <span class="n">queue_len</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_queue</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_media_loading_failed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">cs</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.casting.caster</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

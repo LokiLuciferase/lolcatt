@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lolcatt.ui.lolcatt_playback_info &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2e79380a" />
+    <script src="../../../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_playback_info</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lolcatt.ui.lolcatt_playback_info</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">textual.containers</span> <span class="kn">import</span> <span class="n">Container</span>
+<span class="kn">from</span> <span class="nn">textual.events</span> <span class="kn">import</span> <span class="n">Click</span>
+<span class="kn">from</span> <span class="nn">textual.reactive</span> <span class="kn">import</span> <span class="n">reactive</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Label</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">ListItem</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Static</span>
+
+<span class="kn">from</span> <span class="nn">lolcatt.utils.utils</span> <span class="kn">import</span> <span class="n">marquee</span>
+
+
+<div class="viewcode-block" id="LolCattPlaybackInfo">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo">[docs]</a>
+<span class="k">class</span> <span class="nc">LolCattPlaybackInfo</span><span class="p">(</span><span class="n">Static</span><span class="p">):</span>
+    <span class="n">label_str</span> <span class="o">=</span> <span class="n">reactive</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marquee_gen</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_get_playback_info</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_cast_state</span><span class="p">()</span>
+        <span class="n">playing</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+        <span class="n">display_name</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;display_name&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">playing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Playing: &quot;</span><span class="si">{</span><span class="n">playing</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+        <span class="k">elif</span> <span class="n">display_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">display_name</span> <span class="o">!=</span> <span class="s1">&#39;Backdrop&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Displaying: &quot;</span><span class="si">{</span><span class="n">display_name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+        <span class="k">elif</span> <span class="n">state</span><span class="o">.</span><span class="n">is_loading</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Loading...&#39;</span>
+        <span class="k">elif</span> <span class="n">state</span><span class="o">.</span><span class="n">loading_failed</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="s1">&#39;Loading failed.&#39;</span><span class="p">,</span> <span class="n">severity</span><span class="o">=</span><span class="s1">&#39;warning&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;Nothing is playing.&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Nothing is playing.&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_update_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_playback_info</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_marquee_gen</span><span class="p">))</span>
+
+<div class="viewcode-block" id="LolCattPlaybackInfo.watch_label_str">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.watch_label_str">[docs]</a>
+    <span class="k">def</span> <span class="nf">watch_label_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marquee_gen</span> <span class="o">=</span> <span class="n">marquee</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattPlaybackInfo.on_resize">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_resize">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marquee_gen</span> <span class="o">=</span> <span class="n">marquee</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label_str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattPlaybackInfo.compose">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.compose">[docs]</a>
+    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">Container</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;playback_info&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattPlaybackInfo.on_mount">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_mount">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_mount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_interval</span><span class="p">(</span>
+            <span class="n">interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_update_interval</span><span class="p">(),</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_label</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattPlaybackInfo.on_click">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_click">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Click</span><span class="p">):</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_queue</span><span class="p">()</span>
+        <span class="n">queuelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">ListItem</span><span class="p">(</span><span class="n">Label</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">queue</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">playlist_list</span> <span class="o">=</span> <span class="n">queuelist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">push_screen</span><span class="p">(</span><span class="s1">&#39;playlist&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_playback_info</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

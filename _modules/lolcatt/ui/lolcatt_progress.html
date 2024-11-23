@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lolcatt.ui.lolcatt_progress &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2e79380a" />
+    <script src="../../../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_progress</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lolcatt.ui.lolcatt_progress</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">catt.error</span> <span class="kn">import</span> <span class="n">CastError</span>
+<span class="kn">from</span> <span class="nn">textual.containers</span> <span class="kn">import</span> <span class="n">Container</span>
+<span class="kn">from</span> <span class="nn">textual.events</span> <span class="kn">import</span> <span class="n">Click</span>
+<span class="kn">from</span> <span class="nn">textual.reactive</span> <span class="kn">import</span> <span class="n">reactive</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Label</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">ProgressBar</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Static</span>
+
+
+<div class="viewcode-block" id="LolCattProgress">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress">[docs]</a>
+<span class="k">class</span> <span class="nc">LolCattProgress</span><span class="p">(</span><span class="n">Static</span><span class="p">):</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">reactive</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">reactive</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">queue_len</span> <span class="o">=</span> <span class="n">reactive</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">percent_complete</span> <span class="o">=</span> <span class="n">reactive</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_extract_progress</span><span class="p">(</span><span class="n">cast_info</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_time&#39;</span><span class="p">)</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">)</span>
+        <span class="n">percent_complete</span> <span class="o">=</span> <span class="n">current</span> <span class="o">/</span> <span class="n">duration</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">duration</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">current</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">percent_complete</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_time</span><span class="p">(</span><span class="n">seconds</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">seconds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;--:--&#39;</span>
+        <span class="n">minutes</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">seconds</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">minutes</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hours</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hours</span><span class="si">:</span><span class="s1">02.0f</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="n">minutes</span><span class="si">:</span><span class="s1">02.0f</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="n">seconds</span><span class="si">:</span><span class="s1">02.0f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">minutes</span><span class="si">:</span><span class="s1">02.0f</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="n">seconds</span><span class="si">:</span><span class="s1">02.0f</span><span class="si">}</span><span class="s1">&#39;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_format_queue_len</span><span class="p">(</span><span class="n">queue_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">queue_len</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">current</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(1/</span><span class="si">{</span><span class="n">queue_len</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">)&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pb</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">show_percentage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_eta</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;progress_bar&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pblabel</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;progress_label&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_needed_width</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1"># FIXME: learn CSS</span>
+
+<div class="viewcode-block" id="LolCattProgress.update_progress">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.update_progress">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_cast_state</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">percent_complete</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_progress</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">cast_info</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">queue_len</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">queue_len</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pb</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">progress</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">percent_complete</span><span class="p">)</span>
+        <span class="n">current_fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">duration_fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="n">queue_fmt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_queue_len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">queue_len</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">)</span>
+        <span class="n">upd_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">current_fmt</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">duration_fmt</span><span class="si">}</span><span class="s1">]</span><span class="si">{</span><span class="n">queue_fmt</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_needed_width</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">upd_str</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pblabel</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">padding</span><span class="si">}{</span><span class="n">upd_str</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattProgress.on_mount">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.on_mount">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_mount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_progress</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_interval</span><span class="p">(</span>
+            <span class="n">interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_update_interval</span><span class="p">(),</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">update_progress</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattProgress.on_click">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.on_click">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_click</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Click</span><span class="p">):</span>
+        <span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pb</span><span class="o">.</span><span class="n">content_region</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pb</span><span class="o">.</span><span class="n">content_region</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pb</span><span class="o">.</span><span class="n">content_region</span><span class="o">.</span><span class="n">width</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">click_x</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">screen_x</span><span class="p">,</span> <span class="n">min_x</span><span class="p">),</span> <span class="n">max_x</span><span class="p">)</span>
+        <span class="n">fraction</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">click_x</span> <span class="o">-</span> <span class="n">min_x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_x</span> <span class="o">-</span> <span class="n">min_x</span><span class="p">))</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_cast_state</span><span class="p">()</span><span class="o">.</span><span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fraction</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattProgress.compose">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.compose">[docs]</a>
+    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">Container</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pb</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pblabel</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;progress&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_progress</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

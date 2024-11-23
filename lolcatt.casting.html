@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>lolcatt.casting package &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2e79380a" />
+    <script src="_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lolcatt.ui package" href="lolcatt.ui.html" />
+    <link rel="prev" title="lolcatt package" href="lolcatt.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.ui.html" title="lolcatt.ui package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.html" title="lolcatt package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lolcatt</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lolcatt.html" accesskey="U">lolcatt package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.casting package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="lolcatt-casting-package">
+<h1>lolcatt.casting package<a class="headerlink" href="#lolcatt-casting-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-lolcatt.casting.caster">
+<span id="lolcatt-casting-caster-module"></span><h2>lolcatt.casting.caster module<a class="headerlink" href="#module-lolcatt.casting.caster" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.casting.caster.</span></span><span class="sig-name descname"><span class="pre">CastState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cast_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_loading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loading_failed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">queue_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#CastState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.CastState" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Dataclass for cast state, encapsulating info dictionaries of a catt controller.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState.cast_info">
+<span class="sig-name descname"><span class="pre">cast_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></em><a class="headerlink" href="#lolcatt.casting.caster.CastState.cast_info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState.info">
+<span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></em><a class="headerlink" href="#lolcatt.casting.caster.CastState.info" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState.is_loading">
+<span class="sig-name descname"><span class="pre">is_loading</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.casting.caster.CastState.is_loading" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState.loading_failed">
+<span class="sig-name descname"><span class="pre">loading_failed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.casting.caster.CastState.loading_failed" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.CastState.queue_len">
+<span class="sig-name descname"><span class="pre">queue_len</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#lolcatt.casting.caster.CastState.queue_len" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.casting.caster.</span></span><span class="sig-name descname"><span class="pre">Caster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_or_alias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoplay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class encapsulating the catt.api.CattDevice.</p>
+<p>Provides a simple interface and enables exchange of the CattDevice on the fly.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.CAST_ARGS">
+<span class="sig-name descname"><span class="pre">CAST_ARGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['--force-default']</span></em><a class="headerlink" href="#lolcatt.casting.caster.Caster.CAST_ARGS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.CATT_ARGS">
+<span class="sig-name descname"><span class="pre">CATT_ARGS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#lolcatt.casting.caster.Caster.CATT_ARGS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.cast">
+<span class="sig-name descname"><span class="pre">cast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url_or_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.cast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.cast" title="Link to this definition">¶</a></dt>
+<dd><p>Casts the given url or path to the currently active device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>url_or_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The url or path to cast.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.cast_at_idx">
+<span class="sig-name descname"><span class="pre">cast_at_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.cast_at_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.cast_at_idx" title="Link to this definition">¶</a></dt>
+<dd><p>Skips to the item at the given index in the queues.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.cast_next">
+<span class="sig-name descname"><span class="pre">cast_next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.cast_next"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.cast_next" title="Link to this definition">¶</a></dt>
+<dd><p>Casts the next item in the queue to the currently active device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.cast_previous">
+<span class="sig-name descname"><span class="pre">cast_previous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.cast_previous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.cast_previous" title="Link to this definition">¶</a></dt>
+<dd><p>Casts the previous item in the queue to the currently active device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.change_device">
+<span class="sig-name descname"><span class="pre">change_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_or_alias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.change_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.change_device" title="Link to this definition">¶</a></dt>
+<dd><p>Changes the currently active device to the given name or alias. If the device is not
+available, a ValueError is raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name_or_alias</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span>) – The name or alias of the device to change to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.clear_queue">
+<span class="sig-name descname"><span class="pre">clear_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.clear_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.clear_queue" title="Link to this definition">¶</a></dt>
+<dd><p>Clears the queue.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.enqueue">
+<span class="sig-name descname"><span class="pre">enqueue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url_or_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">front</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.enqueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.enqueue" title="Link to this definition">¶</a></dt>
+<dd><p>Enqueues the given url or path to the queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url_or_path</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – The url or path to enqueue.</p></li>
+<li><p><strong>front</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – If True, the url or path is added to the front of the queue.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_available_devices">
+<span class="sig-name descname"><span class="pre">get_available_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_available_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_available_devices" title="Link to this definition">¶</a></dt>
+<dd><p>Runs Chromecast discovery and returns a list of available CattDevices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">CattDevice</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of available CattDevices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_cast_state">
+<span class="sig-name descname"><span class="pre">get_cast_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_cast_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_cast_state" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a CastState object encapsulating the info dictionaries of the currently active
+CattDevice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#lolcatt.casting.caster.CastState" title="lolcatt.casting.caster.CastState"><code class="xref py py-class docutils literal notranslate"><span class="pre">CastState</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A CastState object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_current_item">
+<span class="sig-name descname"><span class="pre">get_current_item</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_current_item"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_current_item" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the currently playing item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The currently playing item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_device" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the currently active CattDevice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">CattDevice</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The currently active CattDevice.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_device_name">
+<span class="sig-name descname"><span class="pre">get_device_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_device_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_device_name" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the name of the currently active CattDevice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The name of the currently active CattDevice.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_played_queue">
+<span class="sig-name descname"><span class="pre">get_played_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_played_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_played_queue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the played queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The played queue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_queue">
+<span class="sig-name descname"><span class="pre">get_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_queue" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the current queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The current queue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_update_interval">
+<span class="sig-name descname"><span class="pre">get_update_interval</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_update_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_update_interval" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the update interval of the CastState. Determines how often UI elements are need to
+be updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The update interval of the CastState.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.get_well_known_devices">
+<span class="sig-name descname"><span class="pre">get_well_known_devices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.get_well_known_devices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.get_well_known_devices" title="Link to this definition">¶</a></dt>
+<dd><p>Returns well known devices which have aliases set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CattDevice</span></code>]</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Well known devices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.casting.caster.Caster.stop_cast">
+<span class="sig-name descname"><span class="pre">stop_cast</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/casting/caster.html#Caster.stop_cast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.casting.caster.Caster.stop_cast" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the current cast.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.casting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lolcatt.casting" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">lolcatt.casting package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lolcatt.casting.caster">lolcatt.casting.caster module</a><ul>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState"><code class="docutils literal notranslate"><span class="pre">CastState</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState.cast_info"><code class="docutils literal notranslate"><span class="pre">CastState.cast_info</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState.info"><code class="docutils literal notranslate"><span class="pre">CastState.info</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState.is_loading"><code class="docutils literal notranslate"><span class="pre">CastState.is_loading</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState.loading_failed"><code class="docutils literal notranslate"><span class="pre">CastState.loading_failed</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.CastState.queue_len"><code class="docutils literal notranslate"><span class="pre">CastState.queue_len</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster"><code class="docutils literal notranslate"><span class="pre">Caster</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.CAST_ARGS"><code class="docutils literal notranslate"><span class="pre">Caster.CAST_ARGS</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.CATT_ARGS"><code class="docutils literal notranslate"><span class="pre">Caster.CATT_ARGS</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.cast"><code class="docutils literal notranslate"><span class="pre">Caster.cast()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.cast_at_idx"><code class="docutils literal notranslate"><span class="pre">Caster.cast_at_idx()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.cast_next"><code class="docutils literal notranslate"><span class="pre">Caster.cast_next()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.cast_previous"><code class="docutils literal notranslate"><span class="pre">Caster.cast_previous()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.change_device"><code class="docutils literal notranslate"><span class="pre">Caster.change_device()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.clear_queue"><code class="docutils literal notranslate"><span class="pre">Caster.clear_queue()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.enqueue"><code class="docutils literal notranslate"><span class="pre">Caster.enqueue()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_available_devices"><code class="docutils literal notranslate"><span class="pre">Caster.get_available_devices()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_cast_state"><code class="docutils literal notranslate"><span class="pre">Caster.get_cast_state()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_current_item"><code class="docutils literal notranslate"><span class="pre">Caster.get_current_item()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_device"><code class="docutils literal notranslate"><span class="pre">Caster.get_device()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_device_name"><code class="docutils literal notranslate"><span class="pre">Caster.get_device_name()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_played_queue"><code class="docutils literal notranslate"><span class="pre">Caster.get_played_queue()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_queue"><code class="docutils literal notranslate"><span class="pre">Caster.get_queue()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_update_interval"><code class="docutils literal notranslate"><span class="pre">Caster.get_update_interval()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.get_well_known_devices"><code class="docutils literal notranslate"><span class="pre">Caster.get_well_known_devices()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.casting.caster.Caster.stop_cast"><code class="docutils literal notranslate"><span class="pre">Caster.stop_cast()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.casting">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="lolcatt.html"
+                          title="previous chapter">lolcatt package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="lolcatt.ui.html"
+                          title="next chapter">lolcatt.ui package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lolcatt.casting.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.ui.html" title="lolcatt.ui package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.html" title="lolcatt package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lolcatt</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lolcatt.html" >lolcatt package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.casting package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

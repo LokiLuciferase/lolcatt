@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lolcatt.ui.lolcatt_controls &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=2e79380a" />
+    <script src="../../../_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_controls</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for lolcatt.ui.lolcatt_controls</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="kn">from</span> <span class="nn">catt.error</span> <span class="kn">import</span> <span class="n">CastError</span>
+<span class="kn">from</span> <span class="nn">textual</span> <span class="kn">import</span> <span class="n">on</span>
+<span class="kn">from</span> <span class="nn">textual.app</span> <span class="kn">import</span> <span class="n">DEFAULT_COLORS</span>
+<span class="kn">from</span> <span class="nn">textual.containers</span> <span class="kn">import</span> <span class="n">Container</span>
+<span class="kn">from</span> <span class="nn">textual.events</span> <span class="kn">import</span> <span class="n">Key</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">textual.widgets</span> <span class="kn">import</span> <span class="n">Static</span>
+
+
+<div class="viewcode-block" id="ControlsConfig">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ControlsConfig</span><span class="p">:</span>
+    <span class="n">ffwd_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">rewind_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">vol_step</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">fancy_icons</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="LolCattControls">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls">[docs]</a>
+<span class="k">class</span> <span class="nc">LolCattControls</span><span class="p">(</span><span class="n">Static</span><span class="p">):</span>
+    <span class="n">CONTROLS</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;play_pause&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;stop&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;previous&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rewind&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ffwd&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;vol_down&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;vol_up&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">CONTROLS_ASCII</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;play_pause&#39;</span><span class="p">:</span> <span class="s1">&#39;Play/Pause&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;stop&#39;</span><span class="p">:</span> <span class="s1">&#39;Stop&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;previous&#39;</span><span class="p">:</span> <span class="s1">&#39;|&lt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rewind&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;&lt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ffwd&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;next&#39;</span><span class="p">:</span> <span class="s1">&#39;&gt;|&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;vol_down&#39;</span><span class="p">:</span> <span class="s1">&#39;Vol-&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;vol_up&#39;</span><span class="p">:</span> <span class="s1">&#39;Vol+&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_config</span> <span class="o">=</span> <span class="n">ControlsConfig</span><span class="p">(</span>
+            <span class="n">fancy_icons</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;options&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fancy_icons&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button_colors</span> <span class="o">=</span> <span class="p">[</span><span class="n">DEFAULT_COLORS</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">DEFAULT_COLORS</span><span class="p">[</span><span class="s1">&#39;dark&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">warning</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;play_pause&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;play_pause_button&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button</span><span class="o">.</span><span class="n">styles</span><span class="o">.</span><span class="n">border_bottom</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;tall&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button_colors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stop_button</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;stop_button&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_control_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">fancy_icons</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONTROLS</span><span class="p">[</span><span class="n">control</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">CONTROLS_ASCII</span><span class="p">[</span><span class="n">control</span><span class="p">]</span>
+
+<div class="viewcode-block" id="LolCattControls.compose">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.compose">[docs]</a>
+    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">Container</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;controls&#39;</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">Container</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;playback_buttons&#39;</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button</span>
+                <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stop_button</span>
+
+            <span class="k">with</span> <span class="n">Container</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;wind_buttons&#39;</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;previous&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;prev_button&#39;</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;rewind&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;rewind_button&#39;</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;ffwd&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;ffwd_button&#39;</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;next_button&#39;</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">Container</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;volume_buttons&#39;</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;vol_down&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;vol_down_button&#39;</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_control_label</span><span class="p">(</span><span class="s1">&#39;vol_up&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;vol_up_button&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.toggle_play_pause">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.toggle_play_pause">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#play_pause_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">toggle_play_pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">play_toggle</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button</span><span class="o">.</span><span class="n">styles</span><span class="o">.</span><span class="n">border_bottom</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;tall&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button_colors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pp_button_colors</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.stop">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.stop">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#stop_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_cast_state</span><span class="p">()</span><span class="o">.</span><span class="n">cast_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;player_state&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PLAYING&#39;</span><span class="p">,</span> <span class="s1">&#39;PAUSED&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">stop_cast</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.vol_down">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.vol_down">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#vol_down_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">vol_down</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">volumedown</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">vol_step</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.vol_up">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.vol_up">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#vol_up_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">vol_up</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">volumeup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">vol_step</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.ffwd">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.ffwd">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#ffwd_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ffwd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">ffwd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">ffwd_secs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.rewind">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.rewind">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s2">&quot;#rewind_button&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">rewind</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">rewind</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">rewind_secs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.next">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.next">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s1">&#39;#next_button&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">cast_next</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.prev">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.prev">[docs]</a>
+    <span class="nd">@on</span><span class="p">(</span><span class="n">Button</span><span class="o">.</span><span class="n">Pressed</span><span class="p">,</span> <span class="s1">&#39;#prev_button&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">prev</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">caster</span><span class="o">.</span><span class="n">cast_previous</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">CastError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LolCattControls.on_key">
+<a class="viewcode-back" href="../../../lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.on_key">[docs]</a>
+    <span class="k">def</span> <span class="nf">on_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;space&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">toggle_play_pause</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;h&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rewind</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ffwd</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="s1">&#39;down&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;up&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;plus&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vol_up</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;minus&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vol_down</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span></div>
+</div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui.lolcatt_controls</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

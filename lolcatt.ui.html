@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>lolcatt.ui package &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2e79380a" />
+    <script src="_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lolcatt.utils package" href="lolcatt.utils.html" />
+    <link rel="prev" title="lolcatt.casting package" href="lolcatt.casting.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.utils.html" title="lolcatt.utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.casting.html" title="lolcatt.casting package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lolcatt</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lolcatt.html" accesskey="U">lolcatt package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="lolcatt-ui-package">
+<h1>lolcatt.ui package<a class="headerlink" href="#lolcatt-ui-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="lolcatt-ui-caster-static-module">
+<h2>lolcatt.ui.caster_static module<a class="headerlink" href="#lolcatt-ui-caster-static-module" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-lolcatt.ui.lolcatt_controls">
+<span id="lolcatt-ui-lolcatt-controls-module"></span><h2>lolcatt.ui.lolcatt_controls module<a class="headerlink" href="#module-lolcatt.ui.lolcatt_controls" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.ControlsConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_controls.</span></span><span class="sig-name descname"><span class="pre">ControlsConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ffwd_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rewind_secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vol_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fancy_icons</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#ControlsConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.ControlsConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.ControlsConfig.fancy_icons">
+<span class="sig-name descname"><span class="pre">fancy_icons</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.fancy_icons" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.ControlsConfig.ffwd_secs">
+<span class="sig-name descname"><span class="pre">ffwd_secs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.ffwd_secs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.ControlsConfig.rewind_secs">
+<span class="sig-name descname"><span class="pre">rewind_secs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.rewind_secs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.ControlsConfig.vol_step">
+<span class="sig-name descname"><span class="pre">vol_step</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.vol_step" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_controls.</span></span><span class="sig-name descname"><span class="pre">LolCattControls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Static</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS">
+<span class="sig-name descname"><span class="pre">CONTROLS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ffwd':</span> <span class="pre">'\uf04e',</span> <span class="pre">'next':</span> <span class="pre">'\uf051',</span> <span class="pre">'play_pause':</span> <span class="pre">'\uf04b\uf04c',</span> <span class="pre">'previous':</span> <span class="pre">'\uf048',</span> <span class="pre">'rewind':</span> <span class="pre">'\uf04a',</span> <span class="pre">'stop':</span> <span class="pre">'\uf04d',</span> <span class="pre">'vol_down':</span> <span class="pre">'\uf027',</span> <span class="pre">'vol_up':</span> <span class="pre">'\uf028'}</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS_ASCII">
+<span class="sig-name descname"><span class="pre">CONTROLS_ASCII</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ffwd':</span> <span class="pre">'&gt;&gt;',</span> <span class="pre">'next':</span> <span class="pre">'&gt;|',</span> <span class="pre">'play_pause':</span> <span class="pre">'Play/Pause',</span> <span class="pre">'previous':</span> <span class="pre">'|&lt;',</span> <span class="pre">'rewind':</span> <span class="pre">'&lt;&lt;',</span> <span class="pre">'stop':</span> <span class="pre">'Stop',</span> <span class="pre">'vol_down':</span> <span class="pre">'Vol-',</span> <span class="pre">'vol_up':</span> <span class="pre">'Vol+'}</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS_ASCII" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.ffwd">
+<span class="sig-name descname"><span class="pre">ffwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.ffwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.ffwd" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.next">
+<span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.next"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.next" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.on_key">
+<span class="sig-name descname"><span class="pre">on_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.on_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.on_key" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.prev">
+<span class="sig-name descname"><span class="pre">prev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.prev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.prev" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.rewind">
+<span class="sig-name descname"><span class="pre">rewind</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.rewind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.rewind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.stop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.toggle_play_pause">
+<span class="sig-name descname"><span class="pre">toggle_play_pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.toggle_play_pause"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.toggle_play_pause" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.vol_down">
+<span class="sig-name descname"><span class="pre">vol_down</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.vol_down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.vol_down" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_controls.LolCattControls.vol_up">
+<span class="sig-name descname"><span class="pre">vol_up</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_controls.html#LolCattControls.vol_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_controls.LolCattControls.vol_up" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.ui.lolcatt_device_info">
+<span id="lolcatt-ui-lolcatt-device-info-module"></span><h2>lolcatt.ui.lolcatt_device_info module<a class="headerlink" href="#module-lolcatt.ui.lolcatt_device_info" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_device_info.</span></span><span class="sig-name descname"><span class="pre">LolCattDeviceInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Static</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.label_str">
+<span class="sig-name descname"><span class="pre">label_str</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.label_str" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_click">
+<span class="sig-name descname"><span class="pre">on_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo.on_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_click" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_mount">
+<span class="sig-name descname"><span class="pre">on_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo.on_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_mount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_resize">
+<span class="sig-name descname"><span class="pre">on_resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo.on_resize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_resize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.watch_label_str">
+<span class="sig-name descname"><span class="pre">watch_label_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_device_info.html#LolCattDeviceInfo.watch_label_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.watch_label_str" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.ui.lolcatt_playback_info">
+<span id="lolcatt-ui-lolcatt-playback-info-module"></span><h2>lolcatt.ui.lolcatt_playback_info module<a class="headerlink" href="#module-lolcatt.ui.lolcatt_playback_info" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_playback_info.</span></span><span class="sig-name descname"><span class="pre">LolCattPlaybackInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Static</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id17"><span class="problematic" id="id18">``</span></a><a href="#id19"><span class="problematic" id="id20">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.label_str">
+<span class="sig-name descname"><span class="pre">label_str</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.label_str" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_click">
+<span class="sig-name descname"><span class="pre">on_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo.on_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_click" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_mount">
+<span class="sig-name descname"><span class="pre">on_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo.on_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_mount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_resize">
+<span class="sig-name descname"><span class="pre">on_resize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo.on_resize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_resize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.watch_label_str">
+<span class="sig-name descname"><span class="pre">watch_label_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_playback_info.html#LolCattPlaybackInfo.watch_label_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.watch_label_str" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.ui.lolcatt_progress">
+<span id="lolcatt-ui-lolcatt-progress-module"></span><h2>lolcatt.ui.lolcatt_progress module<a class="headerlink" href="#module-lolcatt.ui.lolcatt_progress" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_progress.</span></span><span class="sig-name descname"><span class="pre">LolCattProgress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_progress.html#LolCattProgress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Static</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_progress.html#LolCattProgress.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id25"><span class="problematic" id="id26">``</span></a><a href="#id27"><span class="problematic" id="id28">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id29"><span class="problematic" id="id30">``</span></a><a href="#id31"><span class="problematic" id="id32">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.current">
+<span class="sig-name descname"><span class="pre">current</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.current" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.duration">
+<span class="sig-name descname"><span class="pre">duration</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.duration" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.on_click">
+<span class="sig-name descname"><span class="pre">on_click</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_progress.html#LolCattProgress.on_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.on_click" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.on_mount">
+<span class="sig-name descname"><span class="pre">on_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_progress.html#LolCattProgress.on_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.on_mount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.percent_complete">
+<span class="sig-name descname"><span class="pre">percent_complete</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.percent_complete" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.queue_len">
+<span class="sig-name descname"><span class="pre">queue_len</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.queue_len" title="Link to this definition">¶</a></dt>
+<dd><p>Create a reactive attribute.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>default: A default value or callable that returns a default.
+layout: Perform a layout on change.
+repaint: Perform a repaint on change.
+init: Call watchers on initialize (post mount).
+always_update: Call watchers even when the new value equals the old value.
+bindings: Refresh bindings when the reactive changes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_progress.LolCattProgress.update_progress">
+<span class="sig-name descname"><span class="pre">update_progress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_progress.html#LolCattProgress.update_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.update_progress" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.ui.lolcatt_url_input">
+<span id="lolcatt-ui-lolcatt-url-input-module"></span><h2>lolcatt.ui.lolcatt_url_input module<a class="headerlink" href="#module-lolcatt.ui.lolcatt_url_input" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_url_input.</span></span><span class="sig-name descname"><span class="pre">InputField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">placeholder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highlighter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restrict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'text'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suggester</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_empty</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tooltip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#InputField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.BINDINGS">
+<span class="sig-name descname"><span class="pre">BINDINGS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><code class="xref py py-data docutils literal notranslate"><span class="pre">ClassVar</span></code><span class="pre">[</span><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code><span class="pre">[Binding</span> <span class="pre">|</span> <span class="pre">tuple[str,</span> <span class="pre">str]</span> <span class="pre">|</span> <span class="pre">tuple[str,</span> <span class="pre">str,</span> <span class="pre">str]]]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[Binding(key='left',</span> <span class="pre">action='cursor_left',</span> <span class="pre">description='cursor</span> <span class="pre">left',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+left',</span> <span class="pre">action='cursor_left_word',</span> <span class="pre">description='cursor</span> <span class="pre">left</span> <span class="pre">word',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='right',</span> <span class="pre">action='cursor_right',</span> <span class="pre">description='cursor</span> <span class="pre">right',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+right',</span> <span class="pre">action='cursor_right_word',</span> <span class="pre">description='cursor</span> <span class="pre">right</span> <span class="pre">word',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='backspace',</span> <span class="pre">action='delete_left',</span> <span class="pre">description='delete</span> <span class="pre">left',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='home,ctrl+a',</span> <span class="pre">action='home',</span> <span class="pre">description='home',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='end,ctrl+e',</span> <span class="pre">action='end',</span> <span class="pre">description='end',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='delete,ctrl+d',</span> <span class="pre">action='delete_right',</span> <span class="pre">description='delete</span> <span class="pre">right',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='enter',</span> <span class="pre">action='submit',</span> <span class="pre">description='submit',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+w',</span> <span class="pre">action='delete_left_word',</span> <span class="pre">description='delete</span> <span class="pre">left</span> <span class="pre">to</span> <span class="pre">start</span> <span class="pre">of</span> <span class="pre">word',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+u',</span> <span class="pre">action='delete_left_all',</span> <span class="pre">description='delete</span> <span class="pre">all</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">left',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+f',</span> <span class="pre">action='delete_right_word',</span> <span class="pre">description='delete</span> <span class="pre">right</span> <span class="pre">to</span> <span class="pre">start</span> <span class="pre">of</span> <span class="pre">word',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+k',</span> <span class="pre">action='delete_right_all',</span> <span class="pre">description='delete</span> <span class="pre">all</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">right',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None),</span> <span class="pre">Binding(key='ctrl+s',</span> <span class="pre">action='enqueue',</span> <span class="pre">description='submit</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">playback</span> <span class="pre">queue',</span> <span class="pre">show=False,</span> <span class="pre">key_display=None,</span> <span class="pre">priority=False,</span> <span class="pre">tooltip='',</span> <span class="pre">id=None)]</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.BINDINGS" title="Link to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Key(s) | Description |</div>
+<div class="line">:- | :- |</div>
+<div class="line">left | Move the cursor left. |</div>
+<div class="line">ctrl+left | Move the cursor one word to the left. |</div>
+<div class="line">right | Move the cursor right or accept the completion suggestion. |</div>
+<div class="line">ctrl+right | Move the cursor one word to the right. |</div>
+<div class="line">backspace | Delete the character to the left of the cursor. |</div>
+<div class="line">home,ctrl+a | Go to the beginning of the input. |</div>
+<div class="line">end,ctrl+e | Go to the end of the input. |</div>
+<div class="line">delete,ctrl+d | Delete the character to the right of the cursor. |</div>
+<div class="line">enter | Submit the current value of the input. |</div>
+<div class="line">ctrl+w | Delete the word to the left of the cursor. |</div>
+<div class="line">ctrl+u | Delete everything to the left of the cursor. |</div>
+<div class="line">ctrl+f | Delete the word to the right of the cursor. |</div>
+<div class="line">ctrl+k | Delete everything to the right of the cursor. |</div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Enqueued</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#InputField.Enqueued"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Submitted</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued.bubble">
+<span class="sig-name descname"><span class="pre">bubble</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[bool]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.bubble" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued.handler_name">
+<span class="sig-name descname"><span class="pre">handler_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[str]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'on_input_field_enqueued'</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.handler_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the default message handler.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued.no_dispatch">
+<span class="sig-name descname"><span class="pre">no_dispatch</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[bool]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.no_dispatch" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued.time">
+<span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.time" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.Enqueued.verbose">
+<span class="sig-name descname"><span class="pre">verbose</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[bool]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.verbose" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.action_enqueue">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action_enqueue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#InputField.action_enqueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.action_enqueue" title="Link to this definition">¶</a></dt>
+<dd><p>Handle an enqueue action.</p>
+<p>Normally triggered by the user pressing Ctrl+s. This will also run any validators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.InputField.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.InputField.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.ui.lolcatt_url_input.</span></span><span class="sig-name descname"><span class="pre">LolCattUrlInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Static</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.cast_url">
+<span class="sig-name descname"><span class="pre">cast_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput.cast_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.cast_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id33"><span class="problematic" id="id34">``</span></a><a href="#id35"><span class="problematic" id="id36">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id37"><span class="problematic" id="id38">``</span></a><a href="#id39"><span class="problematic" id="id40">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.enqueue_url">
+<span class="sig-name descname"><span class="pre">enqueue_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput.enqueue_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.enqueue_url" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_key">
+<span class="sig-name descname"><span class="pre">on_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput.on_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_mount">
+<span class="sig-name descname"><span class="pre">on_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/ui/lolcatt_url_input.html#LolCattUrlInput.on_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_mount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.ui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lolcatt.ui" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">lolcatt.ui package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#lolcatt-ui-caster-static-module">lolcatt.ui.caster_static module</a></li>
+<li><a class="reference internal" href="#module-lolcatt.ui.lolcatt_controls">lolcatt.ui.lolcatt_controls module</a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.ControlsConfig"><code class="docutils literal notranslate"><span class="pre">ControlsConfig</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.fancy_icons"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.fancy_icons</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.ffwd_secs"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.ffwd_secs</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.rewind_secs"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.rewind_secs</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.ControlsConfig.vol_step"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.vol_step</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls"><code class="docutils literal notranslate"><span class="pre">LolCattControls</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS"><code class="docutils literal notranslate"><span class="pre">LolCattControls.CONTROLS</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS_ASCII"><code class="docutils literal notranslate"><span class="pre">LolCattControls.CONTROLS_ASCII</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattControls.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattControls.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.compose"><code class="docutils literal notranslate"><span class="pre">LolCattControls.compose()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.ffwd"><code class="docutils literal notranslate"><span class="pre">LolCattControls.ffwd()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.next"><code class="docutils literal notranslate"><span class="pre">LolCattControls.next()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.on_key"><code class="docutils literal notranslate"><span class="pre">LolCattControls.on_key()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.prev"><code class="docutils literal notranslate"><span class="pre">LolCattControls.prev()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.rewind"><code class="docutils literal notranslate"><span class="pre">LolCattControls.rewind()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.stop"><code class="docutils literal notranslate"><span class="pre">LolCattControls.stop()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.toggle_play_pause"><code class="docutils literal notranslate"><span class="pre">LolCattControls.toggle_play_pause()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.vol_down"><code class="docutils literal notranslate"><span class="pre">LolCattControls.vol_down()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_controls.LolCattControls.vol_up"><code class="docutils literal notranslate"><span class="pre">LolCattControls.vol_up()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.ui.lolcatt_device_info">lolcatt.ui.lolcatt_device_info module</a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.compose"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.compose()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.label_str"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.label_str</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_click()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_mount()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_resize"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_resize()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.watch_label_str"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.watch_label_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.ui.lolcatt_playback_info">lolcatt.ui.lolcatt_playback_info module</a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.compose"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.compose()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.label_str"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.label_str</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_click()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_mount()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_resize"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_resize()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.watch_label_str"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.watch_label_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.ui.lolcatt_progress">lolcatt.ui.lolcatt_progress module</a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress"><code class="docutils literal notranslate"><span class="pre">LolCattProgress</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.compose"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.compose()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.current"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.current</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.duration"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.duration</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.on_click()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.on_mount()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.percent_complete"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.percent_complete</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.queue_len"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.queue_len</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_progress.LolCattProgress.update_progress"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.update_progress()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.ui.lolcatt_url_input">lolcatt.ui.lolcatt_url_input module</a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField"><code class="docutils literal notranslate"><span class="pre">InputField</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.BINDINGS"><code class="docutils literal notranslate"><span class="pre">InputField.BINDINGS</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.bubble"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued.bubble</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.handler_name"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued.handler_name</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.no_dispatch"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued.no_dispatch</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.time"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued.time</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.Enqueued.verbose"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued.verbose</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.action_enqueue"><code class="docutils literal notranslate"><span class="pre">InputField.action_enqueue()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.can_focus"><code class="docutils literal notranslate"><span class="pre">InputField.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.InputField.can_focus_children"><code class="docutils literal notranslate"><span class="pre">InputField.can_focus_children</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.cast_url"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.cast_url()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.compose"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.compose()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.enqueue_url"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.enqueue_url()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_key"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.on_key()</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.on_mount()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.ui">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="lolcatt.casting.html"
+                          title="previous chapter">lolcatt.casting package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="lolcatt.utils.html"
+                          title="next chapter">lolcatt.utils package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lolcatt.ui.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.utils.html" title="lolcatt.utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.casting.html" title="lolcatt.casting package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lolcatt</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="lolcatt.html" >lolcatt package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt.ui package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>lolcatt &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2e79380a" />
+    <script src="_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to lolcatt’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to lolcatt’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="lolcatt">
+<h1>lolcatt<a class="headerlink" href="#lolcatt" title="Link to this heading">¶</a></h1>
+<a class="reference external image-reference" href="https://github.com/psf/black"><img alt="https://img.shields.io/badge/code%20style-black-000000.svg" src="https://img.shields.io/badge/code%20style-black-000000.svg" />
+</a>
+<a class="reference external image-reference" href="https://LokiLuciferase.github.io/lolcatt/"><img alt="Documentation" src="https://img.shields.io/badge/Documentation-Github-blue" />
+</a>
+<a class="reference external image-reference" href="https://github.com/LokiLuciferase/lolcatt/actions/workflows/ci.yml"><img alt="Build Status" src="https://github.com/LokiLuciferase/lolcatt/actions/workflows/ci.yml/badge.svg" />
+</a>
+<a class="reference external image-reference" href="https://github.com/LokiLuciferase/lolcatt/raw/python-coverage-comment-action-data/badge.svg"><img alt="Coverage Status" src="https://github.com/LokiLuciferase/lolcatt/raw/python-coverage-comment-action-data/badge.svg" />
+</a>
+<p>A TUI wrapper around <a class="reference external" href="https://github.com/skorokithakis/catt">catt</a>, enabling you to cast to and control your chromecast devices.</p>
+<img alt="" class="align-center" src="https://raw.githubusercontent.com/LokiLuciferase/lolcatt/master/docs/_static/screenshot.png" />
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Python 3.10+ (older versions &gt;= 3.6 might work, but are not tested)</p></li>
+<li><p><a class="reference external" href="https://github.com/skorokithakis/catt">catt</a> (will be installed automatically)</p></li>
+<li><p><a class="reference external" href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> (will be installed automatically)</p></li>
+<li><p>Optional: A font containing FontAwesome icons to allow displaying of fancy icons on buttons. The freely available <a class="reference external" href="https://www.nerdfonts.com/">NerdFont</a> collection is recommended. Fancy icons can be disabled and replaced by text (see below).</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>lolcatt
+</pre></div>
+</div>
+</section>
+<section id="quckstart">
+<h2>Quckstart<a class="headerlink" href="#quckstart" title="Link to this heading">¶</a></h2>
+<p>At first we need to determine the name of the chromecast device we want to cast to. To do so, run <code class="docutils literal notranslate"><span class="pre">lolcatt</span> <span class="pre">--scan</span></code>.
+A default device and device aliases can be set in the <code class="docutils literal notranslate"><span class="pre">catt</span></code> configuration file <code class="docutils literal notranslate"><span class="pre">~/.config/catt/config.cfg</span></code>. See <a class="reference external" href="https://github.com/skorokithakis/catt">catt</a>’s documentation for more information.
+To start the UI, run <code class="docutils literal notranslate"><span class="pre">lolcatt</span> <span class="pre">-d</span> <span class="pre">'&lt;device</span> <span class="pre">name</span> <span class="pre">or</span> <span class="pre">alias&gt;'</span></code> (or simply <code class="docutils literal notranslate"><span class="pre">lolcatt</span></code> if a default device is set).</p>
+<p>To cast, paste either a URL or a path to a local file into the input field and press enter. To add a URL or path to the playback queue instead of playing immediately, hit Ctrl+s instead of enter. To view and navigate in the queue, tap the name of the currently playing item. To seek, tap the progress bar. To change chromecast device, tap the name of the currently active device (currently only devices with set aliases can be selected in this way).</p>
+<p>For URLs, all websites supported by <a class="reference external" href="https://github.com/yt-dlp/yt-dlp">yt-dlp</a> (which handles media download under the hood) are supported. Find a list of supported websites <a class="reference external" href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md">here</a>. For local media, most common video and image formats are supported.</p>
+<p>Youtube playlists are supported, and each contained video will be added to the playback queue. By specifying a cookie file in the config (per default under <code class="docutils literal notranslate"><span class="pre">~/.config/lolcatt/config.toml</span></code>), you can also access private YouTube playlists such as “Watch Later” (<a class="reference external" href="https://www.youtube.com/playlist?list=WL">https://www.youtube.com/playlist?list=WL</a>), and ensure played YouTube videos are marked as watched.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<p>If button icons are not displayed correctly, ensure you are using a font containing FontAwesome icons. Alternatively, you can disable the use of fancy icons in the config file.</p>
+<p>If casting does not work for no apparent reason, ensure you have the latest version of <code class="docutils literal notranslate"><span class="pre">yt_dlp</span></code> installed: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--upgrade</span> <span class="pre">yt-dlp</span></code>.</p>
+<p>If you encounter any other issues, please open an issue.</p>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading">¶</a></h2>
+<p>This package was created with <a class="reference external" href="https://github.com/LokiLuciferase/cookiecutter">Cookiecutter</a> and the <a class="reference external" href="https://github.com/LokiLuciferase/cookiecutter-pypackage">LokiLuciferase/cookiecutter-pypackage</a> project template.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">lolcatt</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#quckstart">Quckstart</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li><a class="reference internal" href="#credits">Credits</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">Welcome to lolcatt’s documentation!</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="installation.html"
+                          title="next chapter">Installation</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/readme.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to lolcatt’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

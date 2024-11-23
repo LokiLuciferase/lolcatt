@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>lolcatt package &#8212; lolcatt 0.5.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b20cc3f5" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=2e79380a" />
+    <script src="_static/documentation_options.js?v=b9afe91b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lolcatt.casting package" href="lolcatt.casting.html" />
+    <link rel="prev" title="lolcatt" href="modules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.casting.html" title="lolcatt.casting package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="lolcatt"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">lolcatt</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="lolcatt-package">
+<h1>lolcatt package<a class="headerlink" href="#lolcatt-package" title="Link to this heading">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="lolcatt.casting.html">lolcatt.casting package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.casting.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.casting.html#module-lolcatt.casting.caster">lolcatt.casting.caster module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState"><code class="docutils literal notranslate"><span class="pre">CastState</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState.cast_info"><code class="docutils literal notranslate"><span class="pre">CastState.cast_info</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState.info"><code class="docutils literal notranslate"><span class="pre">CastState.info</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState.is_loading"><code class="docutils literal notranslate"><span class="pre">CastState.is_loading</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState.loading_failed"><code class="docutils literal notranslate"><span class="pre">CastState.loading_failed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.CastState.queue_len"><code class="docutils literal notranslate"><span class="pre">CastState.queue_len</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster"><code class="docutils literal notranslate"><span class="pre">Caster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.CAST_ARGS"><code class="docutils literal notranslate"><span class="pre">Caster.CAST_ARGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.CATT_ARGS"><code class="docutils literal notranslate"><span class="pre">Caster.CATT_ARGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.cast"><code class="docutils literal notranslate"><span class="pre">Caster.cast()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_at_idx"><code class="docutils literal notranslate"><span class="pre">Caster.cast_at_idx()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_next"><code class="docutils literal notranslate"><span class="pre">Caster.cast_next()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.cast_previous"><code class="docutils literal notranslate"><span class="pre">Caster.cast_previous()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.change_device"><code class="docutils literal notranslate"><span class="pre">Caster.change_device()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.clear_queue"><code class="docutils literal notranslate"><span class="pre">Caster.clear_queue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.enqueue"><code class="docutils literal notranslate"><span class="pre">Caster.enqueue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_available_devices"><code class="docutils literal notranslate"><span class="pre">Caster.get_available_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_cast_state"><code class="docutils literal notranslate"><span class="pre">Caster.get_cast_state()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_current_item"><code class="docutils literal notranslate"><span class="pre">Caster.get_current_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_device"><code class="docutils literal notranslate"><span class="pre">Caster.get_device()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_device_name"><code class="docutils literal notranslate"><span class="pre">Caster.get_device_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_played_queue"><code class="docutils literal notranslate"><span class="pre">Caster.get_played_queue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_queue"><code class="docutils literal notranslate"><span class="pre">Caster.get_queue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_update_interval"><code class="docutils literal notranslate"><span class="pre">Caster.get_update_interval()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.get_well_known_devices"><code class="docutils literal notranslate"><span class="pre">Caster.get_well_known_devices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.casting.html#lolcatt.casting.caster.Caster.stop_cast"><code class="docutils literal notranslate"><span class="pre">Caster.stop_cast()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.casting.html#module-lolcatt.casting">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lolcatt.ui.html">lolcatt.ui package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#lolcatt-ui-caster-static-module">lolcatt.ui.caster_static module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui.lolcatt_controls">lolcatt.ui.lolcatt_controls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig"><code class="docutils literal notranslate"><span class="pre">ControlsConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig.fancy_icons"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.fancy_icons</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig.ffwd_secs"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.ffwd_secs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig.rewind_secs"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.rewind_secs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.ControlsConfig.vol_step"><code class="docutils literal notranslate"><span class="pre">ControlsConfig.vol_step</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls"><code class="docutils literal notranslate"><span class="pre">LolCattControls</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS"><code class="docutils literal notranslate"><span class="pre">LolCattControls.CONTROLS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.CONTROLS_ASCII"><code class="docutils literal notranslate"><span class="pre">LolCattControls.CONTROLS_ASCII</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattControls.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattControls.can_focus_children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.compose"><code class="docutils literal notranslate"><span class="pre">LolCattControls.compose()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.ffwd"><code class="docutils literal notranslate"><span class="pre">LolCattControls.ffwd()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.next"><code class="docutils literal notranslate"><span class="pre">LolCattControls.next()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.on_key"><code class="docutils literal notranslate"><span class="pre">LolCattControls.on_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.prev"><code class="docutils literal notranslate"><span class="pre">LolCattControls.prev()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.rewind"><code class="docutils literal notranslate"><span class="pre">LolCattControls.rewind()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.stop"><code class="docutils literal notranslate"><span class="pre">LolCattControls.stop()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.toggle_play_pause"><code class="docutils literal notranslate"><span class="pre">LolCattControls.toggle_play_pause()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.vol_down"><code class="docutils literal notranslate"><span class="pre">LolCattControls.vol_down()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_controls.LolCattControls.vol_up"><code class="docutils literal notranslate"><span class="pre">LolCattControls.vol_up()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui.lolcatt_device_info">lolcatt.ui.lolcatt_device_info module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.can_focus_children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.compose"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.compose()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.label_str"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.label_str</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_click()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_mount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.on_resize"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.on_resize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_device_info.LolCattDeviceInfo.watch_label_str"><code class="docutils literal notranslate"><span class="pre">LolCattDeviceInfo.watch_label_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui.lolcatt_playback_info">lolcatt.ui.lolcatt_playback_info module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.can_focus_children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.compose"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.compose()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.label_str"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.label_str</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_click()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_mount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.on_resize"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.on_resize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_playback_info.LolCattPlaybackInfo.watch_label_str"><code class="docutils literal notranslate"><span class="pre">LolCattPlaybackInfo.watch_label_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui.lolcatt_progress">lolcatt.ui.lolcatt_progress module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress"><code class="docutils literal notranslate"><span class="pre">LolCattProgress</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.can_focus_children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.compose"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.compose()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.current"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.current</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.duration"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.duration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.on_click"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.on_click()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.on_mount()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.percent_complete"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.percent_complete</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.queue_len"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.queue_len</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_progress.LolCattProgress.update_progress"><code class="docutils literal notranslate"><span class="pre">LolCattProgress.update_progress()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui.lolcatt_url_input">lolcatt.ui.lolcatt_url_input module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField"><code class="docutils literal notranslate"><span class="pre">InputField</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField.BINDINGS"><code class="docutils literal notranslate"><span class="pre">InputField.BINDINGS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField.Enqueued"><code class="docutils literal notranslate"><span class="pre">InputField.Enqueued</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField.action_enqueue"><code class="docutils literal notranslate"><span class="pre">InputField.action_enqueue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField.can_focus"><code class="docutils literal notranslate"><span class="pre">InputField.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.InputField.can_focus_children"><code class="docutils literal notranslate"><span class="pre">InputField.can_focus_children</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.can_focus</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.can_focus_children"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.can_focus_children</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.cast_url"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.cast_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.compose"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.compose()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.enqueue_url"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.enqueue_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_key"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.on_key()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="lolcatt.ui.html#lolcatt.ui.lolcatt_url_input.LolCattUrlInput.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCattUrlInput.on_mount()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.ui.html#module-lolcatt.ui">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="lolcatt.utils.html">lolcatt.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.utils.html#module-lolcatt.utils.utils">lolcatt.utils.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.utils.html#lolcatt.utils.utils.marquee"><code class="docutils literal notranslate"><span class="pre">marquee()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.utils.html#lolcatt.utils.utils.scan"><code class="docutils literal notranslate"><span class="pre">scan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="lolcatt.utils.html#lolcatt.utils.utils.write_initial_config"><code class="docutils literal notranslate"><span class="pre">write_initial_config()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lolcatt.utils.html#module-lolcatt.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-lolcatt.app">
+<span id="lolcatt-app-module"></span><h2>lolcatt.app module<a class="headerlink" href="#module-lolcatt.app" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.app.DeviceScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.app.</span></span><span class="sig-name descname"><span class="pre">DeviceScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#DeviceScreen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.DeviceScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Screen</span></code></p>
+<p>A screen for the device info UI.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.DeviceScreen.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.app.DeviceScreen.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.DeviceScreen.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.app.DeviceScreen.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.app.DeviceScreen.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#DeviceScreen.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.DeviceScreen.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.app.LolCatt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.app.</span></span><span class="sig-name descname"><span class="pre">LolCatt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#LolCatt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.LolCatt" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">App</span></code></p>
+<p>The main application class for lolcatt.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.LolCatt.CSS_PATH">
+<span class="sig-name descname"><span class="pre">CSS_PATH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar[CSSPathType</span> <span class="pre">|</span> <span class="pre">None]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ui/lolcatt.tcss'</span></em><a class="headerlink" href="#lolcatt.app.LolCatt.CSS_PATH" title="Link to this definition">¶</a></dt>
+<dd><p>File paths to load CSS from.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.app.LolCatt.on_mount">
+<span class="sig-name descname"><span class="pre">on_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#LolCatt.on_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.LolCatt.on_mount" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.app.PlaylistScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.app.</span></span><span class="sig-name descname"><span class="pre">PlaylistScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#PlaylistScreen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.PlaylistScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Screen</span></code></p>
+<p>A screen for the playlist UI.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.PlaylistScreen.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.app.PlaylistScreen.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.PlaylistScreen.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.app.PlaylistScreen.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.app.PlaylistScreen.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#PlaylistScreen.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.PlaylistScreen.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id9"><span class="problematic" id="id10">``</span></a><a href="#id11"><span class="problematic" id="id12">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id13"><span class="problematic" id="id14">``</span></a><a href="#id15"><span class="problematic" id="id16">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="lolcatt.app.RemoteScreen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">lolcatt.app.</span></span><span class="sig-name descname"><span class="pre">RemoteScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#RemoteScreen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.RemoteScreen" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Screen</span></code></p>
+<p>A screen for the remote control UI.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.RemoteScreen.can_focus">
+<span class="sig-name descname"><span class="pre">can_focus</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#lolcatt.app.RemoteScreen.can_focus" title="Link to this definition">¶</a></dt>
+<dd><p>Widget may receive focus.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="lolcatt.app.RemoteScreen.can_focus_children">
+<span class="sig-name descname"><span class="pre">can_focus_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#lolcatt.app.RemoteScreen.can_focus_children" title="Link to this definition">¶</a></dt>
+<dd><p>Widget’s children may receive focus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="lolcatt.app.RemoteScreen.compose">
+<span class="sig-name descname"><span class="pre">compose</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lolcatt/app.html#RemoteScreen.compose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lolcatt.app.RemoteScreen.compose" title="Link to this definition">¶</a></dt>
+<dd><p>Called by Textual to create child widgets.</p>
+<p>This method is called when a widget is mounted or by setting <cite>recompose=True</cite> when
+calling [<cite>refresh()</cite>][textual.widget.Widget.refresh].</p>
+<p>Note that you don’t typically need to explicitly call this method.</p>
+<dl>
+<dt>Example:</dt><dd><p><a href="#id17"><span class="problematic" id="id18">``</span></a><a href="#id19"><span class="problematic" id="id20">`</span></a>python
+def compose(self) -&gt; ComposeResult:</p>
+<blockquote>
+<div><p>yield Header()
+yield Label(“Press the button below:”)
+yield Button()
+yield Footer()</p>
+</div></blockquote>
+<p><a href="#id21"><span class="problematic" id="id22">``</span></a><a href="#id23"><span class="problematic" id="id24">`</span></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-lolcatt.cli">
+<span id="lolcatt-cli-module"></span><h2>lolcatt.cli module<a class="headerlink" href="#module-lolcatt.cli" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-lolcatt">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lolcatt" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">lolcatt package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-lolcatt.app">lolcatt.app module</a><ul>
+<li><a class="reference internal" href="#lolcatt.app.DeviceScreen"><code class="docutils literal notranslate"><span class="pre">DeviceScreen</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.app.DeviceScreen.can_focus"><code class="docutils literal notranslate"><span class="pre">DeviceScreen.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.DeviceScreen.can_focus_children"><code class="docutils literal notranslate"><span class="pre">DeviceScreen.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.DeviceScreen.compose"><code class="docutils literal notranslate"><span class="pre">DeviceScreen.compose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.app.LolCatt"><code class="docutils literal notranslate"><span class="pre">LolCatt</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.app.LolCatt.CSS_PATH"><code class="docutils literal notranslate"><span class="pre">LolCatt.CSS_PATH</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.LolCatt.on_mount"><code class="docutils literal notranslate"><span class="pre">LolCatt.on_mount()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.app.PlaylistScreen"><code class="docutils literal notranslate"><span class="pre">PlaylistScreen</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.app.PlaylistScreen.can_focus"><code class="docutils literal notranslate"><span class="pre">PlaylistScreen.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.PlaylistScreen.can_focus_children"><code class="docutils literal notranslate"><span class="pre">PlaylistScreen.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.PlaylistScreen.compose"><code class="docutils literal notranslate"><span class="pre">PlaylistScreen.compose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lolcatt.app.RemoteScreen"><code class="docutils literal notranslate"><span class="pre">RemoteScreen</span></code></a><ul>
+<li><a class="reference internal" href="#lolcatt.app.RemoteScreen.can_focus"><code class="docutils literal notranslate"><span class="pre">RemoteScreen.can_focus</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.RemoteScreen.can_focus_children"><code class="docutils literal notranslate"><span class="pre">RemoteScreen.can_focus_children</span></code></a></li>
+<li><a class="reference internal" href="#lolcatt.app.RemoteScreen.compose"><code class="docutils literal notranslate"><span class="pre">RemoteScreen.compose()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-lolcatt.cli">lolcatt.cli module</a></li>
+<li><a class="reference internal" href="#module-lolcatt">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="modules.html"
+                          title="previous chapter">lolcatt</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="lolcatt.casting.html"
+                          title="next chapter">lolcatt.casting package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lolcatt.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lolcatt.casting.html" title="lolcatt.casting package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="lolcatt"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">lolcatt 0.5.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >lolcatt</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">lolcatt package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023, Lukas Lüftinger.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
